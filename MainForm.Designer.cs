@@ -97,7 +97,6 @@
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.checkedListBoxGames = new System.Windows.Forms.CheckedListBox();
             this.groupBoxOptions = new System.Windows.Forms.GroupBox();
-            this.buttonTest = new System.Windows.Forms.Button();
             this.buttonShowGameGenieDatabase = new System.Windows.Forms.Button();
             this.maskedTextBoxReleaseDate = new System.Windows.Forms.MaskedTextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -632,7 +631,6 @@
             // groupBoxOptions
             // 
             resources.ApplyResources(this.groupBoxOptions, "groupBoxOptions");
-            this.groupBoxOptions.Controls.Add(this.buttonTest);
             this.groupBoxOptions.Controls.Add(this.buttonShowGameGenieDatabase);
             this.groupBoxOptions.Controls.Add(this.maskedTextBoxReleaseDate);
             this.groupBoxOptions.Controls.Add(this.label1);
@@ -655,13 +653,6 @@
             this.groupBoxOptions.Controls.Add(this.labelID);
             this.groupBoxOptions.Name = "groupBoxOptions";
             this.groupBoxOptions.TabStop = false;
-            // 
-            // buttonTest
-            // 
-            resources.ApplyResources(this.buttonTest, "buttonTest");
-            this.buttonTest.Name = "buttonTest";
-            this.buttonTest.UseVisualStyleBackColor = true;
-            this.buttonTest.Click += new System.EventHandler(this.buttonTest_Click);
             // 
             // buttonShowGameGenieDatabase
             // 
@@ -1009,7 +1000,6 @@
         private System.Windows.Forms.ToolStripMenuItem max100toolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem4;
         private System.Windows.Forms.ToolStripMenuItem automaticToolStripMenuItem;
-        private System.Windows.Forms.Button buttonTest;
     }
 }
 

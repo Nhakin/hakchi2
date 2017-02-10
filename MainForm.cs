@@ -1015,26 +1015,5 @@ namespace com.clusterrr.hakchi_gui
             foldersSplitByFirstLetterOriginalToolStripMenuItem.Checked = (byte)ConfigIni.FoldersMode == 9;
             customToolStripMenuItem.Checked = (byte)ConfigIni.FoldersMode == 99;
         }
-
-        private void buttonTest_Click(object sender, EventArgs e)
-        {
-            var lGames = new NesMenuCollection();
-            bool needOriginal = false;
-
-            foreach (var game in checkedListBoxGames.CheckedItems)
-            {
-                if (game is NesGame)
-                    lGames.Add(game as NesGame);
-                else
-                    needOriginal = true;
-            }
-
-            if (needOriginal)
-                for (int i = 0; i < checkedListBoxDefaultGames.Items.Count; i++)
-                    if (checkedListBoxDefaultGames.CheckedIndices.Contains(i))
-                        lGames.Add((NesDefaultGame)checkedListBoxDefaultGames.Items[i]);
-            var lFrm = new TreeContructorForm(lGames);
-            lFrm.ShowDialog();
-        }
     }
 }
