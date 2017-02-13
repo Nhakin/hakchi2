@@ -117,12 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="menuStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>132, 17</value>
-  </metadata>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="addMoreGamesToolStripMenuItem.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
-    <value>Ctrl+O</value>
+  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="maskedTextBoxReleaseDate.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="addMoreGamesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
@@ -1050,155 +1047,14 @@
   <data name="labelID.Size" type="System.Drawing.Size, System.Drawing">
     <value>21, 13</value>
   </data>
-  <data name="labelID.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="labelID.Text" xml:space="preserve">
-    <value>ID:</value>
-  </data>
-  <data name="&gt;&gt;labelID.Name" xml:space="preserve">
-    <value>labelID</value>
-  </data>
-  <data name="&gt;&gt;labelID.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;labelID.Parent" xml:space="preserve">
-    <value>groupBoxOptions</value>
-  </data>
-  <data name="&gt;&gt;labelID.ZOrder" xml:space="preserve">
-    <value>19</value>
-  </data>
-  <data name="groupBoxOptions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>306, 27</value>
-  </data>
-  <data name="groupBoxOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>293, 529</value>
-  </data>
-  <data name="groupBoxOptions.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="groupBoxOptions.Text" xml:space="preserve">
-    <value>Game options</value>
-  </data>
-  <data name="&gt;&gt;groupBoxOptions.Name" xml:space="preserve">
-    <value>groupBoxOptions</value>
-  </data>
-  <data name="&gt;&gt;groupBoxOptions.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;groupBoxOptions.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;groupBoxOptions.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="label5.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>None</value>
-  </data>
-  <data name="label5.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 33</value>
-  </data>
-  <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>74, 13</value>
-  </data>
-  <data name="label5.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="label5.Text" xml:space="preserve">
-    <value>Select games:</value>
-  </data>
-  <data name="&gt;&gt;label5.Name" xml:space="preserve">
-    <value>label5</value>
-  </data>
-  <data name="&gt;&gt;label5.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label5.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;label5.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="buttonAddGames.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>None</value>
-  </data>
-  <data name="buttonAddGames.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 568</value>
-  </data>
-  <data name="buttonAddGames.Size" type="System.Drawing.Size, System.Drawing">
-    <value>282, 38</value>
-  </data>
-  <data name="buttonAddGames.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="buttonAddGames.Text" xml:space="preserve">
-    <value>Add more games</value>
-  </data>
-  <data name="&gt;&gt;buttonAddGames.Name" xml:space="preserve">
-    <value>buttonAddGames</value>
-  </data>
-  <data name="&gt;&gt;buttonAddGames.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;buttonAddGames.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;buttonAddGames.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <metadata name="statusStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>350, 17</value>
-  </metadata>
-  <data name="toolStripStatusLabelSelected.Size" type="System.Drawing.Size, System.Drawing">
-    <value>118, 17</value>
-  </data>
-  <data name="toolStripStatusLabelSelected.Text" xml:space="preserve">
-    <value>toolStripStatusLabel1</value>
-  </data>
-  <data name="statusStrip.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 614</value>
-  </data>
-  <data name="statusStrip.Size" type="System.Drawing.Size, System.Drawing">
-    <value>609, 22</value>
-  </data>
-  <data name="statusStrip.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="statusStrip.Text" xml:space="preserve">
-    <value>statusStrip1</value>
-  </data>
-  <data name="&gt;&gt;statusStrip.Name" xml:space="preserve">
-    <value>statusStrip</value>
-  </data>
-  <data name="&gt;&gt;statusStrip.Type" xml:space="preserve">
-    <value>System.Windows.Forms.StatusStrip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;statusStrip.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;statusStrip.ZOrder" xml:space="preserve">
+  <data name="textBoxName.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <metadata name="openFileDialogNes.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>459, 17</value>
-  </metadata>
-  <data name="openFileDialogNes.Filter" xml:space="preserve">
-    <value>NES files|*.nes;*.fds;*.zip;*.7z;*.rar|All files|*.*</value>
+  <data name="famicomMiniToolStripMenuItem.Text" xml:space="preserve">
+    <value>Famicom Mini</value>
   </data>
   <data name="openFileDialogNes.Title" xml:space="preserve">
     <value>Select NES file(s)</value>
-  </data>
-  <metadata name="contextMenuStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>592, 17</value>
-  </metadata>
-  <data name="selectAllToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>140, 22</value>
-  </data>
-  <data name="selectAllToolStripMenuItem.Text" xml:space="preserve">
-    <value>Select all</value>
   </data>
   <data name="unselectAllToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>140, 22</value>
@@ -1221,11 +1077,8 @@
   <data name="&gt;&gt;contextMenuStrip.Type" xml:space="preserve">
     <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <metadata name="openFileDialogImage.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>741, 17</value>
-  </metadata>
-  <data name="openFileDialogImage.Filter" xml:space="preserve">
-    <value>Images (*.bmp;*.png;*.jpg;*.jpeg;*.gif)|*.bmp;*.png;*.jpg;*.jpeg;*.gif|All files|*.*</value>
+  <data name="dumpKernelToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>179, 22</value>
   </data>
   <data name="openFileDialogImage.Title" xml:space="preserve">
     <value>Select cover for game</value>
@@ -1311,17 +1164,11 @@
   <data name="&gt;&gt;groupBoxDefaultGames.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
-  <metadata name="timerCalculateGames.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>908, 17</value>
-  </metadata>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
+  <data name="&gt;&gt;openFileDialogImage.Name" xml:space="preserve">
+    <value>openFileDialogImage</value>
   </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>609, 636</value>
+  <data name="foldersSplitByFirstLetterToolStripMenuItem.Text" xml:space="preserve">
+    <value>Folders, split by first letter</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
