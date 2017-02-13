@@ -15,7 +15,7 @@ using System.Xml;
 
 namespace com.clusterrr.hakchi_gui
 {
-    public partial class TreeContructorForm : Form
+    public partial class TreeConstructorForm : Form
     {
         public static string FoldersXmlPath = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "folders.xml");
         List<TreeNode> cuttedNodes = new List<TreeNode>();
@@ -44,7 +44,7 @@ namespace com.clusterrr.hakchi_gui
             }
         }
 
-        public TreeContructorForm(NesMenuCollection nesMenuCollection, MainForm mainForm = null)
+        public TreeConstructorForm(NesMenuCollection nesMenuCollection, MainForm mainForm = null)
         {
             try
             {
@@ -764,7 +764,8 @@ namespace com.clusterrr.hakchi_gui
 
         private void buttonCancel_Click(object sender, EventArgs e)
         {
-            Close();
+            //Close();
+            DialogResult = DialogResult.Cancel;
         }
 
         private void pictureBoxArt_Click(object sender, EventArgs e)
@@ -783,7 +784,7 @@ namespace com.clusterrr.hakchi_gui
 
         private void TreeContructorForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (e.CloseReason != CloseReason.UserClosing || DialogResult == System.Windows.Forms.DialogResult.OK) return;
+            if (e.CloseReason != CloseReason.UserClosing || DialogResult == System.Windows.Forms.DialogResult.OK || DialogResult == DialogResult.Cancel) return;
             var a = MessageBox.Show(this, Resources.FoldersSaveQ, this.Text, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
             if (a == System.Windows.Forms.DialogResult.Cancel)
             {
@@ -814,20 +815,56 @@ namespace com.clusterrr.hakchi_gui
             }
         }
 
-        private string TreeToXml()
+        private XmlElement CreateXmlDocument(XmlDocument AXml)
         {
-            var root = treeView.Nodes[0];
-            var xml = new XmlDocument();
-            var treeNode = xml.CreateElement("Tree");
-            xml.AppendChild(treeNode);
-            NodeToXml(xml, treeNode, root);
+            XmlElement lCurNode;
+            XmlAttribute lAttribute;
+
+            lCurNode = AXml.CreateElement("Preset");
+            AXml.DocumentElement.AppendChild(lCurNode);
+
+            lAttribute = AXml.CreateAttribute("Name");
+            lAttribute.Value = ConfigIni.PresetName;
+            lCurNode.Attributes.Append(lAttribute);
+
+            return lCurNode;
+        }
+
+        private string TreeToXml()
+        {           
+            XmlDocument lXml = new XmlDocument();
+            XmlElement lTreeNode = null;
+            XmlNode lXmlNode = null;
+
+            if (File.Exists(FoldersXmlPath))
+            {
+                lXml.LoadXml(File.ReadAllText(FoldersXmlPath));
+                lXmlNode = lXml.SelectSingleNode(string.Format("//Preset[@Name='{0}']", ConfigIni.PresetName));
+                if (lXmlNode == null)
+                    lTreeNode = CreateXmlDocument(lXml);
+                else
+                {
+                    lXmlNode.InnerXml = "";
+                    lTreeNode = (lXmlNode as XmlElement);
+                }                    
+            }
+            else
+            {
+                XmlNode lCurNode;
+                lCurNode = lXml.CreateElement("Tree");
+                lXml.AppendChild(lCurNode);
+
+                lTreeNode = CreateXmlDocument(lXml);
+            }
+
+            var lTreeRoot = treeView.Nodes[0];
+            NodeToXml(lXml, lTreeNode, lTreeRoot);
+
             using (var stringWriter = new StringWriter())
             using (var xmlTextWriter = new XmlTextWriter(stringWriter))
             {
                 xmlTextWriter.Formatting = Formatting.Indented;
-                xmlTextWriter.WriteStartDocument();
-                xml.WriteTo(xmlTextWriter);
-                xmlTextWriter.WriteEndDocument();
+                lXml.WriteTo(xmlTextWriter);
                 xmlTextWriter.Flush();
                 return stringWriter.GetStringBuilder().ToString();
             }
@@ -864,6 +901,7 @@ namespace com.clusterrr.hakchi_gui
                 }
             }
         }
+
         void XmlToTree(string xmlString)
         {
             gamesCollection.Unsplit();
@@ -872,23 +910,29 @@ namespace com.clusterrr.hakchi_gui
             var xml = new XmlDocument();
             xml.LoadXml(xmlString);
             gamesCollection.Clear();
-            XmlToNode(xml, xml.SelectSingleNode("/Tree").ChildNodes, oldCollection, gamesCollection);
-            // oldCollection has only unsorted (new) games
-            if (oldCollection.Count > 0)
+
+            XmlNode lXmlNode = xml.SelectSingleNode(string.Format("//Preset[@Name='{0}']", ConfigIni.PresetName));
+            if (lXmlNode != null)
             {
-                NesMenuFolder unsorted;
-                var unsorteds = from f in gamesCollection where f is NesMenuFolder && f.Name == Resources.FolderNameUnsorted select f;
-                if (unsorteds.Count() > 0)
-                    unsorted = unsorteds.First() as NesMenuFolder;
-                else
+                XmlToNode(xml, lXmlNode.ChildNodes, oldCollection, gamesCollection);
+
+                // oldCollection has only unsorted (new) games
+                if (oldCollection.Count > 0)
                 {
-                    unsorted = new NesMenuFolder(Resources.FolderNameUnsorted);
-                    unsorted.Position = NesMenuFolder.Priority.Leftmost;
-                    gamesCollection.Add(unsorted);
+                    NesMenuFolder unsorted;
+                    var unsorteds = from f in gamesCollection where f is NesMenuFolder && f.Name == Resources.FolderNameUnsorted select f;
+                    if (unsorteds.Count() > 0)
+                        unsorted = unsorteds.First() as NesMenuFolder;
+                    else
+                    {
+                        unsorted = new NesMenuFolder(Resources.FolderNameUnsorted);
+                        unsorted.Position = NesMenuFolder.Priority.Leftmost;
+                        gamesCollection.Add(unsorted);
+                    }
+                    foreach (var game in oldCollection)
+                        unsorted.ChildMenuCollection.Add(game);
+                    MessageBox.Show(this, Resources.NewGamesUnsorted, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
-                foreach (var game in oldCollection)
-                    unsorted.ChildMenuCollection.Add(game);
-                MessageBox.Show(this, Resources.NewGamesUnsorted, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             DrawTree();
         }

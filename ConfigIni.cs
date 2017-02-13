@@ -13,6 +13,7 @@ namespace com.clusterrr.hakchi_gui
         public static bool FirstRun = true;
         public static string SelectedGames = "default";
         public static string HiddenGames = "";
+        public static string PresetName = "Default";
         public static bool CustomFlashed = false;
         public static bool UseFont = true;
         public static bool ResetHack = true;
@@ -58,6 +59,9 @@ namespace com.clusterrr.hakchi_gui
                                     break;
                                 case "hiddengames":
                                     HiddenGames = value;
+                                    break;
+                                case "lastpreset":
+                                    PresetName = value;
                                     break;
                                 case "customflashed":
                                     CustomFlashed = !value.ToLower().Equals("false");
@@ -121,8 +125,9 @@ namespace com.clusterrr.hakchi_gui
             Debug.WriteLine("Saving config");
             var configLines = new List<string>();
             configLines.Add("[Config]");
-            configLines.Add(string.Format("SelectedGames={0}", SelectedGames));
-            configLines.Add(string.Format("HiddenGames={0}", HiddenGames));
+            //configLines.Add(string.Format("SelectedGames={0}", SelectedGames));
+            //configLines.Add(string.Format("HiddenGames={0}", HiddenGames));
+            configLines.Add(string.Format("LastPreset={0}", PresetName));
             configLines.Add(string.Format("CustomFlashed={0}", CustomFlashed));
             configLines.Add(string.Format("UseFont={0}", UseFont));
             configLines.Add(string.Format("ResetHack={0}", ResetHack));

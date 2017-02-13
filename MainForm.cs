@@ -259,9 +259,25 @@ namespace com.clusterrr.hakchi_gui
                 checkedListBoxDefaultGames.Items.Add(game, !hidden.Contains(game.Code));
         }
 
+        void LoadPreset(String APresetName)
+        {
+            var cols = ConfigIni.Presets[APresetName].Split('|');
+            ConfigIni.SelectedGames = cols[0];
+            ConfigIni.HiddenGames = cols[1];
+            var selected = ConfigIni.SelectedGames.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+            var hide = ConfigIni.HiddenGames.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+            checkedListBoxGames.SetItemChecked(0, selected.Contains("default"));
+            for (int j = 1; j < checkedListBoxGames.Items.Count; j++)
+                checkedListBoxGames.SetItemChecked(j,
+                    selected.Contains((checkedListBoxGames.Items[j] as NesMiniApplication).Code));
+            for (int j = 0; j < checkedListBoxDefaultGames.Items.Count; j++)
+                checkedListBoxDefaultGames.SetItemChecked(j,
+                    !hide.Contains(((NesDefaultGame)checkedListBoxDefaultGames.Items[j]).Code));
+        }
+
         void LoadPresets()
         {
-            while (presetsToolStripMenuItem.DropDownItems.Count > 3)
+            while (presetsToolStripMenuItem.DropDownItems.Count > 4)
                 presetsToolStripMenuItem.DropDownItems.RemoveAt(0);
             deletePresetToolStripMenuItem.Enabled = false;
             deletePresetToolStripMenuItem.DropDownItems.Clear();
@@ -271,18 +287,19 @@ namespace com.clusterrr.hakchi_gui
                 presetsToolStripMenuItem.DropDownItems.Insert(i, new ToolStripMenuItem(preset, null,
                     delegate(object sender, EventArgs e)
                     {
-                        var cols = ConfigIni.Presets[preset].Split('|');
-                        ConfigIni.SelectedGames = cols[0];
-                        ConfigIni.HiddenGames = cols[1];
-                        var selected = ConfigIni.SelectedGames.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
-                        var hide = ConfigIni.HiddenGames.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
-                        checkedListBoxGames.SetItemChecked(0, selected.Contains("default"));
-                        for (int j = 1; j < checkedListBoxGames.Items.Count; j++)
-                            checkedListBoxGames.SetItemChecked(j,
-                                selected.Contains((checkedListBoxGames.Items[j] as NesMiniApplication).Code));
-                        for (int j = 0; j < checkedListBoxDefaultGames.Items.Count; j++)
-                            checkedListBoxDefaultGames.SetItemChecked(j,
-                                !hide.Contains(((NesDefaultGame)checkedListBoxDefaultGames.Items[j]).Code));
+                        LoadPreset(preset);
+
+                        if (sender is ToolStripMenuItem)
+                        {
+                            foreach (var lCurMenu in presetsToolStripMenuItem.DropDownItems)
+                                if (!(lCurMenu is ToolStripSeparator))
+                                {
+                                    var lMenuItem = (lCurMenu as ToolStripMenuItem);
+                                    lMenuItem.Checked = lCurMenu == sender;
+                                    if (lMenuItem.Checked)
+                                        ConfigIni.PresetName = lMenuItem.Text;
+                                }                                    
+                        }
                     }));
                 deletePresetToolStripMenuItem.DropDownItems.Insert(i, new ToolStripMenuItem(preset, null,
                     delegate(object sender, EventArgs e)
@@ -294,9 +311,38 @@ namespace com.clusterrr.hakchi_gui
                             LoadPresets();
                         }
                     }));
-                deletePresetToolStripMenuItem.Enabled = true;
+
+                if (preset.ToLower() == ConfigIni.PresetName.ToLower())
+                {
+                    (presetsToolStripMenuItem.DropDownItems[i] as ToolStripMenuItem).Checked = true;
+                    LoadPreset(ConfigIni.PresetName);
+                }
                 i++;
             }
+
+            if (i==0)
+            {
+                presetsToolStripMenuItem.DropDownItems.Insert(i, new ToolStripMenuItem("Default", null,
+                    delegate(object sender, EventArgs e)
+                    {
+                        LoadPreset("Default");
+
+                        if (sender is ToolStripMenuItem)
+                        {
+                            foreach (var lCurMenu in presetsToolStripMenuItem.DropDownItems)
+                                if (!(lCurMenu is ToolStripSeparator))
+                                {
+                                    var lMenuItem = (lCurMenu as ToolStripMenuItem);
+                                    lMenuItem.Checked = lCurMenu == sender;
+                                    if (lMenuItem.Checked)
+                                        ConfigIni.PresetName = lMenuItem.Text;
+                                }
+                        }
+                    }));
+                (presetsToolStripMenuItem.DropDownItems[i] as ToolStripMenuItem).Checked = true;
+                SaveSelectedGames();
+            }
+            deletePresetToolStripMenuItem.Enabled = deletePresetToolStripMenuItem.DropDownItems.Count > 1;
         }
 
         void AddPreset(object sender, EventArgs e)
@@ -417,6 +463,14 @@ namespace com.clusterrr.hakchi_gui
             foreach (NesDefaultGame game in checkedListBoxDefaultGames.CheckedItems)
                 selected.Remove(game.Code);
             ConfigIni.HiddenGames = string.Join(";", selected.ToArray());
+
+            foreach (var lPreset in presetsToolStripMenuItem.DropDownItems) 
+                if (lPreset is ToolStripMenuItem && (lPreset as ToolStripMenuItem).Checked)
+                {
+                    ConfigIni.Presets[(lPreset as ToolStripMenuItem).Text] = ConfigIni.SelectedGames + "|" + ConfigIni.HiddenGames;
+                    break;
+                }
+                    
         }
 
         private void SaveConfig()
@@ -1021,6 +1075,28 @@ namespace com.clusterrr.hakchi_gui
             foldersSplitByFirstLetterToolStripMenuItem.Checked = (byte)ConfigIni.FoldersMode == 8;
             foldersSplitByFirstLetterOriginalToolStripMenuItem.Checked = (byte)ConfigIni.FoldersMode == 9;
             customToolStripMenuItem.Checked = (byte)ConfigIni.FoldersMode == 99;
+        }
+
+        private void FoldersConfigurationtoolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            NesMenuCollection lSelectedGames = new NesMenuCollection();
+            bool lParseOriginal = false;
+
+            foreach (var game in checkedListBoxGames.CheckedItems)
+            {
+                if (game is NesMiniApplication)
+                    lSelectedGames.Add(game as NesMiniApplication);
+                else
+                    lParseOriginal = true;
+            }
+
+            if (lParseOriginal)
+                for (int i = 0; i < checkedListBoxDefaultGames.Items.Count; i++)
+                    if (checkedListBoxDefaultGames.CheckedIndices.Contains(i))
+                        lSelectedGames.Add((NesDefaultGame)checkedListBoxDefaultGames.Items[i]);
+
+            TreeConstructorForm lFrm = new TreeConstructorForm(lSelectedGames, this);
+            lFrm.ShowDialog();
         }
     }
 }
