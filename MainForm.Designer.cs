@@ -131,7 +131,6 @@
             this.groupBoxDefaultGames = new System.Windows.Forms.GroupBox();
             this.checkedListBoxDefaultGames = new System.Windows.Forms.CheckedListBox();
             this.timerCalculateGames = new System.Windows.Forms.Timer(this.components);
-            this.FoldersConfigurationtoolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.groupBoxOptions.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxArt)).BeginInit();
@@ -400,7 +399,6 @@
             this.foldersSplitByFirstLetterOriginalToolStripMenuItem,
             this.maximumGamesPerFolderToolStripMenuItem,
             this.toolStripMenuItem4,
-            this.FoldersConfigurationtoolStripMenuItem,
             this.customToolStripMenuItem});
             this.pagesfoldersTypeToolStripMenuItem.Name = "pagesfoldersTypeToolStripMenuItem";
             resources.ApplyResources(this.pagesfoldersTypeToolStripMenuItem, "pagesfoldersTypeToolStripMenuItem");
@@ -865,12 +863,6 @@
             this.timerCalculateGames.Interval = 500;
             this.timerCalculateGames.Tick += new System.EventHandler(this.timerCalculateGames_Tick);
             // 
-            // FoldersConfigurationtoolStripMenuItem
-            // 
-            this.FoldersConfigurationtoolStripMenuItem.Name = "FoldersConfigurationtoolStripMenuItem";
-            resources.ApplyResources(this.FoldersConfigurationtoolStripMenuItem, "FoldersConfigurationtoolStripMenuItem");
-            this.FoldersConfigurationtoolStripMenuItem.Click += new System.EventHandler(this.FoldersConfigurationtoolStripMenuItem_Click);
-            // 
             // MainForm
             // 
             resources.ApplyResources(this, "$this");
@@ -1008,7 +1000,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem4;
         private System.Windows.Forms.ToolStripMenuItem automaticToolStripMenuItem;
         protected internal System.Windows.Forms.CheckedListBox checkedListBoxDefaultGames;
-        private System.Windows.Forms.ToolStripMenuItem FoldersConfigurationtoolStripMenuItem;
     }
 }
 
