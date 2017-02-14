@@ -12,6 +12,7 @@ using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows.Forms;
+using System.Xml;
 
 namespace com.clusterrr.hakchi_gui
 {
@@ -294,7 +295,7 @@ namespace com.clusterrr.hakchi_gui
                             foreach (var lCurMenu in presetsToolStripMenuItem.DropDownItems)
                                 if (!(lCurMenu is ToolStripSeparator))
                                 {
-                                    var lMenuItem = (lCurMenu as ToolStripMenuItem);
+                                    ToolStripMenuItem lMenuItem = (lCurMenu as ToolStripMenuItem);
                                     lMenuItem.Checked = lCurMenu == sender;
                                     if (lMenuItem.Checked)
                                         ConfigIni.PresetName = lMenuItem.Text;
@@ -309,10 +310,35 @@ namespace com.clusterrr.hakchi_gui
                         {
                             ConfigIni.Presets.Remove(preset);
                             LoadPresets();
+
+                            if (ConfigIni.PresetName.ToLower().Trim() == preset.ToLower().Trim())
+                            {
+                                ConfigIni.PresetName = presetsToolStripMenuItem.DropDownItems[0].Text;
+                                (presetsToolStripMenuItem.DropDownItems[0] as ToolStripMenuItem).Checked = true;
+                                LoadPreset(ConfigIni.PresetName);
+                            }
+
+                            if (File.Exists(TreeConstructorForm.FoldersXmlPath))
+                            {
+                                XmlDocument lXml = new XmlDocument();
+                                lXml.LoadXml(File.ReadAllText(TreeConstructorForm.FoldersXmlPath));
+                                XmlNode lNode = lXml.SelectSingleNode(string.Format("//Preset[@Name='{0}']", preset));
+
+                                if (lNode != null)
+                                {
+                                    XmlNode lParent = lNode.ParentNode;
+                                    lParent.RemoveChild(lNode);
+
+                                    if (lParent.ChildNodes.Count == 0)
+                                        File.Delete(TreeConstructorForm.FoldersXmlPath);
+                                    else
+                                        lXml.Save(TreeConstructorForm.FoldersXmlPath);
+                                }
+                            }
                         }
                     }));
 
-                if (preset.ToLower() == ConfigIni.PresetName.ToLower())
+                if (preset.ToLower().Trim() == ConfigIni.PresetName.ToLower().Trim())
                 {
                     (presetsToolStripMenuItem.DropDownItems[i] as ToolStripMenuItem).Checked = true;
                     LoadPreset(ConfigIni.PresetName);
@@ -1084,9 +1110,8 @@ namespace com.clusterrr.hakchi_gui
             }
 
             if (lParseOriginal)
-                for (int i = 0; i < checkedListBoxDefaultGames.Items.Count; i++)
-                    if (checkedListBoxDefaultGames.CheckedIndices.Contains(i))
-                        lSelectedGames.Add((NesDefaultGame)checkedListBoxDefaultGames.Items[i]);
+                foreach (NesDefaultGame lSelectedGame in checkedListBoxDefaultGames.CheckedItems)
+                    lSelectedGames.Add(lSelectedGame);
 
             TreeConstructorForm lFrm = new TreeConstructorForm(lSelectedGames, this);
             lFrm.ShowDialog();
