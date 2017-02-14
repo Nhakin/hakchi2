@@ -277,7 +277,7 @@ namespace com.clusterrr.hakchi_gui
 
         void LoadPresets()
         {
-            while (presetsToolStripMenuItem.DropDownItems.Count > 4)
+            while (presetsToolStripMenuItem.DropDownItems.Count > 3)
                 presetsToolStripMenuItem.DropDownItems.RemoveAt(0);
             deletePresetToolStripMenuItem.Enabled = false;
             deletePresetToolStripMenuItem.DropDownItems.Clear();
@@ -340,7 +340,7 @@ namespace com.clusterrr.hakchi_gui
                         }
                     }));
                 (presetsToolStripMenuItem.DropDownItems[i] as ToolStripMenuItem).Checked = true;
-                SaveSelectedGames();
+                ConfigIni.PresetName = "Default";
             }
             deletePresetToolStripMenuItem.Enabled = deletePresetToolStripMenuItem.DropDownItems.Count > 1;
         }
@@ -355,8 +355,8 @@ namespace com.clusterrr.hakchi_gui
                 var name = form.textBox.Text.Replace("=", " ");
                 if (!string.IsNullOrEmpty(name))
                 {
+                    ConfigIni.PresetName = name;
                     SaveSelectedGames();
-                    ConfigIni.Presets[name] = ConfigIni.SelectedGames + "|" + ConfigIni.HiddenGames;
                     LoadPresets();
                 }
             }
@@ -463,14 +463,7 @@ namespace com.clusterrr.hakchi_gui
             foreach (NesDefaultGame game in checkedListBoxDefaultGames.CheckedItems)
                 selected.Remove(game.Code);
             ConfigIni.HiddenGames = string.Join(";", selected.ToArray());
-
-            foreach (var lPreset in presetsToolStripMenuItem.DropDownItems) 
-                if (lPreset is ToolStripMenuItem && (lPreset as ToolStripMenuItem).Checked)
-                {
-                    ConfigIni.Presets[(lPreset as ToolStripMenuItem).Text] = ConfigIni.SelectedGames + "|" + ConfigIni.HiddenGames;
-                    break;
-                }
-                    
+            ConfigIni.Presets[ConfigIni.PresetName] = ConfigIni.SelectedGames + "|" + ConfigIni.HiddenGames;                    
         }
 
         private void SaveConfig()

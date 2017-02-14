@@ -934,6 +934,9 @@ namespace com.clusterrr.hakchi_gui
                     MessageBox.Show(this, Resources.NewGamesUnsorted, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
+            else
+                gamesCollection.AddRange(oldCollection);
+
             DrawTree();
         }
 
