@@ -352,6 +352,9 @@
   <data name="toolStripMenuItem4.Size" type="System.Drawing.Size, System.Drawing">
     <value>442, 6</value>
   </data>
+  <data name="FoldersConfigurationtoolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>445, 22</value>
+  </data>
   <data name="customToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>445, 22</value>
   </data>

@@ -88,6 +88,7 @@
             this.max90toolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.max100toolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripSeparator();
+            this.FoldersConfigurationtoolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.customToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.betterPNGCompressionlowerQualityToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.globalCommandLineArgumentsexpertsOnluToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -399,6 +400,7 @@
             this.foldersSplitByFirstLetterOriginalToolStripMenuItem,
             this.maximumGamesPerFolderToolStripMenuItem,
             this.toolStripMenuItem4,
+            this.FoldersConfigurationtoolStripMenuItem,
             this.customToolStripMenuItem});
             this.pagesfoldersTypeToolStripMenuItem.Name = "pagesfoldersTypeToolStripMenuItem";
             resources.ApplyResources(this.pagesfoldersTypeToolStripMenuItem, "pagesfoldersTypeToolStripMenuItem");
@@ -567,6 +569,12 @@
             // 
             this.toolStripMenuItem4.Name = "toolStripMenuItem4";
             resources.ApplyResources(this.toolStripMenuItem4, "toolStripMenuItem4");
+            // 
+            // FoldersConfigurationtoolStripMenuItem
+            // 
+            this.FoldersConfigurationtoolStripMenuItem.Name = "FoldersConfigurationtoolStripMenuItem";
+            resources.ApplyResources(this.FoldersConfigurationtoolStripMenuItem, "FoldersConfigurationtoolStripMenuItem");
+            this.FoldersConfigurationtoolStripMenuItem.Click += new System.EventHandler(this.FoldersConfigurationtoolStripMenuItem_Click);
             // 
             // customToolStripMenuItem
             // 
@@ -1000,6 +1008,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem4;
         private System.Windows.Forms.ToolStripMenuItem automaticToolStripMenuItem;
         protected internal System.Windows.Forms.CheckedListBox checkedListBoxDefaultGames;
+        private System.Windows.Forms.ToolStripMenuItem FoldersConfigurationtoolStripMenuItem;
     }
 }
 

@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
+using System.Xml;
 
 namespace com.clusterrr.hakchi_gui
 {
@@ -153,9 +154,23 @@ namespace com.clusterrr.hakchi_gui
                 Invoke(new Action<NesMenuCollection>(FolderManagerFromThread), new object[] { collection });
                 return;
             }
-            var constructor = new TreeContructorForm(collection, MainForm);
+
+            TreeConstructorForm constructor = new TreeConstructorForm(collection, MainForm);
             TaskbarProgress.SetState(this.Handle, TaskbarProgress.TaskbarStates.Paused);
-            FolderManagerResult = constructor.ShowDialog();
+
+            if (File.Exists(TreeConstructorForm.FoldersXmlPath))
+            {
+                XmlDocument lXml = new XmlDocument();
+                lXml.LoadXml(File.ReadAllText(TreeConstructorForm.FoldersXmlPath));
+                XmlNode lXmlNode = lXml.SelectSingleNode(string.Format("//Preset[@Name='{0}']", ConfigIni.PresetName));
+                if (lXmlNode != null)
+                    FolderManagerResult = DialogResult.OK;
+                else
+                    FolderManagerResult = constructor.ShowDialog();
+            }
+            else
+                FolderManagerResult = constructor.ShowDialog();
+            
             TaskbarProgress.SetState(this.Handle, TaskbarProgress.TaskbarStates.Normal);
         }
 

@@ -208,11 +208,11 @@
       <DependentUpon>StringInputForm.cs</DependentUpon>
     </Compile>
     <Compile Include="TaskbarProgress.cs" />
-    <Compile Include="TreeContructorForm.cs">
+    <Compile Include="TreeConstructorForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="TreeContructorForm.Designer.cs">
-      <DependentUpon>TreeContructorForm.cs</DependentUpon>
+    <Compile Include="TreeConstructorForm.Designer.cs">
+      <DependentUpon>TreeConstructorForm.cs</DependentUpon>
     </Compile>
     <Compile Include="UnsupportedFourScreenException.cs" />
     <Compile Include="UnsupportedMapperException.cs" />
@@ -259,6 +259,9 @@
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.ru-RU.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm.ru.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.pl-PL.resx" />
@@ -316,14 +319,14 @@
     <EmbeddedResource Include="StringInputForm.resx">
       <DependentUpon>StringInputForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="TreeContructorForm.pl-PL.resx">
-      <DependentUpon>TreeContructorForm.cs</DependentUpon>
+    <EmbeddedResource Include="TreeConstructorForm.pl-PL.resx">
+      <DependentUpon>TreeConstructorForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="TreeContructorForm.resx">
-      <DependentUpon>TreeContructorForm.cs</DependentUpon>
+    <EmbeddedResource Include="TreeConstructorForm.resx">
+      <DependentUpon>TreeConstructorForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="TreeContructorForm.ru-RU.resx">
-      <DependentUpon>TreeContructorForm.cs</DependentUpon>
+    <EmbeddedResource Include="TreeConstructorForm.ru-RU.resx">
+      <DependentUpon>TreeConstructorForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WaitingForm.pl-PL.resx">
       <DependentUpon>WaitingForm.cs</DependentUpon>

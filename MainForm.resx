@@ -452,11 +452,17 @@
   <data name="toolStripMenuItem4.Size" type="System.Drawing.Size, System.Drawing">
     <value>353, 6</value>
   </data>
+  <data name="FoldersConfigurationtoolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>356, 22</value>
+  </data>
+  <data name="FoldersConfigurationtoolStripMenuItem.Text" xml:space="preserve">
+    <value>Folders Manager</value>
+  </data>
   <data name="customToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>356, 22</value>
   </data>
   <data name="customToolStripMenuItem.Text" xml:space="preserve">
-    <value>Custom - show Folders Manager every time</value>
+    <value>Custom</value>
   </data>
   <data name="pagesfoldersTypeToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>325, 22</value>
@@ -1159,7 +1165,7 @@
     <value>toolStripStatusLabel1</value>
   </data>
   <data name="statusStrip.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 615</value>
+    <value>0, 614</value>
   </data>
   <data name="statusStrip.Size" type="System.Drawing.Size, System.Drawing">
     <value>609, 22</value>
@@ -1324,7 +1330,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>609, 637</value>
+    <value>609, 636</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -2811,6 +2817,12 @@
   </data>
   <data name="&gt;&gt;toolStripMenuItem4.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;FoldersConfigurationtoolStripMenuItem.Name" xml:space="preserve">
+    <value>FoldersConfigurationtoolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;FoldersConfigurationtoolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;customToolStripMenuItem.Name" xml:space="preserve">
     <value>customToolStripMenuItem</value>
