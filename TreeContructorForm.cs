@@ -15,7 +15,7 @@ using System.Xml;
 
 namespace com.clusterrr.hakchi_gui
 {
-    public partial class TreeConstructorForm : Form
+    public partial class TreeContructorForm : Form
     {
         public static string FoldersXmlPath = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "folders.xml");
         List<TreeNode> cuttedNodes = new List<TreeNode>();
@@ -44,7 +44,7 @@ namespace com.clusterrr.hakchi_gui
             }
         }
 
-        public TreeConstructorForm(NesMenuCollection nesMenuCollection, MainForm mainForm = null)
+        public TreeContructorForm(NesMenuCollection nesMenuCollection, MainForm mainForm = null)
         {
             try
             {

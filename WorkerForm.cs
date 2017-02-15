@@ -155,13 +155,13 @@ namespace com.clusterrr.hakchi_gui
                 return;
             }
 
-            TreeConstructorForm constructor = new TreeConstructorForm(collection, MainForm);
+            TreeContructorForm constructor = new TreeContructorForm(collection, MainForm);
             TaskbarProgress.SetState(this.Handle, TaskbarProgress.TaskbarStates.Paused);
 
-            if (File.Exists(TreeConstructorForm.FoldersXmlPath))
+            if (File.Exists(TreeContructorForm.FoldersXmlPath))
             {
                 XmlDocument lXml = new XmlDocument();
-                lXml.LoadXml(File.ReadAllText(TreeConstructorForm.FoldersXmlPath));
+                lXml.LoadXml(File.ReadAllText(TreeContructorForm.FoldersXmlPath));
                 XmlNode lXmlNode = lXml.SelectSingleNode(string.Format("//Preset[@Name='{0}']", ConfigIni.PresetName));
                 if (lXmlNode != null)
                     FolderManagerResult = DialogResult.OK;

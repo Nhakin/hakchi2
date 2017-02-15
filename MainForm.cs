@@ -318,10 +318,10 @@ namespace com.clusterrr.hakchi_gui
                                 LoadPreset(ConfigIni.PresetName);
                             }
 
-                            if (File.Exists(TreeConstructorForm.FoldersXmlPath))
+                            if (File.Exists(TreeContructorForm.FoldersXmlPath))
                             {
                                 XmlDocument lXml = new XmlDocument();
-                                lXml.LoadXml(File.ReadAllText(TreeConstructorForm.FoldersXmlPath));
+                                lXml.LoadXml(File.ReadAllText(TreeContructorForm.FoldersXmlPath));
                                 XmlNode lNode = lXml.SelectSingleNode(string.Format("//Preset[@Name='{0}']", preset));
 
                                 if (lNode != null)
@@ -330,9 +330,9 @@ namespace com.clusterrr.hakchi_gui
                                     lParent.RemoveChild(lNode);
 
                                     if (lParent.ChildNodes.Count == 0)
-                                        File.Delete(TreeConstructorForm.FoldersXmlPath);
+                                        File.Delete(TreeContructorForm.FoldersXmlPath);
                                     else
-                                        lXml.Save(TreeConstructorForm.FoldersXmlPath);
+                                        lXml.Save(TreeContructorForm.FoldersXmlPath);
                                 }
                             }
                         }
@@ -1113,7 +1113,7 @@ namespace com.clusterrr.hakchi_gui
                 foreach (NesDefaultGame lSelectedGame in checkedListBoxDefaultGames.CheckedItems)
                     lSelectedGames.Add(lSelectedGame);
 
-            TreeConstructorForm lFrm = new TreeConstructorForm(lSelectedGames, this);
+            TreeContructorForm lFrm = new TreeContructorForm(lSelectedGames, this);
             lFrm.ShowDialog();
         }
     }
