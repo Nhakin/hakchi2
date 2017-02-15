@@ -103,17 +103,12 @@ namespace com.clusterrr.hakchi_gui
 
                 // Some settnigs
                 useExtendedFontToolStripMenuItem.Checked = ConfigIni.UseFont;
-                ToolStripMenuItemArmetLevel0.Checked = ConfigIni.AntiArmetLevel == 0;
-                ToolStripMenuItemArmetLevel1.Checked = ConfigIni.AntiArmetLevel == 1;
-                ToolStripMenuItemArmetLevel2.Checked = ConfigIni.AntiArmetLevel == 2;
+                epilepsyProtectionToolStripMenuItem.Checked = ConfigIni.AntiArmetLevel > 0;
                 selectButtonCombinationToolStripMenuItem.Enabled = resetUsingCombinationOfButtonsToolStripMenuItem.Checked = ConfigIni.ResetHack;
                 enableAutofireToolStripMenuItem.Checked = ConfigIni.AutofireHack;
-                removeThumbnailsAtTheBottomToolStripMenuItem.Checked = ConfigIni.RemoveThumbnails;
-                betterPNGCompressionlowerQualityToolStripMenuItem.Checked = ConfigIni.EightBitPngCompression;
                 nESMiniToolStripMenuItem.Checked = ConfigIni.ConsoleType == 0;
                 famicomMiniToolStripMenuItem.Checked = ConfigIni.ConsoleType == 1;
                 upABStartOnSecondControllerToolStripMenuItem.Checked = ConfigIni.FcStart;
-                disableMenuMusicToolStripMenuItem.Checked = ConfigIni.DisableMusic;
 
                 disablePagefoldersToolStripMenuItem.Checked = (byte)ConfigIni.FoldersMode == 0;
                 automaticToolStripMenuItem.Checked = (byte)ConfigIni.FoldersMode == 2;
@@ -316,12 +311,12 @@ namespace com.clusterrr.hakchi_gui
                                 ConfigIni.PresetName = presetsToolStripMenuItem.DropDownItems[0].Text;
                                 (presetsToolStripMenuItem.DropDownItems[0] as ToolStripMenuItem).Checked = true;
                                 LoadPreset(ConfigIni.PresetName);
-                            }
+                        }
 
-                            if (File.Exists(TreeContructorForm.FoldersXmlPath))
+                            if (File.Exists(TreeConstructorForm.FoldersXmlPath))
                             {
                                 XmlDocument lXml = new XmlDocument();
-                                lXml.LoadXml(File.ReadAllText(TreeContructorForm.FoldersXmlPath));
+                                lXml.LoadXml(File.ReadAllText(TreeConstructorForm.FoldersXmlPath));
                                 XmlNode lNode = lXml.SelectSingleNode(string.Format("//Preset[@Name='{0}']", preset));
 
                                 if (lNode != null)
@@ -330,9 +325,9 @@ namespace com.clusterrr.hakchi_gui
                                     lParent.RemoveChild(lNode);
 
                                     if (lParent.ChildNodes.Count == 0)
-                                        File.Delete(TreeContructorForm.FoldersXmlPath);
+                                        File.Delete(TreeConstructorForm.FoldersXmlPath);
                                     else
-                                        lXml.Save(TreeContructorForm.FoldersXmlPath);
+                                        lXml.Save(TreeConstructorForm.FoldersXmlPath);
                                 }
                             }
                         }
@@ -616,7 +611,7 @@ namespace com.clusterrr.hakchi_gui
             workerForm.Text = Resources.FlasingCustom;
             workerForm.Task = WorkerForm.Tasks.FlashKernel;
             workerForm.KernelDump = KernelDump;
-            workerForm.Mod = "mod_kernel";
+            workerForm.Mod = "mod_hakchi";
             workerForm.Config = null;
             workerForm.Games = null;
             workerForm.HiddenGames = null;
@@ -636,17 +631,26 @@ namespace com.clusterrr.hakchi_gui
             workerForm.Text = Resources.UploadingGames;
             workerForm.Task = WorkerForm.Tasks.Memboot;
             workerForm.KernelDump = KernelDump;
-            workerForm.Mod = "mod_transfer";
-            workerForm.Config = new Dictionary<string, bool>();
-            workerForm.Config["hakchi_enabled"] = true;
-            workerForm.Config["hakchi_remove_games"] = true;
-            workerForm.Config["hakchi_original_games"] = false;
-            workerForm.Config["hakchi_title_font"] = ConfigIni.UseFont;
-            workerForm.Config["hakchi_clovercon_hack"] = ConfigIni.ResetHack || ConfigIni.AutofireHack || ConfigIni.FcStart;
-            workerForm.Config["hakchi_remove_thumbnails"] = ConfigIni.RemoveThumbnails;
-            workerForm.Config["hakchi_remove_music"] = ConfigIni.DisableMusic;
+            workerForm.Mod = "mod_hakchi";
+            workerForm.Config = new Dictionary<string, string>();
+            workerForm.hmodsInstall = new List<string>();
             workerForm.Games = new NesMenuCollection();
             var hiddenGames = new List<string>();
+            if (ConfigIni.ResetHack || ConfigIni.AutofireHack || ConfigIni.FcStart)
+            {
+                workerForm.hmodsInstall.Add("clovercon");
+                workerForm.Config["clovercon_enabled"] = "y";
+            }
+            else workerForm.Config["clovercon_enabled"] = "n";
+            workerForm.Config["clovercon_home_combination"] = string.Format("0x{0:X2}", (byte)ConfigIni.ResetCombination);
+            workerForm.Config["clovercon_autofire"] = ConfigIni.AutofireHack ? "1" : "0";
+            workerForm.Config["clovercon_fc_start"] = ConfigIni.FcStart ? "1" : "0";
+            if (ConfigIni.UseFont)
+            {
+                workerForm.hmodsInstall.Add("fontfix");
+                workerForm.Config["fontfix_enabled"] = "y";
+            }
+            else workerForm.Config["fontfix_enabled"] = "n";
             bool needOriginal = false;
             foreach (var game in checkedListBoxGames.CheckedItems)
             {
@@ -663,19 +667,12 @@ namespace com.clusterrr.hakchi_gui
                     else
                         hiddenGames.Add(((NesDefaultGame)checkedListBoxDefaultGames.Items[i]).Code);
                 }
-            workerForm.Config["hakchi_original_games"] = needOriginal;
-            if (ConfigIni.AntiArmetLevel == 1)
-                workerForm.Config["hakchi_remove_armet_original"] = true;
-            else if (ConfigIni.AntiArmetLevel == 2)
-                workerForm.Config["hakchi_remove_armet_all"] = true;
+            workerForm.Config["disable_armet"] = (ConfigIni.AntiArmetLevel > 0) ? "y" : "n";
+            workerForm.Config["nes_extra_args"] = ConfigIni.ExtraCommandLineArguments;
             if (needOriginal)
                 workerForm.HiddenGames = hiddenGames.ToArray();
             else
                 workerForm.HiddenGames = null;
-            workerForm.ResetCombination = ConfigIni.ResetHack ? ConfigIni.ResetCombination : (SelectButtonsForm.NesButtons)0xFF;
-            workerForm.AutofireHack = ConfigIni.AutofireHack;
-            workerForm.FcStart = ConfigIni.FcStart;
-            workerForm.ExtraCommandLineArguments = ConfigIni.ExtraCommandLineArguments;
             workerForm.FoldersMode = ConfigIni.FoldersMode;
             workerForm.MaxGamesPerFolder = ConfigIni.MaxGamesPerFolder;
 
@@ -738,9 +735,30 @@ namespace com.clusterrr.hakchi_gui
             workerForm.Task = WorkerForm.Tasks.Memboot;
             workerForm.KernelDump = KernelDump;
             workerForm.Mod = "mod_uninstall";
-            workerForm.Config = null;
-            workerForm.Games = null;
-            workerForm.HiddenGames = null;
+            workerForm.Start();
+            return workerForm.DialogResult == DialogResult.OK;
+        }
+
+        bool InstallMods(string[] mods)
+        {
+            var workerForm = new WorkerForm();
+            workerForm.Text = Resources.InstallingMods;
+            workerForm.Task = WorkerForm.Tasks.Memboot;
+            workerForm.KernelDump = KernelDump;
+            workerForm.Mod = "mod_hakchi";
+            workerForm.hmodsInstall = new List<string>(mods);
+            workerForm.Start();
+            return workerForm.DialogResult == DialogResult.OK;
+        }
+
+        bool UninstallMods(string[] mods)
+        {
+            var workerForm = new WorkerForm();
+            workerForm.Text = Resources.UninstallingMods;
+            workerForm.Task = WorkerForm.Tasks.Memboot;
+            workerForm.KernelDump = KernelDump;
+            workerForm.Mod = "mod_hakchi";
+            workerForm.hmodsUninstall = new List<string>(mods);
             workerForm.Start();
             return workerForm.DialogResult == DialogResult.OK;
         }
@@ -849,27 +867,13 @@ namespace com.clusterrr.hakchi_gui
 
         private void ToolStripMenuItemArmet_Click(object sender, EventArgs e)
         {
-            var name = (sender as ToolStripMenuItem).Name;
-            ConfigIni.AntiArmetLevel = byte.Parse(name.Substring(name.Length - 1));
-            ToolStripMenuItemArmetLevel0.Checked = ConfigIni.AntiArmetLevel == 0;
-            ToolStripMenuItemArmetLevel1.Checked = ConfigIni.AntiArmetLevel == 1;
-            ToolStripMenuItemArmetLevel2.Checked = ConfigIni.AntiArmetLevel == 2;
+            ConfigIni.AntiArmetLevel = epilepsyProtectionToolStripMenuItem.Checked ? (byte)2 : (byte)0;
         }
 
         private void cloverconHackToolStripMenuItem_Click(object sender, EventArgs e)
         {
             selectButtonCombinationToolStripMenuItem.Enabled =
                 ConfigIni.ResetHack = resetUsingCombinationOfButtonsToolStripMenuItem.Checked;
-        }
-
-        private void removeThumbnailsAtTheBottomToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ConfigIni.RemoveThumbnails = removeThumbnailsAtTheBottomToolStripMenuItem.Checked;
-        }
-
-        private void betterPNGCompressionlowerQualityToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ConfigIni.EightBitPngCompression = betterPNGCompressionlowerQualityToolStripMenuItem.Checked;
         }
 
         private void upABStartOnSecondControllerToolStripMenuItem_Click(object sender, EventArgs e)
@@ -918,11 +922,6 @@ namespace com.clusterrr.hakchi_gui
             form.textBox.Text = ConfigIni.ExtraCommandLineArguments;
             if (form.ShowDialog() == DialogResult.OK)
                 ConfigIni.ExtraCommandLineArguments = form.textBox.Text;
-        }
-
-        private void disableMenuMusicToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ConfigIni.DisableMusic = disableMenuMusicToolStripMenuItem.Checked;
         }
 
         private void timerCalculateGames_Tick(object sender, EventArgs e)
@@ -1096,7 +1095,47 @@ namespace com.clusterrr.hakchi_gui
             customToolStripMenuItem.Checked = (byte)ConfigIni.FoldersMode == 99;
         }
 
-        private void FoldersConfigurationtoolStripMenuItem_Click(object sender, EventArgs e)
+        private void installModulesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!File.Exists(KernelDump))
+            {
+                MessageBox.Show(Resources.NoKernelYouNeed, Resources.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            var form = new SelectModsForm();
+            form.Text = Resources.SelectModsInstall;
+            if (form.ShowDialog() == DialogResult.OK)
+            {
+                if (InstallMods(((from m
+                                   in form.checkedListBoxMods.CheckedItems.OfType<object>().ToArray()
+                                    select m.ToString())).ToArray()))
+        {
+                    MessageBox.Show(Resources.DoneUploaded, Resources.Wow, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+        }
+
+        private void uninstallModulesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!File.Exists(KernelDump))
+            {
+                MessageBox.Show(Resources.NoKernelYouNeed, Resources.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            var form = new SelectModsForm();
+            form.Text = Resources.SelectModsUninstall;
+            if (form.ShowDialog() == DialogResult.OK)
+            {
+                if (UninstallMods(((from m 
+                                   in form.checkedListBoxMods.CheckedItems.OfType<object>().ToArray()
+                                    select m.ToString())).ToArray()))
+            {
+                    MessageBox.Show(Resources.DoneUploaded, Resources.Wow, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+        }
+
+        private void FoldersConfigurationToolStripMenuItem_Click(object sender, EventArgs e)
         {
             NesMenuCollection lSelectedGames = new NesMenuCollection();
             bool lParseOriginal = false;
@@ -1113,7 +1152,7 @@ namespace com.clusterrr.hakchi_gui
                 foreach (NesDefaultGame lSelectedGame in checkedListBoxDefaultGames.CheckedItems)
                     lSelectedGames.Add(lSelectedGame);
 
-            TreeContructorForm lFrm = new TreeContructorForm(lSelectedGames, this);
+            TreeConstructorForm lFrm = new TreeConstructorForm(lSelectedGames, this);
             lFrm.ShowDialog();
         }
     }
