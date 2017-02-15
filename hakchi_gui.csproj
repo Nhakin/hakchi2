@@ -364,22 +364,10 @@
     <None Include="mods\hmods\fontfix.hmod">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="mods\mod_hakchi\bin\busybox">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="mods\mod_hakchi\bin\rsync">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Include="mods\mod_hakchi\hakchi\config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="mods\mod_hakchi\hakchi\init">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="mods\mod_hakchi\hakchi\rootfs\bin\chmenu">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="mods\mod_hakchi\hakchi\rootfs\bin\clover-kachikachi-wr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="mods\mod_hakchi\hakchi\rootfs\etc\inittab">
@@ -671,7 +659,10 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="mods\mod_hakchi\bin\" />
+    <Folder Include="mods\mod_hakchi\hakchi\rootfs\bin\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
