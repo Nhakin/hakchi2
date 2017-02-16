@@ -499,6 +499,39 @@
     <None Include="user_mods\music_hack.hmod\uninstall">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="user_mods\retroarch.hmod\etc\libretro\core\emux_sms_libretro.so">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="user_mods\retroarch.hmod\etc\libretro\core\fceumm_libretro.so">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="user_mods\retroarch.hmod\etc\libretro\core\gambatte_libretro.so">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="user_mods\retroarch.hmod\etc\libretro\core\genesis_plus_gx_libretro.so">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="user_mods\retroarch.hmod\etc\libretro\core\nestopia_libretro.so">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="user_mods\retroarch.hmod\etc\libretro\core\snes9x2010_libretro.so">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="user_mods\retroarch.hmod\etc\libretro\joypad_autoconf\clovercon1.cfg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="user_mods\retroarch.hmod\etc\libretro\joypad_autoconf\clovercon2.cfg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="user_mods\retroarch.hmod\etc\libretro\retroarch.cfg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="user_mods\retroarch.hmod\etc\preinit.d\pe9af_retroarch">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="user_mods\retroarch.hmod\install">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="data\GameGenieDB.xml">
@@ -598,6 +631,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="user_mods\music_hack.hmod\readme.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="user_mods\retroarch.hmod\etc\libretro\bios\NstDatabase.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="user_mods\retroarch.hmod\readme.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="folder_images\README.txt">
