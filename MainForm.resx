@@ -1269,6 +1269,9 @@
   <data name="groupBoxDefaultGames.Size" type="System.Drawing.Size, System.Drawing">
     <value>293, 529</value>
   </data>
+  <data name="modulesToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Modules</value>
+  </data>
   <data name="groupBoxDefaultGames.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>

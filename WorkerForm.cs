@@ -178,7 +178,7 @@ namespace com.clusterrr.hakchi_gui
                     FolderManagerResult = constructor.ShowDialog();
             }
             else
-                FolderManagerResult = constructor.ShowDialog();
+            FolderManagerResult = constructor.ShowDialog();
             
             TaskbarProgress.SetState(this.Handle, TaskbarProgress.TaskbarStates.Normal);
         }
@@ -592,7 +592,9 @@ namespace com.clusterrr.hakchi_gui
             if (Games != null)
             {
                 Directory.CreateDirectory(tempGamesDirectory);
-                if (first) File.WriteAllBytes(Path.Combine(tempGamesDirectory, "clear"), new byte[0]);
+                if (first)
+                {
+                    File.WriteAllBytes(Path.Combine(tempGamesDirectory, "clear"), new byte[0]);
                 Directory.CreateDirectory(originalGamesConfigDirectory);
                 if (HiddenGames != null && HiddenGames.Length > 0)
                 {
@@ -600,8 +602,9 @@ namespace com.clusterrr.hakchi_gui
                     foreach (var game in HiddenGames)
                         h.Append(game + "\n");
                     File.WriteAllText(hiddenPath, h.ToString());
+                }            
                 }
-
+            
                 stats.Next();
                 AddMenu(Games, stats);
                 Debug.WriteLine(string.Format("Games copied: {0}/{1}, part size: {2}", stats.GamesProceed, stats.GamesTotal, stats.Size));
@@ -610,15 +613,15 @@ namespace com.clusterrr.hakchi_gui
             bool last = stats.GamesProceed >= stats.GamesTotal;
 
             if (last && hmodsInstall != null && hmodsInstall.Count >0 )
-                {
+            {
                 Directory.CreateDirectory(tempHmodsDirectory);
                 foreach (var hmod in hmodsInstall)
-                    {
+                {
                     var modName = hmod + ".hmod";
                     foreach (var dir in hmodDirectories)
-                        {
-                        if (Directory.Exists(Path.Combine(dir, modName)))
                     {
+                        if (Directory.Exists(Path.Combine(dir, modName)))
+                        {
                             NesMiniApplication.DirectoryCopy(Path.Combine(dir, modName), Path.Combine(tempHmodsDirectory, modName), true);
                             break;
                         }
@@ -627,7 +630,7 @@ namespace com.clusterrr.hakchi_gui
                             File.Copy(Path.Combine(dir, modName), Path.Combine(tempHmodsDirectory, modName));
                             break;
                         }
-            }
+                    }
                 }
             }
             if (last && hmodsUninstall != null && hmodsUninstall.Count > 0)
@@ -804,9 +807,9 @@ namespace com.clusterrr.hakchi_gui
                     }
                     if (stats.GamesStart == 0)
                     {
-                        int childIndex = stats.allMenus.IndexOf(folder.ChildMenuCollection);
+                        folder.ChildIndex = stats.allMenus.IndexOf(folder.ChildMenuCollection);                        
                         var folderDir = Path.Combine(targetDirectory, folder.Code);
-                        folder.Save(folderDir, childIndex);
+                        folder.Save(folderDir);
                     }
                 }
                 if (element is NesDefaultGame)
@@ -902,29 +905,29 @@ namespace com.clusterrr.hakchi_gui
                         SevenZipExtractor.SetLibraryPath(Path.Combine(baseDirectory, IntPtr.Size == 8 ? @"tools\7z64.dll" : @"tools\7z.dll"));
                         using (var szExtractor = new SevenZipExtractor(file))
                         {
-                        var filesInArchive = new List<string>();
-                        foreach (var f in szExtractor.ArchiveFileNames)
-                        {
-                            var e = Path.GetExtension(f).ToLower();
-                            if (e == ".nes" || e == ".fds")
-                                filesInArchive.Add(f);
-                        }
-                        if (filesInArchive.Count == 1)
-                        {
-                            fileName = filesInArchive[0];
-                        }
-                        else
-                        {
-                            var fsForm = new SelectFileForm(filesInArchive.ToArray());
-                            if (fsForm.ShowDialog() == DialogResult.OK)
-                                fileName = (string)fsForm.listBoxFiles.SelectedItem;
+                            var filesInArchive = new List<string>();
+                            foreach (var f in szExtractor.ArchiveFileNames)
+                            {
+                                var e = Path.GetExtension(f).ToLower();
+                                if (e == ".nes" || e == ".fds")
+                                    filesInArchive.Add(f);
+                            }
+                            if (filesInArchive.Count == 1)
+                            {
+                                fileName = filesInArchive[0];
+                            }
                             else
-                                continue;
-                        }
-                        var o = new MemoryStream();
-                        szExtractor.ExtractFile(fileName, o);
+                            {
+                                var fsForm = new SelectFileForm(filesInArchive.ToArray());
+                                if (fsForm.ShowDialog() == DialogResult.OK)
+                                    fileName = (string)fsForm.listBoxFiles.SelectedItem;
+                                else
+                                    continue;
+                            }
+                            var o = new MemoryStream();
+                            szExtractor.ExtractFile(fileName, o);
                             rawData = new byte[o.Length];
-                        o.Seek(0, SeekOrigin.Begin);
+                            o.Seek(0, SeekOrigin.Begin);
                             o.Read(rawData, 0, (int)o.Length);
                         }
                     }
