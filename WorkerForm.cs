@@ -567,7 +567,7 @@ namespace com.clusterrr.hakchi_gui
                 }
             }
 
-            if (Directory.Exists(transferDirectory))
+            if (!first && Directory.Exists(transferDirectory))
             {
                 Debug.WriteLine("Clearing transfer directory");
                 Directory.Delete(transferDirectory, true);
@@ -682,7 +682,7 @@ namespace com.clusterrr.hakchi_gui
                     {
                         try
                         {
-                            urls = ImageGooglerForm.GetImageUrls(game.Name);
+                            urls = ImageGooglerForm.GetImageUrls(game);
                             break;
                         }
                         catch (Exception ex)
