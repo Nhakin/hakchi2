@@ -364,72 +364,31 @@
     <None Include="mods\hmods\fontfix.hmod">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="mods\mod_hakchi\hakchi\config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="mods\mod_hakchi\hakchi\init">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="mods\mod_hakchi\hakchi\rootfs\etc\inittab">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="mods\mod_hakchi\hakchi\rootfs\etc\preinit">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="mods\mod_hakchi\hakchi\rootfs\etc\preinit.d\b0000_defines">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="mods\mod_hakchi\hakchi\rootfs\etc\preinit.d\b0010_functions">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="mods\mod_hakchi\hakchi\rootfs\etc\preinit.d\p0000_config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="mods\mod_hakchi\hakchi\rootfs\etc\preinit.d\p7000_preinit">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="mods\mod_hakchi\hakchi\rootfs\etc\preinit.d\p7070_firmware">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="mods\mod_hakchi\hakchi\rootfs\etc\preinit.d\p7070_preinit">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="mods\mod_hakchi\hakchi\rootfs\etc\preinit.d\p7100_preinit">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="mods\mod_hakchi\hakchi\rootfs\etc\preinit.d\pa100_games">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="mods\mod_hakchi\hakchi\rootfs\etc\preinit.d\pffff_bootstock">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="mods\mod_hakchi\hakchi\rootfs\etc\preinit.d\pffff_config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="mods\mod_hakchi\hakchi\rootfs\etc\profile">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="mods\mod_hakchi\hakchi\script\backup">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="mods\mod_hakchi\hakchi\script\base">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="mods\mod_hakchi\hakchi\script\games">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="mods\mod_hakchi\hakchi\script\install">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="mods\mod_hakchi\hakchi\script\package">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="mods\mod_hakchi\hakchi\script\transfer">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="mods\mod_hakchi\sbin\init">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    <None Include="mods\mod_hakchi\bin\busybox" />
+    <None Include="mods\mod_hakchi\hakchi\config" />
+    <None Include="mods\mod_hakchi\hakchi\init" />
+    <None Include="mods\mod_hakchi\hakchi\rootfs\bin\chmenu" />
+    <None Include="mods\mod_hakchi\hakchi\rootfs\bin\clover-kachikachi-wr" />
+    <None Include="mods\mod_hakchi\hakchi\rootfs\etc\inittab" />
+    <None Include="mods\mod_hakchi\hakchi\rootfs\etc\preinit" />
+    <None Include="mods\mod_hakchi\hakchi\rootfs\etc\preinit.d\b0000_defines" />
+    <None Include="mods\mod_hakchi\hakchi\rootfs\etc\preinit.d\b0010_functions" />
+    <None Include="mods\mod_hakchi\hakchi\rootfs\etc\preinit.d\p0000_config" />
+    <None Include="mods\mod_hakchi\hakchi\rootfs\etc\preinit.d\p7000_preinit" />
+    <None Include="mods\mod_hakchi\hakchi\rootfs\etc\preinit.d\p7070_firmware" />
+    <None Include="mods\mod_hakchi\hakchi\rootfs\etc\preinit.d\p7070_preinit" />
+    <None Include="mods\mod_hakchi\hakchi\rootfs\etc\preinit.d\p7100_preinit" />
+    <None Include="mods\mod_hakchi\hakchi\rootfs\etc\preinit.d\pa100_games" />
+    <None Include="mods\mod_hakchi\hakchi\rootfs\etc\preinit.d\pffff_bootstock" />
+    <None Include="mods\mod_hakchi\hakchi\rootfs\etc\preinit.d\pffff_config" />
+    <None Include="mods\mod_hakchi\hakchi\rootfs\etc\profile" />
+    <None Include="mods\mod_hakchi\hakchi\script\backup" />
+    <None Include="mods\mod_hakchi\hakchi\script\base" />
+    <None Include="mods\mod_hakchi\hakchi\script\games" />
+    <None Include="mods\mod_hakchi\hakchi\script\install" />
+    <None Include="mods\mod_hakchi\hakchi\script\package" />
+    <None Include="mods\mod_hakchi\hakchi\script\transfer" />
+    <None Include="mods\mod_hakchi\sbin\init" />
     <None Include="mods\mod_uninstall\bin\busybox">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -699,10 +658,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="mods\mod_hakchi\bin\" />
-    <Folder Include="mods\mod_hakchi\hakchi\rootfs\bin\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>cd $(ProjectDir)user_mods\retroarch.hmod
