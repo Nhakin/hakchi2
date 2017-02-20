@@ -60,6 +60,7 @@ namespace com.clusterrr.hakchi_gui
         readonly string originalGamesConfigDirectory;
         string[] correctKernels;
         const long maxRamfsSize = 40 * 1024 * 1024;
+        const long maxTotalSize = 320 * 1024 * 1024;
         string selectedFile = null;
         public NesMiniApplication[] addedApplications;
 
@@ -486,7 +487,7 @@ namespace com.clusterrr.hakchi_gui
                 else Games.Split(FoldersMode, MaxGamesPerFolder);
             }
             progress += 5;
-            SetProgress(progress, 300);
+            SetProgress(progress, 1000);
 
             do
             {
@@ -503,7 +504,7 @@ namespace com.clusterrr.hakchi_gui
                     return;
                 }
                 progress += 5;
-                SetProgress(progress, maxProgress > 0 ? maxProgress : 300);
+                SetProgress(progress, maxProgress > 0 ? maxProgress : 1000);
 
                 byte[] kernel;
                 if (!string.IsNullOrEmpty(Mod))
@@ -525,9 +526,10 @@ namespace com.clusterrr.hakchi_gui
                 if (maxProgress < 0)
                 {
                     if (stats.GamesProceed > 0)
-                        maxProgress = (kernel.Length / 67000 + 20) * stats.GamesTotal / stats.GamesProceed + 75 * ((int)Math.Ceiling((float)stats.GamesTotal / (float)stats.GamesProceed) - 1);
+                        maxProgress = (int)(((double)kernel.Length / (double)67000 + 20) * (double)stats.TotalSize / (double)stats.Size + 
+                            100 * ((int)Math.Ceiling((double)stats.TotalSize / (double)stats.Size) - 1));
                     else
-                        maxProgress = (kernel.Length / 67000 + 20);
+                        maxProgress = (int)((double)kernel.Length / (double)67000 + 20);
                 }
                 SetProgress(progress, maxProgress);
 
@@ -549,7 +551,7 @@ namespace com.clusterrr.hakchi_gui
                 var bootCommand = string.Format("boota {0:x}", Fel.kernel_base_m);
                 SetStatus(Resources.ExecutingCommand + " " + bootCommand);
                 fel.RunUbootCmd(bootCommand, true);
-            } while (stats.GamesProceed < stats.GamesTotal);
+            } while (stats.GamesProceed < stats.TotalGames);
             SetStatus(Resources.Done);
             SetProgress(maxProgress, maxProgress);
         }
@@ -588,7 +590,7 @@ namespace com.clusterrr.hakchi_gui
                 }
             }
 
-            if (Directory.Exists(transferDirectory))
+            if (!first && Directory.Exists(transferDirectory))
             {
                 Debug.WriteLine("Clearing transfer directory");
                 Directory.Delete(transferDirectory, true);
@@ -613,10 +615,11 @@ namespace com.clusterrr.hakchi_gui
 
                 stats.Next();
                 AddMenu(Games, stats);
-                Debug.WriteLine(string.Format("Games copied: {0}/{1}, part size: {2}", stats.GamesProceed, stats.GamesTotal, stats.Size));
+                if (stats.TotalSize > maxTotalSize) throw new Exception(string.Format(Resources.MemoryFull, stats.TotalSize / 1024 / 1024));
+                Debug.WriteLine(string.Format("Games copied: {0}/{1}, part size: {2}", stats.GamesProceed, stats.TotalGames, stats.Size));
             }
 
-            bool last = stats.GamesProceed >= stats.GamesTotal;
+            bool last = stats.GamesProceed >= stats.TotalGames;
 
             if (last && hmodsInstall != null && hmodsInstall.Count > 0)
             {
@@ -703,7 +706,7 @@ namespace com.clusterrr.hakchi_gui
                     {
                         try
                         {
-                            urls = ImageGooglerForm.GetImageUrls(game.Name);
+                            urls = ImageGooglerForm.GetImageUrls(game);
                             break;
                         }
                         catch (Exception ex)
@@ -739,18 +742,22 @@ namespace com.clusterrr.hakchi_gui
         private class GamesTreeStats
         {
             public List<NesMenuCollection> allMenus = new List<NesMenuCollection>();
-            public int GamesTotal = 0;
+            public int TotalGames = 0;
             public int GamesStart = 0;
             public int GamesProceed = 0;
             public long Size = 0;
+            public long TotalSize = 0;
+            public bool Stopped;
 
             public void Next()
             {
                 allMenus.Clear();
                 GamesStart = GamesProceed;
-                GamesTotal = 0;
+                TotalGames = 0;
                 GamesProceed = 0;
                 Size = 0;
+                TotalSize = 0;
+                Stopped = false;
             }
         }
 
@@ -770,21 +777,21 @@ namespace com.clusterrr.hakchi_gui
             {
                 if (element is NesMiniApplication)
                 {
-                    stats.GamesTotal++;
-                    if (stats.Size >= maxRamfsSize) continue;
-                    stats.GamesProceed++;
-                    if (stats.GamesStart >= stats.GamesProceed) continue;
+                    stats.TotalGames++;
                     var game = element as NesMiniApplication;
-                    Debug.Write(string.Format("Processing {0} ('{1}'), #{2}", game.Code, game.Name, stats.GamesProceed));
-                    var gameCopy = game.CopyTo(targetDirectory);
-                    stats.Size += gameCopy.Size();
-                    if (stats.Size >= maxRamfsSize)
+                    var gameSize = game.Size();
+                    if (gameSize >= maxRamfsSize) throw new Exception(string.Format(Resources.GameTooBig, game.Name));
+                    stats.TotalSize += gameSize;
+                    if (stats.Stopped || stats.Size + gameSize >= maxRamfsSize)
                     {
-                        // Rollback. Just in case of huge last game
-                        stats.GamesProceed--;
-                        Directory.Delete(gameCopy.GamePath, true);
+                        stats.Stopped = true;
                         continue;
                     }
+                    stats.GamesProceed++;
+                    if (stats.GamesStart >= stats.GamesProceed) continue;
+                    Debug.Write(string.Format("Processing {0} ('{1}'), #{2}", game.Code, game.Name, stats.GamesProceed));
+                    var gameCopy = game.CopyTo(targetDirectory);
+                    stats.Size += gameSize;
                     Debug.WriteLine(string.Format(", total size: {0}", stats.Size));
                     try
                     {
@@ -907,6 +914,7 @@ namespace com.clusterrr.hakchi_gui
                     var ext = Path.GetExtension(file).ToLower();
                     bool? needPatch = YesForAllPatches ? (bool?)true : null;
                     byte[] rawData = null;
+                    string tmp = null;
                     if (ext == ".7z" || ext == ".zip" || ext == ".rar")
                     {
                         SevenZipExtractor.SetLibraryPath(Path.Combine(baseDirectory, IntPtr.Size == 8 ? @"tools\7z64.dll" : @"tools\7z.dll"));
@@ -917,11 +925,11 @@ namespace com.clusterrr.hakchi_gui
                             foreach (var f in szExtractor.ArchiveFileNames)
                             {
                                 var e = Path.GetExtension(f).ToLower();
-                                if (e == ".nes" || e == ".fds" || e == ".unf" || e == ".unif")
+                                if (e == ".nes" || e == ".fds" || e == ".unf" || e == ".unif" || e == ".desktop")
                                     nesFilesInArchive.Add(f);
                                 filesInArchive.Add(f);
                             }
-                            if (nesFilesInArchive.Count == 1) // Only one NES file
+                            if (nesFilesInArchive.Count == 1) // Only one NES file (or app)
                             {
                                 fileName = nesFilesInArchive[0];
                             }
@@ -942,17 +950,29 @@ namespace com.clusterrr.hakchi_gui
                                 else continue;
                             }
                             var o = new MemoryStream();
-                            szExtractor.ExtractFile(fileName, o);
-                            rawData = new byte[o.Length];
-                            o.Seek(0, SeekOrigin.Begin);
-                            o.Read(rawData, 0, (int)o.Length);
+                            if (Path.GetExtension(fileName).ToLower() == ".desktop" // App in archive, need the whole directory
+                                || szExtractor.ArchiveFileNames.Contains(Path.GetFileNameWithoutExtension(fileName)+".jpg") // Or it has cover in archive
+                                || szExtractor.ArchiveFileNames.Contains(Path.GetFileNameWithoutExtension(fileName) + ".png"))
+                            {
+                                tmp = Path.Combine(Path.GetTempPath(), fileName);
+                                Directory.CreateDirectory(tmp);
+                                szExtractor.ExtractArchive(tmp);
+                                fileName = Path.Combine(tmp, fileName);
+                            }
+                            else
+                            {
+                                szExtractor.ExtractFile(fileName, o);
+                                rawData = new byte[o.Length];
+                                o.Seek(0, SeekOrigin.Begin);
+                                o.Read(rawData, 0, (int)o.Length);
+                            }
                         }
                     }
                     if (Path.GetExtension(fileName).ToLower() == ".nes")
                     {
                         try
                         {
-                            app = NesGame.Import(fileName, YesForAllUnsupportedMappers ? (bool?)true : null, ref needPatch, needPatchCallback, this, rawData);
+                            app = NesGame.ImportNes(fileName, YesForAllUnsupportedMappers ? (bool?)true : null, ref needPatch, needPatchCallback, this, rawData);
 
                             // Trying to import Game Genie codes
                             var lGameGeniePath = Path.Combine(Path.GetDirectoryName(fileName), Path.GetFileNameWithoutExtension(fileName) + ".xml");
@@ -976,7 +996,7 @@ namespace com.clusterrr.hakchi_gui
                                     MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2, true);
                                 while (r == DialogResult.None) Thread.Sleep(100);
                                 if (r == DialogResult.Yes || r == DialogResult.Abort || r == DialogResult.Retry)
-                                    app = NesGame.Import(fileName, true, ref needPatch, needPatchCallback, this, rawData);
+                                    app = NesGame.ImportNes(fileName, true, ref needPatch, needPatchCallback, this, rawData);
                                 if (r == DialogResult.Abort)
                                     YesForAllUnsupportedMappers = true;
                             }
@@ -987,6 +1007,7 @@ namespace com.clusterrr.hakchi_gui
                     {
                         app = NesMiniApplication.Import(fileName, rawData);
                     }
+                    if (!string.IsNullOrEmpty(tmp) && Directory.Exists(tmp)) Directory.Delete(tmp, true);
                     ConfigIni.SelectedGames += ";" + app.Code;
                 }
                 catch (Exception ex)

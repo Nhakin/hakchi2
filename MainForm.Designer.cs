@@ -37,6 +37,7 @@
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.addPresetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deletePresetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.syncronizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.searchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.downloadCoversForAllGamesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
@@ -57,6 +58,7 @@
             this.resetUsingCombinationOfButtonsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.selectButtonCombinationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.enableAutofireToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.useXYOnClassicControllerAsAutofireABToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.upABStartOnSecondControllerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.useExtendedFontToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.epilepsyProtectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -127,7 +129,7 @@
             this.groupBoxDefaultGames = new System.Windows.Forms.GroupBox();
             this.checkedListBoxDefaultGames = new System.Windows.Forms.CheckedListBox();
             this.timerCalculateGames = new System.Windows.Forms.Timer(this.components);
-            this.FoldersConfigurationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.foldersManagerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.groupBoxOptions.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxArt)).BeginInit();
@@ -152,6 +154,7 @@
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addMoreGamesToolStripMenuItem,
             this.presetsToolStripMenuItem,
+            this.syncronizeToolStripMenuItem,
             this.searchToolStripMenuItem,
             this.downloadCoversForAllGamesToolStripMenuItem,
             this.toolStripMenuItem1,
@@ -189,6 +192,12 @@
             // 
             this.deletePresetToolStripMenuItem.Name = "deletePresetToolStripMenuItem";
             resources.ApplyResources(this.deletePresetToolStripMenuItem, "deletePresetToolStripMenuItem");
+            // 
+            // syncronizeToolStripMenuItem
+            // 
+            this.syncronizeToolStripMenuItem.Name = "syncronizeToolStripMenuItem";
+            resources.ApplyResources(this.syncronizeToolStripMenuItem, "syncronizeToolStripMenuItem");
+            this.syncronizeToolStripMenuItem.Click += new System.EventHandler(this.buttonStart_Click);
             // 
             // searchToolStripMenuItem
             // 
@@ -307,6 +316,7 @@
             this.resetUsingCombinationOfButtonsToolStripMenuItem,
             this.selectButtonCombinationToolStripMenuItem,
             this.enableAutofireToolStripMenuItem,
+            this.useXYOnClassicControllerAsAutofireABToolStripMenuItem,
             this.upABStartOnSecondControllerToolStripMenuItem});
             this.cloverconHackToolStripMenuItem.Name = "cloverconHackToolStripMenuItem";
             resources.ApplyResources(this.cloverconHackToolStripMenuItem, "cloverconHackToolStripMenuItem");
@@ -332,6 +342,13 @@
             this.enableAutofireToolStripMenuItem.Name = "enableAutofireToolStripMenuItem";
             resources.ApplyResources(this.enableAutofireToolStripMenuItem, "enableAutofireToolStripMenuItem");
             this.enableAutofireToolStripMenuItem.Click += new System.EventHandler(this.enableAutofireToolStripMenuItem_Click);
+            // 
+            // useXYOnClassicControllerAsAutofireABToolStripMenuItem
+            // 
+            this.useXYOnClassicControllerAsAutofireABToolStripMenuItem.CheckOnClick = true;
+            this.useXYOnClassicControllerAsAutofireABToolStripMenuItem.Name = "useXYOnClassicControllerAsAutofireABToolStripMenuItem";
+            resources.ApplyResources(this.useXYOnClassicControllerAsAutofireABToolStripMenuItem, "useXYOnClassicControllerAsAutofireABToolStripMenuItem");
+            this.useXYOnClassicControllerAsAutofireABToolStripMenuItem.Click += new System.EventHandler(this.useXYOnClassicControllerAsAutofireABToolStripMenuItem_Click);
             // 
             // upABStartOnSecondControllerToolStripMenuItem
             // 
@@ -371,7 +388,7 @@
             this.foldersSplitByFirstLetterOriginalToolStripMenuItem,
             this.maximumGamesPerFolderToolStripMenuItem,
             this.toolStripMenuItem4,
-            this.FoldersConfigurationToolStripMenuItem,
+            this.foldersManagerToolStripMenuItem,
             this.customToolStripMenuItem});
             this.pagesfoldersTypeToolStripMenuItem.Name = "pagesfoldersTypeToolStripMenuItem";
             resources.ApplyResources(this.pagesfoldersTypeToolStripMenuItem, "pagesfoldersTypeToolStripMenuItem");
@@ -829,11 +846,11 @@
             this.timerCalculateGames.Interval = 500;
             this.timerCalculateGames.Tick += new System.EventHandler(this.timerCalculateGames_Tick);
             // 
-            // FoldersConfigurationToolStripMenuItem
+            // foldersManagerToolStripMenuItem
             // 
-            this.FoldersConfigurationToolStripMenuItem.Name = "FoldersConfigurationToolStripMenuItem";
-            resources.ApplyResources(this.FoldersConfigurationToolStripMenuItem, "FoldersConfigurationToolStripMenuItem");
-            this.FoldersConfigurationToolStripMenuItem.Click += new System.EventHandler(this.FoldersConfigurationToolStripMenuItem_Click);
+            this.foldersManagerToolStripMenuItem.Name = "foldersManagerToolStripMenuItem";
+            resources.ApplyResources(this.foldersManagerToolStripMenuItem, "foldersManagerToolStripMenuItem");
+            this.foldersManagerToolStripMenuItem.Click += new System.EventHandler(this.FoldersConfigurationToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -968,7 +985,9 @@
         private System.Windows.Forms.ToolStripMenuItem modulesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem installModulesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem uninstallModulesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem FoldersConfigurationToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem syncronizeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem useXYOnClassicControllerAsAutofireABToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem foldersManagerToolStripMenuItem;
     }
 }
 

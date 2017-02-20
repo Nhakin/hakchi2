@@ -117,62 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="imageList.ImageStream" mimetype="application/x-microsoft.net.object.binary.base64">
-    <value>
-        AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
-        LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
-        ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAABy
-        CwAAAk1TRnQBSQFMAgEBBgEAAbABAAGwAQABEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
-        AwABQAMAASADAAEBAQABCAYAAQgYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
-        AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
-        AQABgAF8Af8BAAJQAf8BAAGTAQAB1gEAAf8B7AHMAQABxgHWAe8BAAHWAucBAAGQAakBrQIAAf8BMwMA
-        AWYDAAGZAwABzAIAATMDAAIzAgABMwFmAgABMwGZAgABMwHMAgABMwH/AgABZgMAAWYBMwIAAmYCAAFm
-        AZkCAAFmAcwCAAFmAf8CAAGZAwABmQEzAgABmQFmAgACmQIAAZkBzAIAAZkB/wIAAcwDAAHMATMCAAHM
-        AWYCAAHMAZkCAALMAgABzAH/AgAB/wFmAgAB/wGZAgAB/wHMAQABMwH/AgAB/wEAATMBAAEzAQABZgEA
-        ATMBAAGZAQABMwEAAcwBAAEzAQAB/wEAAf8BMwIAAzMBAAIzAWYBAAIzAZkBAAIzAcwBAAIzAf8BAAEz
-        AWYCAAEzAWYBMwEAATMCZgEAATMBZgGZAQABMwFmAcwBAAEzAWYB/wEAATMBmQIAATMBmQEzAQABMwGZ
-        AWYBAAEzApkBAAEzAZkBzAEAATMBmQH/AQABMwHMAgABMwHMATMBAAEzAcwBZgEAATMBzAGZAQABMwLM
-        AQABMwHMAf8BAAEzAf8BMwEAATMB/wFmAQABMwH/AZkBAAEzAf8BzAEAATMC/wEAAWYDAAFmAQABMwEA
-        AWYBAAFmAQABZgEAAZkBAAFmAQABzAEAAWYBAAH/AQABZgEzAgABZgIzAQABZgEzAWYBAAFmATMBmQEA
-        AWYBMwHMAQABZgEzAf8BAAJmAgACZgEzAQADZgEAAmYBmQEAAmYBzAEAAWYBmQIAAWYBmQEzAQABZgGZ
-        AWYBAAFmApkBAAFmAZkBzAEAAWYBmQH/AQABZgHMAgABZgHMATMBAAFmAcwBmQEAAWYCzAEAAWYBzAH/
-        AQABZgH/AgABZgH/ATMBAAFmAf8BmQEAAWYB/wHMAQABzAEAAf8BAAH/AQABzAEAApkCAAGZATMBmQEA
-        AZkBAAGZAQABmQEAAcwBAAGZAwABmQIzAQABmQEAAWYBAAGZATMBzAEAAZkBAAH/AQABmQFmAgABmQFm
-        ATMBAAGZATMBZgEAAZkBZgGZAQABmQFmAcwBAAGZATMB/wEAApkBMwEAApkBZgEAA5kBAAKZAcwBAAKZ
-        Af8BAAGZAcwCAAGZAcwBMwEAAWYBzAFmAQABmQHMAZkBAAGZAswBAAGZAcwB/wEAAZkB/wIAAZkB/wEz
-        AQABmQHMAWYBAAGZAf8BmQEAAZkB/wHMAQABmQL/AQABzAMAAZkBAAEzAQABzAEAAWYBAAHMAQABmQEA
-        AcwBAAHMAQABmQEzAgABzAIzAQABzAEzAWYBAAHMATMBmQEAAcwBMwHMAQABzAEzAf8BAAHMAWYCAAHM
-        AWYBMwEAAZkCZgEAAcwBZgGZAQABzAFmAcwBAAGZAWYB/wEAAcwBmQIAAcwBmQEzAQABzAGZAWYBAAHM
-        ApkBAAHMAZkBzAEAAcwBmQH/AQACzAIAAswBMwEAAswBZgEAAswBmQEAA8wBAALMAf8BAAHMAf8CAAHM
-        Af8BMwEAAZkB/wFmAQABzAH/AZkBAAHMAf8BzAEAAcwC/wEAAcwBAAEzAQAB/wEAAWYBAAH/AQABmQEA
-        AcwBMwIAAf8CMwEAAf8BMwFmAQAB/wEzAZkBAAH/ATMBzAEAAf8BMwH/AQAB/wFmAgAB/wFmATMBAAHM
-        AmYBAAH/AWYBmQEAAf8BZgHMAQABzAFmAf8BAAH/AZkCAAH/AZkBMwEAAf8BmQFmAQAB/wKZAQAB/wGZ
-        AcwBAAH/AZkB/wEAAf8BzAIAAf8BzAEzAQAB/wHMAWYBAAH/AcwBmQEAAf8CzAEAAf8BzAH/AQAC/wEz
-        AQABzAH/AWYBAAL/AZkBAAL/AcwBAAJmAf8BAAFmAf8BZgEAAWYC/wEAAf8CZgEAAf8BZgH/AQAC/wFm
-        AQABIQEAAaUBAANfAQADdwEAA4YBAAOWAQADywEAA7IBAAPXAQAD3QEAA+MBAAPqAQAD8QEAA/gBAAHw
-        AfsB/wEAAaQCoAEAA4ADAAH/AgAB/wMAAv8BAAH/AwAB/wEAAf8BAAL/AgAD/0IADhICAA7vIgABEgHt
-        ArwJ7QESAgAB7wG8AvIJvAHvIgABEgHtAhIJ7QESAgAB7wG8Au8JvAHvIQABEgLtArwC7QESB+0BEgHv
-        ArwC8gK8Ae8HvAHvIAABEgLtAhIK7QESAe8CvALvCrwB7yAAARIC7QK8Ae0HMgLtARIB7wK8AvIBvAea
-        ArwB7yAAARIC7QISAe0CMgKGAYsCMgLtARIB7wK8Au8BvAKaA7UCmgK8Ae8gAAESAu0CvAHtAjgBiwES
-        ARoBEwE4Au0BEgHvArwC8gG8ApoBuwHvARsB9wGaArwB7yAAARIC7QISAe0COAFuAZMBGgEcATgC7QES
-        Ae8CvALvAbwCmgEHAbwB8wHwAZoCvAHvIAABEgLtArwB7QQ4AhcBOALtARIB7wK8AvIBvASgApQBoAK8
-        Ae8gAAESAu0CEgHtBTgBlAE4Au0BEgHvArwC7wG8BaABvQGgArwB7yAAARIC7QK8Ae0B+wHTAfsB0wP7
-        Au0BEgHvArwC8gG8AaAB3AGgAdwDoAK8Ae8gAAESAu0CDwHtAfsB0wH7A9MB+wLtARIB7wK8AuwBvAGg
-        AdwBoAPcAaACvAHvIAABEgK8AhIBvAf7ArwBEgHvAvIC7wHyB6AC8gHvIAADEgIPARIHMAMSA+8C7AHv
-        B5kD74EADhICAA7vAgAOtAIADrwCAAESAe0CvAntARICAAHvAbwC8gm8Ae8CAAG0DAkBtAIAAbwM8gG8
-        AgABEgHtAhIJ7QESAgAB7wG8Au8JvAHvAgABtAwJAbQCAAG8DPIBvAEAARIC7QK8Au0BEgftARIB7wK8
-        AvICvAHvB7wB7wEAAbQMCQG0AgABvAzyAbwBAAESAu0CEgrtARIB7wK8Au8KvAHvAbQOCQG0AbwO8gG8
-        ARIC7QK8Ae0HbQLtARIB7wK8AvIBvAfvArwB7wG0DgkBtAG8DvIBvAESAu0CEgHtB20C7QESAe8CvALv
-        AbwH7wK8Ae8BtA4JAbQBvA7yAbwBEgLtArwB7QdtAu0BEgHvArwC8gG8B+8CvAHvAbQOCQG0AbwO8gG8
-        ARIC7QISAe0HbQLtARIB7wK8Au8BvAfvArwB7wG0DgkBtAG8DvIBvAESAu0CvAHtB20C7QESAe8CvALy
-        AbwH7wK8Ae8HtAgJAbQHvAjyAbwBEgLtAhIB7QdtAu0BEgHvArwC7wG8B+8CvAHvAQAFrgq0AQAFBwq8
-        ARIC7QK8Ae0HbQLtARIB7wK8AvIBvAfvArwB7wEADq4CAA4HAQABEgLtAg8B7QdtAu0BEgHvArwC7AG8
-        B+8CvAHvAgAFrgsABQcJAAESArwCEgG8B20CvAESAe8C8gLvAfIH7wLyAe8gAAMSAg8BEgcPAxID7wLs
-        Ae8H7APvAUIBTQE+BwABPgMAASgDAAFAAwABIAMAAQEBAAEBBgABARYAA/8BAAT/BAABgAEBAYABAQQA
-        AYABAQGAAQEEAAGAAQEBgAEBZAAM/wGAAQEBgAEBAYABAQGAAQEBgAEBAYABAQGAAQEBgAEBAYABAQGA
-        AQEBgAEBAYABAQQAAYABAQGAAQE0AAGAAQABgAUAAYABAQGAAQEEAAHBAf8BwQH/BAAE/wQACw==
-</value>
-  </data>
   <data name="comboBoxPosition.Items" xml:space="preserve">
     <value>Самая левая</value>
   </data>
@@ -184,10 +128,6 @@
   </data>
   <data name="comboBoxPosition.Items3" xml:space="preserve">
     <value>Самая правая</value>
-  </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="labelPosition.Size" type="System.Drawing.Size, System.Drawing">
-    <value>101, 13</value>
   </data>
   <data name="labelPosition.Text" xml:space="preserve">
     <value>Положение папки:</value>
@@ -219,61 +159,25 @@
   <data name="groupBoxArt.Text" xml:space="preserve">
     <value>Иконка в меню</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="newFolderToolStripMenuItem.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
-    <value>Ctrl+N</value>
-  </data>
-  <data name="newFolderToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>234, 22</value>
-  </data>
   <data name="newFolderToolStripMenuItem.Text" xml:space="preserve">
     <value>Создать новую папку</value>
-  </data>
-  <data name="renameToolStripMenuItem.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
-    <value>F2</value>
-  </data>
-  <data name="renameToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>234, 22</value>
   </data>
   <data name="renameToolStripMenuItem.Text" xml:space="preserve">
     <value>Переименовать папку</value>
   </data>
-  <data name="toolStripMenuItemSep.Size" type="System.Drawing.Size, System.Drawing">
-    <value>231, 6</value>
-  </data>
-  <data name="cutToolStripMenuItem.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
-    <value>Ctrl+X</value>
-  </data>
-  <data name="cutToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>234, 22</value>
-  </data>
   <data name="cutToolStripMenuItem.Text" xml:space="preserve">
     <value>Вырезать</value>
-  </data>
-  <data name="pasteToolStripMenuItem.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
-    <value>Ctrl+V</value>
-  </data>
-  <data name="pasteToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>234, 22</value>
   </data>
   <data name="pasteToolStripMenuItem.Text" xml:space="preserve">
     <value>Вставить</value>
   </data>
-  <data name="deleteToolStripMenuItem.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
-    <value>Del</value>
-  </data>
-  <data name="deleteToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>234, 22</value>
-  </data>
   <data name="deleteToolStripMenuItem.Text" xml:space="preserve">
     <value>Удалить</value>
-  </data>
-  <data name="contextMenuStrip.Size" type="System.Drawing.Size, System.Drawing">
-    <value>235, 120</value>
   </data>
   <data name="buttonCancel.Text" xml:space="preserve">
     <value>Отмена</value>
   </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAEAgIAAAAEAIAAoCAEAFgAAACgAAACAAAAAAAEAAAEAIAAAAAAAAAABABILAAASCwAAAAAAAAAA

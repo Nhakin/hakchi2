@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace com.clusterrr.hakchi_gui
@@ -18,6 +15,7 @@ namespace com.clusterrr.hakchi_gui
         public static bool UseFont = true;
         public static bool ResetHack = true;
         public static bool AutofireHack = false;
+        public static bool AutofireXYHack = false;
         public static bool FcStart = false;
         public static byte AntiArmetLevel = 0;
         public static byte ConsoleType = 0;
@@ -26,12 +24,21 @@ namespace com.clusterrr.hakchi_gui
         public static SelectButtonsForm.NesButtons ResetCombination = SelectButtonsForm.NesButtons.Down | SelectButtonsForm.NesButtons.Select;
         public static Dictionary<string, string> Presets = new Dictionary<string, string>();
         public static string ExtraCommandLineArguments = "";
+        public const string ConfigDir = "config";
         public const string ConfigFile = "config.ini";
 
         public static void Load()
         {
             Debug.WriteLine("Loading config");
-            var fileName = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), ConfigFile);
+            var fileNameOld = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), ConfigFile);
+            var configFullDir = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), ConfigDir);
+            var fileName = Path.Combine(configFullDir, ConfigFile);
+            if (File.Exists(fileNameOld)) // Moving old config to new directory
+            {
+                Directory.CreateDirectory(configFullDir);
+                File.Copy(fileNameOld, fileName, true);
+                File.Delete(fileNameOld);
+            }
             if (File.Exists(fileName))
             {
                 var configLines = File.ReadAllLines(fileName);
@@ -80,6 +87,9 @@ namespace com.clusterrr.hakchi_gui
                                 case "autofirehack":
                                     AutofireHack = !value.ToLower().Equals("false");
                                     break;
+                                case "autofirexyhack":
+                                    AutofireXYHack = !value.ToLower().Equals("false");
+                                    break;
                                 case "resetcombination":
                                     ResetCombination = (SelectButtonsForm.NesButtons)byte.Parse(value);
                                     break;
@@ -118,6 +128,7 @@ namespace com.clusterrr.hakchi_gui
             configLines.Add(string.Format("UseFont={0}", UseFont));
             configLines.Add(string.Format("ResetHack={0}", ResetHack));
             configLines.Add(string.Format("AutofireHack={0}", AutofireHack));
+            configLines.Add(string.Format("AutofireXYHack={0}", AutofireXYHack));
             configLines.Add(string.Format("FirstRun={0}", FirstRun));
             configLines.Add(string.Format("AntiArmetLevel={0}", AntiArmetLevel));
             configLines.Add(string.Format("ResetCombination={0}", (byte)ResetCombination));
@@ -133,7 +144,11 @@ namespace com.clusterrr.hakchi_gui
             {
                 configLines.Add(string.Format("{0}={1}", preset, Presets[preset]));
             }
-            File.WriteAllLines(Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), ConfigFile), configLines.ToArray());
+
+            var configFullDir = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), ConfigDir);
+            var fileName = Path.Combine(configFullDir, ConfigFile);
+            Directory.CreateDirectory(configFullDir);
+            File.WriteAllLines(fileName, configLines.ToArray());
         }
     }
 }
