@@ -303,18 +303,11 @@
   <data name="AutofireHelp1" xml:space="preserve">
     <value>Hold Select+A/B for a second to enable/disable autofire A/B.</value>
   </data>
-  <data name="AutofireHelp2" xml:space="preserve">
-    <value>Also, the X/Y buttons on the Classic Controller will act as autofire A/B.</value>
-  </data>
   <data name="ExtraArgsInfo" xml:space="preserve">
     <value>You can add global command-line arguments which will be appended to all games including the original 30. This is only for experts!</value>
   </data>
   <data name="ExtraArgsTitle" xml:space="preserve">
     <value>Extra command-line arguments</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="blank" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\images\blank.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="DownloadAllCoversTitle" xml:space="preserve">
     <value>Downloading box art for all games (I'm feeling lucky!)</value>
@@ -331,6 +324,7 @@
   <data name="ParticallyTitle" xml:space="preserve">
     <value>Too many ROMs</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="gamepad" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\images\gamepad.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -510,5 +504,41 @@
   </data>
   <data name="UninstallingMods" xml:space="preserve">
     <value>Uninstalling mods...</value>
+  </data>
+  <data name="blank_app" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\images\blank_app.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="blank_gb" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\images\blank_gb.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="blank_gba" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\images\blank_gba.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="blank_gbc" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\images\blank_gbc.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="blank_genesis" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\images\blank_genesis.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="blank_pce" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\images\blank_pce.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="blank_sms" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\images\blank_sms.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="blank_snes_us" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\images\blank_snes-us.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="blank_nes" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\images\blank_nes.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="blank_n64" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\images\blank_n64.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GameTooBig" xml:space="preserve">
+    <value>Sorry, game "{0}" is too big.</value>
+  </data>
+  <data name="MemoryFull" xml:space="preserve">
+    <value>Sorry, there are {0}MBytes of games, it's too much.</value>
   </data>
 </root>

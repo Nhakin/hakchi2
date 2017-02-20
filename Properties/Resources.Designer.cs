@@ -97,20 +97,11 @@ namespace com.clusterrr.hakchi_gui.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Also, the X/Y buttons on the Classic Controller will act as autofire A/B..
-        /// </summary>
-        internal static string AutofireHelp2 {
-            get {
-                return ResourceManager.GetString("AutofireHelp2", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap blank {
+        internal static System.Drawing.Bitmap blank_app {
             get {
-                object obj = ResourceManager.GetObject("blank", resourceCulture);
+                object obj = ResourceManager.GetObject("blank_app", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -128,9 +119,99 @@ namespace com.clusterrr.hakchi_gui.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap blank_gb {
+            get {
+                object obj = ResourceManager.GetObject("blank_gb", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap blank_gba {
+            get {
+                object obj = ResourceManager.GetObject("blank_gba", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap blank_gbc {
+            get {
+                object obj = ResourceManager.GetObject("blank_gbc", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap blank_genesis {
+            get {
+                object obj = ResourceManager.GetObject("blank_genesis", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap blank_jp {
             get {
                 object obj = ResourceManager.GetObject("blank_jp", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap blank_n64 {
+            get {
+                object obj = ResourceManager.GetObject("blank_n64", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap blank_nes {
+            get {
+                object obj = ResourceManager.GetObject("blank_nes", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap blank_pce {
+            get {
+                object obj = ResourceManager.GetObject("blank_pce", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap blank_sms {
+            get {
+                object obj = ResourceManager.GetObject("blank_sms", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap blank_snes_us {
+            get {
+                object obj = ResourceManager.GetObject("blank_snes_us", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -226,7 +307,7 @@ namespace com.clusterrr.hakchi_gui.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Do you really want to delete &quot;{0}&quot; preset?.
+        ///   Looks up a localized string similar to Do you really want to delete the &quot;{0}&quot; preset?.
         /// </summary>
         internal static string DeletePreset {
             get {
@@ -334,7 +415,7 @@ namespace com.clusterrr.hakchi_gui.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Executing FES-1....
+        ///   Looks up a localized string similar to Executing fes1....
         /// </summary>
         internal static string ExecutingFes1 {
             get {
@@ -805,6 +886,15 @@ namespace com.clusterrr.hakchi_gui.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sorry, game &quot;{0}&quot; is too big..
+        /// </summary>
+        internal static string GameTooBig {
+            get {
+                return ResourceManager.GetString("GameTooBig", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Do you want to delete &quot;{0}&quot; code?.
         /// </summary>
         internal static string GGCodeDelete {
@@ -922,7 +1012,7 @@ namespace com.clusterrr.hakchi_gui.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Sorry, &quot;{0}&quot; uses mapper #{1} but this mapper is not supported by the NES Mini and the game probably will not start with the default emulator. But it should work if other emulator&apos;s module installed. Do you want to add this game?.
+        ///   Looks up a localized string similar to Sorry, &quot;{0}&quot; uses mapper #{1} but this mapper is not supported by the NES Mini and the game will probably not start with the default emulator. But it should work if other emulator&apos;s module installed. Do you want to add this game?.
         /// </summary>
         internal static string MapperNotSupported {
             get {
@@ -940,11 +1030,20 @@ namespace com.clusterrr.hakchi_gui.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The kernel is already patched or it&apos;s an unknown revision. Please send this message to me (press Ctrl+C). Continue at on your own risk..
+        ///   Looks up a localized string similar to The kernel is already patched or it&apos;s an unknown revision. Please send this message to me (press Ctrl+C). Continue at your own risk..
         /// </summary>
         internal static string MD5Failed2 {
             get {
                 return ResourceManager.GetString("MD5Failed2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sorry, there are {0}MBytes of games, it&apos;s too much..
+        /// </summary>
+        internal static string MemoryFull {
+            get {
+                return ResourceManager.GetString("MemoryFull", resourceCulture);
             }
         }
         
@@ -1030,7 +1129,7 @@ namespace com.clusterrr.hakchi_gui.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Don&apos;t worry! Everything is fine. There are just too many ROMs to transfer them at once. Please wait until the power LED goes out, press OK and follow the instructions to continue..
+        ///   Looks up a localized string similar to Don&apos;t worry! Everything is fine. There are just too many ROMs to transfer at once. Please wait until power LED goes out, press OK and follow the instructions to continue..
         /// </summary>
         internal static string ParticallyBody {
             get {
