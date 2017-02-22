@@ -6,11 +6,15 @@ namespace com.clusterrr.hakchi_gui
 {
     public class PceGame : NesMiniApplication
     {
-        public const char Prefix = 'E';
-        public static Image DefaultCover { get { return Resources.blank_pce; } }
-        internal const string DefaultApp = "/bin/pce";
+        public override string GoogleSuffix
+        {
+            get
+            {
+                return "(pce | pc engine | turbografx 16)";
+            }
+        }
 
-        public PceGame(string path, bool ignoreEmptyConfig)
+        public PceGame(string path, bool ignoreEmptyConfig = false)
             : base(path, ignoreEmptyConfig)
         {
         }

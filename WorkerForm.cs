@@ -905,7 +905,7 @@ namespace com.clusterrr.hakchi_gui
                             foreach (var f in szExtractor.ArchiveFileNames)
                             {
                                 var e = Path.GetExtension(f).ToLower();
-                                if (e == ".nes" || e == ".fds" || e == ".unf" || e == ".unif" || e == ".desktop")
+                                if (e == ".desktop" || AppTypeCollection.GetAppByExtension(e) != null)
                                     nesFilesInArchive.Add(f);
                                 filesInArchive.Add(f);
                             }
@@ -952,7 +952,7 @@ namespace com.clusterrr.hakchi_gui
                     {
                         try
                         {
-                            app = NesGame.ImportNes(fileName, YesForAllUnsupportedMappers ? (bool?)true : null, ref needPatch, needPatchCallback, this, rawData);
+                            app = NesGame.Import(fileName, YesForAllUnsupportedMappers ? (bool?)true : null, ref needPatch, needPatchCallback, this, rawData);
 
                             // Trying to import Game Genie codes
                             var lGameGeniePath = Path.Combine(Path.GetDirectoryName(fileName), Path.GetFileNameWithoutExtension(fileName) + ".xml");
@@ -977,7 +977,7 @@ namespace com.clusterrr.hakchi_gui
                                 if (r == DialogResult.Abort)
                                     YesForAllUnsupportedMappers = true;
                                 if (r == DialogResult.Yes || r == DialogResult.Abort || r == DialogResult.Retry)
-                                    app = NesGame.ImportNes(fileName, true, ref needPatch, needPatchCallback, this, rawData);
+                                    app = NesGame.Import(fileName, true, ref needPatch, needPatchCallback, this, rawData);
                                 else
                                     continue;
                             }
@@ -1001,6 +1001,7 @@ namespace com.clusterrr.hakchi_gui
                     apps.Add(app);
                 SetProgress(++count, files.Length);
             }
+            addedApplications = apps.ToArray();
             return apps; // Added games/apps
         }
 

@@ -461,6 +461,12 @@
   <data name="pagesfoldersTypeToolStripMenuItem.Text" xml:space="preserve">
     <value>Pages/folders structure</value>
   </data>
+  <data name="compressGamesIfPossibleToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>327, 22</value>
+  </data>
+  <data name="compressGamesIfPossibleToolStripMenuItem.Text" xml:space="preserve">
+    <value>Compress games, if possible</value>
+  </data>
   <data name="globalCommandLineArgumentsexpertsOnluToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>327, 22</value>
   </data>
@@ -1155,14 +1161,8 @@
   <data name="toolStripProgressBar.Size" type="System.Drawing.Size, System.Drawing">
     <value>300, 16</value>
   </data>
-  <data name="toolStripStatusLabel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>118, 17</value>
-  </data>
-  <data name="toolStripStatusLabel1.Text" xml:space="preserve">
-    <value>toolStripStatusLabel1</value>
-  </data>
   <data name="statusStrip.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 614</value>
+    <value>0, 615</value>
   </data>
   <data name="statusStrip.Size" type="System.Drawing.Size, System.Drawing">
     <value>609, 22</value>
@@ -1188,9 +1188,6 @@
   <metadata name="openFileDialogNes.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>202, 17</value>
   </metadata>
-  <data name="openFileDialogNes.Filter" xml:space="preserve">
-    <value>NES files and applications|*.nes;*.fds;*.desktop;*.zip;*.7z;*.rar|All files|*.*</value>
-  </data>
   <data name="openFileDialogNes.Title" xml:space="preserve">
     <value>Select NES file(s)</value>
   </data>
@@ -1327,7 +1324,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>609, 636</value>
+    <value>609, 637</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -2815,6 +2812,12 @@
   <data name="&gt;&gt;customToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;compressGamesIfPossibleToolStripMenuItem.Name" xml:space="preserve">
+    <value>compressGamesIfPossibleToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;compressGamesIfPossibleToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;globalCommandLineArgumentsexpertsOnluToolStripMenuItem.Name" xml:space="preserve">
     <value>globalCommandLineArgumentsexpertsOnluToolStripMenuItem</value>
   </data>
@@ -2898,12 +2901,6 @@
   </data>
   <data name="&gt;&gt;timerCalculateGames.Type" xml:space="preserve">
     <value>System.Windows.Forms.Timer, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStripStatusLabel1.Name" xml:space="preserve">
-    <value>toolStripStatusLabel1</value>
-  </data>
-  <data name="&gt;&gt;toolStripStatusLabel1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripStatusLabel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>MainForm</value>
