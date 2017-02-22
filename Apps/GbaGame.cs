@@ -6,11 +6,14 @@ namespace com.clusterrr.hakchi_gui
 {
     public class GbaGame : NesMiniApplication
     {
-        public const char Prefix = 'A';
-        public static Image DefaultCover { get { return Resources.blank_gba; } }
-        public const string DefaultApp = "/bin/gba";
-
-        public GbaGame(string path, bool ignoreEmptyConfig)
+        public override string GoogleSuffix
+        {
+            get
+            {
+                return "gba";
+            }
+        }
+        public GbaGame(string path, bool ignoreEmptyConfig = false)
             : base(path, ignoreEmptyConfig)
         {
         }

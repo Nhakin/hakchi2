@@ -88,6 +88,7 @@
             this.max100toolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripSeparator();
             this.customToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.compressGamesIfPossibleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.globalCommandLineArgumentsexpertsOnluToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gitHubPageWithActualReleasesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -131,7 +132,6 @@
             this.groupBoxDefaultGames = new System.Windows.Forms.GroupBox();
             this.checkedListBoxDefaultGames = new System.Windows.Forms.CheckedListBox();
             this.timerCalculateGames = new System.Windows.Forms.Timer(this.components);
-            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.menuStrip.SuspendLayout();
             this.groupBoxOptions.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxArt)).BeginInit();
@@ -286,6 +286,7 @@
             this.useExtendedFontToolStripMenuItem,
             this.epilepsyProtectionToolStripMenuItem,
             this.pagesfoldersTypeToolStripMenuItem,
+            this.compressGamesIfPossibleToolStripMenuItem,
             this.globalCommandLineArgumentsexpertsOnluToolStripMenuItem});
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
             resources.ApplyResources(this.settingsToolStripMenuItem, "settingsToolStripMenuItem");
@@ -566,6 +567,13 @@
             this.customToolStripMenuItem.Tag = "99";
             this.customToolStripMenuItem.Click += new System.EventHandler(this.pagesModefoldersToolStripMenuItem_Click);
             // 
+            // compressGamesIfPossibleToolStripMenuItem
+            // 
+            this.compressGamesIfPossibleToolStripMenuItem.CheckOnClick = true;
+            this.compressGamesIfPossibleToolStripMenuItem.Name = "compressGamesIfPossibleToolStripMenuItem";
+            resources.ApplyResources(this.compressGamesIfPossibleToolStripMenuItem, "compressGamesIfPossibleToolStripMenuItem");
+            this.compressGamesIfPossibleToolStripMenuItem.Click += new System.EventHandler(this.compressGamesIfPossibleToolStripMenuItem_Click);
+            // 
             // globalCommandLineArgumentsexpertsOnluToolStripMenuItem
             // 
             this.globalCommandLineArgumentsexpertsOnluToolStripMenuItem.Name = "globalCommandLineArgumentsexpertsOnluToolStripMenuItem";
@@ -775,8 +783,7 @@
             this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabelSelected,
             this.toolStripStatusLabelSize,
-            this.toolStripProgressBar,
-            this.toolStripStatusLabel1});
+            this.toolStripProgressBar});
             resources.ApplyResources(this.statusStrip, "statusStrip");
             this.statusStrip.Name = "statusStrip";
             this.statusStrip.SizingGrip = false;
@@ -801,8 +808,8 @@
             // openFileDialogNes
             // 
             this.openFileDialogNes.DefaultExt = "nes";
-            resources.ApplyResources(this.openFileDialogNes, "openFileDialogNes");
             this.openFileDialogNes.Multiselect = true;
+            resources.ApplyResources(this.openFileDialogNes, "openFileDialogNes");
             // 
             // contextMenuStrip
             // 
@@ -862,11 +869,6 @@
             this.timerCalculateGames.Enabled = true;
             this.timerCalculateGames.Interval = 500;
             this.timerCalculateGames.Tick += new System.EventHandler(this.timerCalculateGames_Tick);
-            // 
-            // toolStripStatusLabel1
-            // 
-            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            resources.ApplyResources(this.toolStripStatusLabel1, "toolStripStatusLabel1");
             // 
             // MainForm
             // 
@@ -1005,7 +1007,7 @@
         private System.Windows.Forms.ToolStripMenuItem useXYOnClassicControllerAsAutofireABToolStripMenuItem;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelSize;
         private System.Windows.Forms.ToolStripProgressBar toolStripProgressBar;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.ToolStripMenuItem compressGamesIfPossibleToolStripMenuItem;
     }
 }
 

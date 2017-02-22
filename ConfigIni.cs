@@ -24,6 +24,7 @@ namespace com.clusterrr.hakchi_gui
         public static SelectButtonsForm.NesButtons ResetCombination = SelectButtonsForm.NesButtons.Down | SelectButtonsForm.NesButtons.Select;
         public static Dictionary<string, string> Presets = new Dictionary<string, string>();
         public static string ExtraCommandLineArguments = "";
+        public static bool Compress = true;
         public const string ConfigDir = "config";
         public const string ConfigFile = "config.ini";
 
@@ -108,6 +109,9 @@ namespace com.clusterrr.hakchi_gui
                                 case "foldersmode":
                                     FoldersMode = (NesMenuCollection.SplitStyle)byte.Parse(value);
                                     break;
+                                case "Compress":
+                                    Compress = !value.ToLower().Equals("false");
+                                    break;
                             }
                             break;
                         case "presets":
@@ -137,6 +141,7 @@ namespace com.clusterrr.hakchi_gui
             configLines.Add(string.Format("FcStart={0}", FcStart));
             configLines.Add(string.Format("FoldersMode={0}", (byte)FoldersMode));
             configLines.Add(string.Format("MaxGamesPerFolder={0}", MaxGamesPerFolder));
+            configLines.Add(string.Format("Compress={0}", Compress));
 
             configLines.Add("");
             configLines.Add("[Presets]");
