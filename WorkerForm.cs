@@ -60,7 +60,6 @@ namespace com.clusterrr.hakchi_gui
         readonly string originalGamesConfigDirectory;
         string[] correctKernels;
         const long maxRamfsSize = 40 * 1024 * 1024;
-        const long maxTotalSize = 320 * 1024 * 1024;
         string selectedFile = null;
         public NesMiniApplication[] addedApplications;
 
@@ -195,7 +194,10 @@ namespace com.clusterrr.hakchi_gui
             var form = new SelectFileForm(files);
             TaskbarProgress.SetState(this.Handle, TaskbarProgress.TaskbarStates.Paused);
             var result = form.ShowDialog();
-            selectedFile = form.listBoxFiles.SelectedItem.ToString();
+            if (form.listBoxFiles.SelectedItem != null)
+                selectedFile = form.listBoxFiles.SelectedItem.ToString();
+            else
+                selectedFile = null;
             TaskbarProgress.SetState(this.Handle, TaskbarProgress.TaskbarStates.Normal);
             return result;
         }
@@ -615,7 +617,6 @@ namespace com.clusterrr.hakchi_gui
 
                 stats.Next();
                 AddMenu(Games, stats);
-                if (stats.TotalSize > maxTotalSize) throw new Exception(string.Format(Resources.MemoryFull, stats.TotalSize / 1024 / 1024));
                 Debug.WriteLine(string.Format("Games copied: {0}/{1}, part size: {2}", stats.GamesProceed, stats.TotalGames, stats.Size));
             }
 
@@ -994,11 +995,12 @@ namespace com.clusterrr.hakchi_gui
                                     Resources.AreYouSure,
                                     files.Length <= 1 ? MessageBoxButtons.YesNo : MessageBoxButtons.AbortRetryIgnore,
                                     MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2, true);
-                                while (r == DialogResult.None) Thread.Sleep(100);
-                                if (r == DialogResult.Yes || r == DialogResult.Abort || r == DialogResult.Retry)
-                                    app = NesGame.ImportNes(fileName, true, ref needPatch, needPatchCallback, this, rawData);
                                 if (r == DialogResult.Abort)
                                     YesForAllUnsupportedMappers = true;
+                                if (r == DialogResult.Yes || r == DialogResult.Abort || r == DialogResult.Retry)
+                                    app = NesGame.ImportNes(fileName, true, ref needPatch, needPatchCallback, this, rawData);
+                                else
+                                    continue;
                             }
                             else throw ex;
                         }

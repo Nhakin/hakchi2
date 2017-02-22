@@ -152,14 +152,8 @@
   <data name="presetsToolStripMenuItem.Text" xml:space="preserve">
     <value>Selection presets</value>
   </data>
-  <data name="syncronizeToolStripMenuItem.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
-    <value>F5</value>
-  </data>
-  <data name="syncronizeToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="synchronizeToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>238, 22</value>
-  </data>
-  <data name="syncronizeToolStripMenuItem.Text" xml:space="preserve">
-    <value>Syncronize</value>
   </data>
   <data name="searchToolStripMenuItem.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
     <value>Ctrl+F</value>
@@ -1151,6 +1145,12 @@
   </data>
   <data name="toolStripStatusLabelSelected.Text" xml:space="preserve">
     <value>toolStripStatusLabel1</value>
+  </data>
+  <data name="toolStripStatusLabelSize.Size" type="System.Drawing.Size, System.Drawing">
+    <value>0, 17</value>
+  </data>
+  <data name="toolStripProgressBar.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 16</value>
   </data>
   <data name="statusStrip.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 614</value>
@@ -2500,10 +2500,10 @@
   <data name="&gt;&gt;deletePresetToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;syncronizeToolStripMenuItem.Name" xml:space="preserve">
-    <value>syncronizeToolStripMenuItem</value>
+  <data name="&gt;&gt;synchronizeToolStripMenuItem.Name" xml:space="preserve">
+    <value>synchronizeToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;syncronizeToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;synchronizeToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;searchToolStripMenuItem.Name" xml:space="preserve">
@@ -2800,12 +2800,6 @@
   <data name="&gt;&gt;toolStripMenuItem4.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;foldersManagerToolStripMenuItem.Name" xml:space="preserve">
-    <value>foldersManagerToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;foldersManagerToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;customToolStripMenuItem.Name" xml:space="preserve">
     <value>customToolStripMenuItem</value>
   </data>
@@ -2848,6 +2842,18 @@
   <data name="&gt;&gt;toolStripStatusLabelSelected.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripStatusLabel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;toolStripStatusLabelSize.Name" xml:space="preserve">
+    <value>toolStripStatusLabelSize</value>
+  </data>
+  <data name="&gt;&gt;toolStripStatusLabelSize.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripStatusLabel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripProgressBar.Name" xml:space="preserve">
+    <value>toolStripProgressBar</value>
+  </data>
+  <data name="&gt;&gt;toolStripProgressBar.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripProgressBar, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;openFileDialogNes.Name" xml:space="preserve">
     <value>openFileDialogNes</value>
   </data>
@@ -2883,6 +2889,12 @@
   </data>
   <data name="&gt;&gt;timerCalculateGames.Type" xml:space="preserve">
     <value>System.Windows.Forms.Timer, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;foldersManagerToolStripMenuItem.Name" xml:space="preserve">
+    <value>foldersManagerToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;foldersManagerToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>MainForm</value>

@@ -37,7 +37,7 @@
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.addPresetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deletePresetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.syncronizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.synchronizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.searchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.downloadCoversForAllGamesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
@@ -87,7 +87,6 @@
             this.max90toolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.max100toolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripSeparator();
-            this.foldersManagerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.customToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.globalCommandLineArgumentsexpertsOnluToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -120,6 +119,8 @@
             this.buttonAddGames = new System.Windows.Forms.Button();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabelSelected = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabelSize = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripProgressBar = new System.Windows.Forms.ToolStripProgressBar();
             this.openFileDialogNes = new System.Windows.Forms.OpenFileDialog();
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.selectAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -130,6 +131,7 @@
             this.groupBoxDefaultGames = new System.Windows.Forms.GroupBox();
             this.checkedListBoxDefaultGames = new System.Windows.Forms.CheckedListBox();
             this.timerCalculateGames = new System.Windows.Forms.Timer(this.components);
+            this.foldersManagerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.groupBoxOptions.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxArt)).BeginInit();
@@ -154,7 +156,7 @@
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addMoreGamesToolStripMenuItem,
             this.presetsToolStripMenuItem,
-            this.syncronizeToolStripMenuItem,
+            this.synchronizeToolStripMenuItem,
             this.searchToolStripMenuItem,
             this.downloadCoversForAllGamesToolStripMenuItem,
             this.toolStripMenuItem1,
@@ -193,11 +195,11 @@
             this.deletePresetToolStripMenuItem.Name = "deletePresetToolStripMenuItem";
             resources.ApplyResources(this.deletePresetToolStripMenuItem, "deletePresetToolStripMenuItem");
             // 
-            // syncronizeToolStripMenuItem
+            // synchronizeToolStripMenuItem
             // 
-            this.syncronizeToolStripMenuItem.Name = "syncronizeToolStripMenuItem";
-            resources.ApplyResources(this.syncronizeToolStripMenuItem, "syncronizeToolStripMenuItem");
-            this.syncronizeToolStripMenuItem.Click += new System.EventHandler(this.buttonStart_Click);
+            this.synchronizeToolStripMenuItem.Name = "synchronizeToolStripMenuItem";
+            resources.ApplyResources(this.synchronizeToolStripMenuItem, "synchronizeToolStripMenuItem");
+            this.synchronizeToolStripMenuItem.Click += new System.EventHandler(this.buttonStart_Click);
             // 
             // searchToolStripMenuItem
             // 
@@ -558,12 +560,6 @@
             this.toolStripMenuItem4.Name = "toolStripMenuItem4";
             resources.ApplyResources(this.toolStripMenuItem4, "toolStripMenuItem4");
             // 
-            // foldersManagerToolStripMenuItem
-            // 
-            this.foldersManagerToolStripMenuItem.Name = "foldersManagerToolStripMenuItem";
-            resources.ApplyResources(this.foldersManagerToolStripMenuItem, "foldersManagerToolStripMenuItem");
-            this.foldersManagerToolStripMenuItem.Click += new System.EventHandler(this.FoldersConfigurationToolStripMenuItem_Click);
-            // 
             // customToolStripMenuItem
             // 
             this.customToolStripMenuItem.Name = "customToolStripMenuItem";
@@ -778,7 +774,9 @@
             // statusStrip
             // 
             this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabelSelected});
+            this.toolStripStatusLabelSelected,
+            this.toolStripStatusLabelSize,
+            this.toolStripProgressBar});
             resources.ApplyResources(this.statusStrip, "statusStrip");
             this.statusStrip.Name = "statusStrip";
             this.statusStrip.SizingGrip = false;
@@ -787,6 +785,18 @@
             // 
             this.toolStripStatusLabelSelected.Name = "toolStripStatusLabelSelected";
             resources.ApplyResources(this.toolStripStatusLabelSelected, "toolStripStatusLabelSelected");
+            // 
+            // toolStripStatusLabelSize
+            // 
+            this.toolStripStatusLabelSize.Name = "toolStripStatusLabelSize";
+            resources.ApplyResources(this.toolStripStatusLabelSize, "toolStripStatusLabelSize");
+            // 
+            // toolStripProgressBar
+            // 
+            this.toolStripProgressBar.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.toolStripProgressBar.Name = "toolStripProgressBar";
+            resources.ApplyResources(this.toolStripProgressBar, "toolStripProgressBar");
+            this.toolStripProgressBar.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
             // 
             // openFileDialogNes
             // 
@@ -844,6 +854,7 @@
             resources.ApplyResources(this.checkedListBoxDefaultGames, "checkedListBoxDefaultGames");
             this.checkedListBoxDefaultGames.FormattingEnabled = true;
             this.checkedListBoxDefaultGames.Name = "checkedListBoxDefaultGames";
+            this.checkedListBoxDefaultGames.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.checkedListBoxDefaultGames_ItemCheck);
             this.checkedListBoxDefaultGames.MouseDown += new System.Windows.Forms.MouseEventHandler(this.checkedListBoxDefaultGames_MouseDown);
             // 
             // timerCalculateGames
@@ -851,6 +862,12 @@
             this.timerCalculateGames.Enabled = true;
             this.timerCalculateGames.Interval = 500;
             this.timerCalculateGames.Tick += new System.EventHandler(this.timerCalculateGames_Tick);
+            // 
+            // foldersManagerToolStripMenuItem
+            // 
+            this.foldersManagerToolStripMenuItem.Name = "foldersManagerToolStripMenuItem";
+            resources.ApplyResources(this.foldersManagerToolStripMenuItem, "foldersManagerToolStripMenuItem");
+            this.foldersManagerToolStripMenuItem.Click += new System.EventHandler(this.FoldersConfigurationToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -985,8 +1002,10 @@
         private System.Windows.Forms.ToolStripMenuItem modulesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem installModulesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem uninstallModulesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem syncronizeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem synchronizeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem useXYOnClassicControllerAsAutofireABToolStripMenuItem;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelSize;
+        private System.Windows.Forms.ToolStripProgressBar toolStripProgressBar;
         private System.Windows.Forms.ToolStripMenuItem foldersManagerToolStripMenuItem;
     }
 }
