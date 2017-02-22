@@ -87,6 +87,7 @@
             this.max90toolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.max100toolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripSeparator();
+            this.foldersManagerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.customToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.globalCommandLineArgumentsexpertsOnluToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -129,7 +130,6 @@
             this.groupBoxDefaultGames = new System.Windows.Forms.GroupBox();
             this.checkedListBoxDefaultGames = new System.Windows.Forms.CheckedListBox();
             this.timerCalculateGames = new System.Windows.Forms.Timer(this.components);
-            this.foldersManagerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.groupBoxOptions.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxArt)).BeginInit();
@@ -558,6 +558,12 @@
             this.toolStripMenuItem4.Name = "toolStripMenuItem4";
             resources.ApplyResources(this.toolStripMenuItem4, "toolStripMenuItem4");
             // 
+            // foldersManagerToolStripMenuItem
+            // 
+            this.foldersManagerToolStripMenuItem.Name = "foldersManagerToolStripMenuItem";
+            resources.ApplyResources(this.foldersManagerToolStripMenuItem, "foldersManagerToolStripMenuItem");
+            this.foldersManagerToolStripMenuItem.Click += new System.EventHandler(this.FoldersConfigurationToolStripMenuItem_Click);
+            // 
             // customToolStripMenuItem
             // 
             this.customToolStripMenuItem.Name = "customToolStripMenuItem";
@@ -845,12 +851,6 @@
             this.timerCalculateGames.Enabled = true;
             this.timerCalculateGames.Interval = 500;
             this.timerCalculateGames.Tick += new System.EventHandler(this.timerCalculateGames_Tick);
-            // 
-            // foldersManagerToolStripMenuItem
-            // 
-            this.foldersManagerToolStripMenuItem.Name = "foldersManagerToolStripMenuItem";
-            resources.ApplyResources(this.foldersManagerToolStripMenuItem, "foldersManagerToolStripMenuItem");
-            this.foldersManagerToolStripMenuItem.Click += new System.EventHandler(this.FoldersConfigurationToolStripMenuItem_Click);
             // 
             // MainForm
             // 
