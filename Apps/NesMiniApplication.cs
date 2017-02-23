@@ -13,15 +13,15 @@ namespace com.clusterrr.hakchi_gui
     public class NesMiniApplication : INesMenuElement
     {
         public readonly static string GamesDirectory = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "games");
-        const string DefaultReleaseDate = "1983-07-15"; // Famicom release day
-        const string DefaultPublisher = "NINTENDO";
+        const string DefaultReleaseDate = "1900-01-01";
+        const string DefaultPublisher = "UNKNOWN";
 
         protected string code;
         public string Code
         {
             get { return code; }
         }
-        public const char DefaultPrefix = 'U';
+        public const char DefaultPrefix = 'Z';
         public static Image DefaultCover { get { return Resources.blank_app; } }
         internal const string DefaultApp = "/bin/path-to-your-app";
         public virtual string GoogleSuffix
@@ -136,39 +136,54 @@ namespace com.clusterrr.hakchi_gui
             var appinfo = AppTypeCollection.GetAppByExtension(extension);
             if (appinfo != null)
             {
-                if (ConfigIni.Compress)
-                {
-                    string temp = null;
-                    temp = Path.Combine(Path.GetTempPath(), fileName);
-                    File.WriteAllBytes(temp, rawRomData);
-                    rawRomData = Compress(temp);
-                    fileName += ".7z";
-                    if (!string.IsNullOrEmpty(temp) && File.Exists(temp))
-                        File.Delete(temp);
-                }
                 var import = appinfo.Class.GetMethod("Import", new Type[] { typeof(string), typeof(byte[]) });
                 if (import != null)
                     return (NesMiniApplication)import.Invoke(null, new object[] { fileName, rawRomData });
                 else
-                    return Import(fileName, rawRomData, appinfo.Prefix, appinfo.DefaultApp, appinfo.DefaultCover);
+                    return Import(fileName, rawRomData, appinfo.Prefix, appinfo.DefaultApp, appinfo.DefaultCover, ConfigIni.Compress);
             }
             string application = extension.Length > 2 ? ("/bin/" + extension.Substring(1)) : DefaultApp;
             return Import(fileName, rawRomData, DefaultPrefix, application, DefaultCover);
         }
 
-        private static NesMiniApplication Import(string fileName, byte[] rawRomData, char prefixCode, string application, Image defaultCover)
+        private static NesMiniApplication Import(string fileName, byte[] rawRomData, char prefixCode, string application, Image defaultCover, bool compress = false)
         {
-            bool sevenZipped = false;
-            if (fileName.EndsWith(".7z"))
-            {
-                fileName = fileName.Substring(0, fileName.Length - 3);
-                sevenZipped = true;
-            }
             var crc32 = CRC32(rawRomData);
             var code = GenerateCode(crc32, prefixCode);
             var gamePath = Path.Combine(GamesDirectory, code);
+            bool sevenZipped = false;
+            if (compress)
+            {
+                string temp = null;
+                try
+                {
+                    if (!File.Exists(fileName))
+                    {
+                        temp = Path.Combine(Path.GetTempPath(), Path.GetFileName(fileName));
+                        File.WriteAllBytes(temp, rawRomData);
+                        rawRomData = Compress(temp);
+                        sevenZipped = true;
+                    }
+                    else
+                    {
+                        rawRomData = Compress(fileName);
+                        sevenZipped = true;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine("Compression error: " + ex.Message + ex.Source);
+                }
+                finally
+                {
+                    if (!string.IsNullOrEmpty(temp) && File.Exists(temp))
+                        File.Delete(temp);
+                }
+            }
             var romName = Regex.Replace(Path.GetFileName(fileName), @"[^A-Za-z0-9.-]", "_").Trim() + (sevenZipped ? ".7z" : "");
             var romPath = Path.Combine(gamePath, romName);
+            if (Directory.Exists(gamePath))
+                Directory.Delete(gamePath, true);
             Directory.CreateDirectory(gamePath);
             File.WriteAllBytes(romPath, rawRomData);
             var game = new NesMiniApplication(gamePath, true);
@@ -506,9 +521,10 @@ namespace com.clusterrr.hakchi_gui
 
         private static byte[] Compress(string filename)
         {
+            SevenZipExtractor.SetLibraryPath(Path.Combine(MainForm.BaseDirectory, IntPtr.Size == 8 ? @"tools\7z64.dll" : @"tools\7z.dll"));
             var arch = new MemoryStream();
             var compressor = new SevenZipCompressor();
-            compressor.CompressionLevel = CompressionLevel.Ultra;
+            compressor.CompressionLevel = CompressionLevel.High;
             compressor.CompressFiles(arch, filename);
             arch.Seek(0, SeekOrigin.Begin);
             var result = new byte[arch.Length];
