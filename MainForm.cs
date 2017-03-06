@@ -98,7 +98,7 @@ namespace com.clusterrr.hakchi_gui
                 LoadPresets();
                 var version = Assembly.GetExecutingAssembly().GetName().Version;
                 Text = string.Format("hakchi2 - v{0}.{1:D2}{2}", version.Major, version.Build, (version.Revision < 10) ?
-                    ("rc" + version.Revision.ToString()) : (version.Revision > 10 ? ('a' + version.Revision - 10).ToString() : ""));
+                    ("rc" + version.Revision.ToString()) : (version.Revision > 10 ? ((char)('a' + version.Revision - 10)).ToString() : ""));
 
                 // Some settnigs
                 useExtendedFontToolStripMenuItem.Checked = ConfigIni.UseFont;
@@ -599,6 +599,7 @@ namespace com.clusterrr.hakchi_gui
             workerForm.Task = WorkerForm.Tasks.FlashKernel;
             workerForm.KernelDump = KernelDump;
             workerForm.Mod = "mod_hakchi";
+            workerForm.hmodsInstall = new List<string>() { "clovercon", "fontfix", "clovershell" };
             workerForm.Config = null;
             workerForm.Games = null;
             workerForm.HiddenGames = null;
@@ -678,10 +679,13 @@ namespace com.clusterrr.hakchi_gui
             if (addedApps != null)
             {
                 // Add games, only new ones
-                var oldApps = from app in checkedListBoxGames.Items.Cast<object>().ToArray()
-                              where app is NesMiniApplication
-                              select (app as NesMiniApplication).Code;
-                var newApps = from app in addedApps where !oldApps.Contains(app.Code) select app;
+                var newApps = addedApps.Distinct(new NesMiniApplication.NesMiniAppEqualityComparer());
+                var newCodes = from app in newApps select app.Code;
+                var oldAppsReplaced = from app in checkedListBoxGames.Items.Cast<object>().ToArray()
+                                      where (app is NesMiniApplication) && newCodes.Contains((app as NesMiniApplication).Code)
+                                      select app;
+                foreach (var replaced in oldAppsReplaced)
+                    checkedListBoxGames.Items.Remove(replaced);
                 checkedListBoxGames.Items.AddRange(newApps.ToArray());
                 var first = checkedListBoxGames.Items[0];
                 bool originalChecked = (checkedListBoxGames.CheckedItems.Contains(first));
