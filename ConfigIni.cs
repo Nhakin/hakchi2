@@ -109,7 +109,7 @@ namespace com.clusterrr.hakchi_gui
                                 case "foldersmode":
                                     FoldersMode = (NesMenuCollection.SplitStyle)byte.Parse(value);
                                     break;
-                                case "Compress":
+                                case "compress":
                                     Compress = !value.ToLower().Equals("false");
                                     break;
                             }

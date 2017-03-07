@@ -16,7 +16,7 @@ namespace com.clusterrr.hakchi_gui
 {
     public partial class WorkerForm : Form
     {
-        public enum Tasks { DumpKernel, FlashKernel, Memboot, DownloadAllCovers, AddGames };
+        public enum Tasks { DumpKernel, FlashKernel, Memboot, UploadGames, DownloadAllCovers, AddGames };
         public Tasks Task;
         //public string UBootDump;
         public string KernelDump;
@@ -57,9 +57,10 @@ namespace com.clusterrr.hakchi_gui
         readonly string cloverconDriverPath;
         readonly string argumentsFilePath;
         readonly string transferDirectory;
-        readonly string originalGamesConfigDirectory;
+        string originalGamesConfigDirectory;
         string[] correctKernels;
-        const long maxRamfsSize = 40 * 1024 * 1024;
+        long maxRamfsSize = 40 * 1024 * 1024;
+        const long maxCompressedsRamfsSize = 30 * 1024 * 1024;
         string selectedFile = null;
         public NesMiniApplication[] addedApplications;
 
@@ -92,7 +93,8 @@ namespace com.clusterrr.hakchi_gui
             tempHmodsDirectory = Path.Combine(transferDirectory, "hmod");
             originalGamesConfigDirectory = Path.Combine(tempGamesDirectory, "original");
             hiddenPath = Path.Combine(originalGamesConfigDirectory, "hidden");
-            correctKernels = new string[] {
+            correctKernels
+                = new string[] {
                 "5cfdca351484e7025648abc3b20032ff", "07bfb800beba6ef619c29990d14b5158", // NES Mini
                 "ac8144c3ea4ab32e017648ee80bdc230" // Famicom Mini
             };
@@ -207,6 +209,7 @@ namespace com.clusterrr.hakchi_gui
             SetProgress(0, 1);
             try
             {
+                DialogResult = DialogResult.None;
                 switch (Task)
                 {
                     case Tasks.DumpKernel:
@@ -214,6 +217,9 @@ namespace com.clusterrr.hakchi_gui
                         break;
                     case Tasks.FlashKernel:
                         FlashKernel();
+                        break;
+                    case Tasks.UploadGames:
+                        UploadGames();
                         break;
                     case Tasks.Memboot:
                         Memboot();
@@ -225,7 +231,8 @@ namespace com.clusterrr.hakchi_gui
                         AddGames(GamesToAdd);
                         break;
                 }
-                DialogResult = DialogResult.OK;
+                if (DialogResult == DialogResult.None)
+                    DialogResult = DialogResult.OK;
             }
             catch (ThreadAbortException) { }
             catch (Exception ex)
@@ -242,6 +249,7 @@ namespace com.clusterrr.hakchi_gui
                 }
             }
             GC.Collect();
+            Thread.Sleep(500);
         }
 
         void SetStatus(string status)
@@ -294,12 +302,10 @@ namespace com.clusterrr.hakchi_gui
                 message += ex.StackTrace;
 #endif
                 Debug.WriteLine(ex.Message + ex.StackTrace);
-                if (ex is GameGenieFormatException || ex is GameGenieNotFoundException)
-                    MessageBox.Show(this, message, Resources.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                else if (ex is MadWizard.WinUSBNet.USBException)
-                    MessageBox.Show(this, message + "\r\n" + Resources.PleaseTryAgainUSB, Resources.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                else
-                    MessageBox.Show(this, message, Resources.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //if (ex is MadWizard.WinUSBNet.USBException) // TODO
+                //    MessageBox.Show(this, message + "\r\n" + Resources.PleaseTryAgainUSB, Resources.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //else
+                MessageBox.Show(this, message, Resources.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 TaskbarProgress.SetState(this.Handle, TaskbarProgress.TaskbarStates.Normal);
                 if (!dontStop)
                 {
@@ -391,7 +397,10 @@ namespace com.clusterrr.hakchi_gui
         public void FlashKernel()
         {
             int progress = 0;
-            int maxProgress = 120 + (string.IsNullOrEmpty(Mod) ? 0 : 5);
+            int maxProgress = 120 + (string.IsNullOrEmpty(Mod) ? 0 : 5) +
+                ((hmodsInstall != null && hmodsInstall.Count > 0) ? 102 : 0);
+            var hmods = hmodsInstall;
+            hmodsInstall = null;
             if (WaitForDeviceFromThread() != DialogResult.OK)
             {
                 DialogResult = DialogResult.Abort;
@@ -457,20 +466,61 @@ namespace com.clusterrr.hakchi_gui
             if (!kernel.SequenceEqual(r))
                 throw new Exception(Resources.VerifyFailed);
 
-            if (string.IsNullOrEmpty(Mod))
+            hmodsInstall = hmods;
+            if (hmodsInstall != null && hmodsInstall.Count > 0)
+            {
+                Memboot(maxProgress, progress); // Lets install some mods                
+            }
+            else
             {
                 var shutdownCommand = string.Format("shutdown", Fel.kernel_base_m);
                 SetStatus(Resources.ExecutingCommand + " " + shutdownCommand);
                 fel.RunUbootCmd(shutdownCommand, true);
+                SetStatus(Resources.Done);
+                SetProgress(maxProgress, maxProgress);
             }
-            SetStatus(Resources.Done);
-            SetProgress(maxProgress, maxProgress);
         }
 
-        public void Memboot()
+        public void UploadGames()
         {
-            int progress = 0;
-            int maxProgress = -1;
+            var clovershell = new com.clusterrr.cloverhack.ClovershellConnection();
+            try
+            {
+                clovershell.Connect();
+            }
+            catch { }
+            if (!clovershell.Online)
+            {
+                Memboot();
+                return;
+            }
+            if (Directory.Exists(tempDirectory))
+                Directory.Delete(tempDirectory, true);
+            Directory.CreateDirectory(tempDirectory);
+            // Games!
+            if (Games != null)
+            {
+                originalGamesConfigDirectory = Path.Combine(tempDirectory, "original");
+                Directory.CreateDirectory(tempGamesDirectory);
+                Directory.CreateDirectory(originalGamesConfigDirectory);
+                if (HiddenGames != null && HiddenGames.Length > 0)
+                {
+                    StringBuilder h = new StringBuilder();
+                    foreach (var game in HiddenGames)
+                        h.Append(game + "\n");
+                    File.WriteAllText(hiddenPath, h.ToString());
+                }
+
+                var stats = new GamesTreeStats();
+                maxRamfsSize = -1;
+                stats.Next();
+                AddMenu(Games, stats);
+                
+            }            
+        }
+
+        public void Memboot(int maxProgress = -1, int progress = 0)
+        {
             var stats = new GamesTreeStats();
 
             if (Games != null)
@@ -488,7 +538,7 @@ namespace com.clusterrr.hakchi_gui
                 else Games.Split(FoldersMode, MaxGamesPerFolder);
             }
             progress += 5;
-            SetProgress(progress, 1000);
+            SetProgress(progress, maxProgress < 0 ? 1000 : maxProgress);
 
             do
             {
@@ -509,7 +559,19 @@ namespace com.clusterrr.hakchi_gui
 
                 byte[] kernel;
                 if (!string.IsNullOrEmpty(Mod))
-                    kernel = CreatePatchedKernel(stats);
+                {
+                    var origMaxRamfsSize = maxRamfsSize;
+                    var origGamesProceed = stats.GamesProceed;
+                    while (true)
+                    {
+                        kernel = CreatePatchedKernel(stats);
+                        if (kernel.Length < maxCompressedsRamfsSize) break;
+                        maxRamfsSize -= 5 * 1024 * 1024;
+                        Debug.WriteLine(string.Format("Kernel size is too big: {0}MB, reducing max unpacked size to {1}MB", kernel.Length / 1024 / 1024, maxRamfsSize / 1024 / 1024));
+                        stats.GamesProceed = origGamesProceed;
+                    }
+                    maxRamfsSize = origMaxRamfsSize;
+                }
                 else
                     kernel = File.ReadAllBytes(KernelDump);
                 var size = CalKernelSize(kernel);
@@ -552,6 +614,7 @@ namespace com.clusterrr.hakchi_gui
                 var bootCommand = string.Format("boota {0:x}", Fel.kernel_base_m);
                 SetStatus(Resources.ExecutingCommand + " " + bootCommand);
                 fel.RunUbootCmd(bootCommand, true);
+                Thread.Sleep(7000);
             } while (stats.GamesProceed < stats.TotalGames);
             SetStatus(Resources.Done);
             SetProgress(maxProgress, maxProgress);
@@ -560,10 +623,11 @@ namespace com.clusterrr.hakchi_gui
         private byte[] CreatePatchedKernel(GamesTreeStats stats = null)
         {
             if (stats == null) stats = new GamesTreeStats();
+            var origGamesProceed = stats.GamesProceed;
             bool first = stats.GamesProceed == 0;
             bool partial = stats.GamesProceed > 0;
             SetStatus(Resources.BuildingCustom);
-            if (first)
+            if (first || !Directory.Exists(ramfsDirectory))
             {
                 if (Directory.Exists(tempDirectory))
                     Directory.Delete(tempDirectory, true);
@@ -687,7 +751,6 @@ namespace com.clusterrr.hakchi_gui
             if (last)
                 Directory.Delete(tempDirectory, true);
 #endif
-            if (result.Length > Fel.kernel_max_size) throw new Exception("Kernel is too big");
             GC.Collect();
             return result;
         }
@@ -780,7 +843,7 @@ namespace com.clusterrr.hakchi_gui
                     stats.TotalGames++;
                     var game = element as NesMiniApplication;
                     var gameSize = game.Size();
-                    if (gameSize >= maxRamfsSize) throw new Exception(string.Format(Resources.GameTooBig, game.Name));
+                    if (maxRamfsSize > 0 && gameSize >= maxRamfsSize) throw new Exception(string.Format(Resources.GameTooBig, game.Name));
                     stats.TotalSize += gameSize;
                     if (stats.Stopped || stats.Size + gameSize >= maxRamfsSize)
                     {
@@ -803,11 +866,11 @@ namespace com.clusterrr.hakchi_gui
                     }
                     catch (GameGenieFormatException ex)
                     {
-                        ShowError(new GameGenieFormatException(string.Format(Resources.GameGenieFormatError, ex.Code, game)), dontStop: true);
+                        ShowError(new Exception(string.Format(Resources.GameGenieFormatError, ex.Code, game.Name)), dontStop: true);
                     }
                     catch (GameGenieNotFoundException ex)
                     {
-                        ShowError(new GameGenieNotFoundException(string.Format(Resources.GameGenieNotFound, ex.Code, game.Name)), dontStop: true);
+                        ShowError(new Exception(string.Format(Resources.GameGenieNotFound, ex.Code, game.Name)), dontStop: true);
                     }
                 }
                 if (element is NesMenuFolder)
@@ -905,20 +968,20 @@ namespace com.clusterrr.hakchi_gui
             YesForAllPatches = false;
             int count = 0;
             SetStatus(Resources.AddingGames);
-            foreach (var file in files)
+            foreach (var sourceFileName in files)
             {
                 NesMiniApplication app = null;
                 try
                 {
-                    var fileName = file;
-                    var ext = Path.GetExtension(file).ToLower();
+                    var fileName = sourceFileName;
+                    var ext = Path.GetExtension(sourceFileName).ToLower();
                     bool? needPatch = YesForAllPatches ? (bool?)true : null;
                     byte[] rawData = null;
                     string tmp = null;
                     if (ext == ".7z" || ext == ".zip" || ext == ".rar")
                     {
                         SevenZipExtractor.SetLibraryPath(Path.Combine(baseDirectory, IntPtr.Size == 8 ? @"tools\7z64.dll" : @"tools\7z.dll"));
-                        using (var szExtractor = new SevenZipExtractor(file))
+                        using (var szExtractor = new SevenZipExtractor(sourceFileName))
                         {
                             var filesInArchive = new List<string>();
                             var nesFilesInArchive = new List<string>();
@@ -939,7 +1002,7 @@ namespace com.clusterrr.hakchi_gui
                                 if (r == DialogResult.OK)
                                     fileName = selectedFile;
                                 else if (r == DialogResult.Ignore)
-                                    fileName = file;
+                                    fileName = sourceFileName;
                                 else continue;
                             }
                             else if (filesInArchive.Count == 1) // No NES files but only one another file
@@ -952,10 +1015,10 @@ namespace com.clusterrr.hakchi_gui
                                 if (r == DialogResult.OK)
                                     fileName = selectedFile;
                                 else if (r == DialogResult.Ignore)
-                                    fileName = file;
+                                    fileName = sourceFileName;
                                 else continue;
                             }
-                            if (fileName != file)
+                            if (fileName != sourceFileName)
                             {
                                 var o = new MemoryStream();
                                 if (Path.GetExtension(fileName).ToLower() == ".desktop" // App in archive, need the whole directory
@@ -981,7 +1044,7 @@ namespace com.clusterrr.hakchi_gui
                     {
                         try
                         {
-                            app = NesGame.Import(fileName, YesForAllUnsupportedMappers ? (bool?)true : null, ref needPatch, needPatchCallback, this, rawData);
+                            app = NesGame.Import(fileName, sourceFileName, YesForAllUnsupportedMappers ? (bool?)true : null, ref needPatch, needPatchCallback, this, rawData);
 
                             // Trying to import Game Genie codes
                             var lGameGeniePath = Path.Combine(Path.GetDirectoryName(fileName), Path.GetFileNameWithoutExtension(fileName) + ".xml");
@@ -1006,7 +1069,7 @@ namespace com.clusterrr.hakchi_gui
                                 if (r == DialogResult.Abort)
                                     YesForAllUnsupportedMappers = true;
                                 if (r == DialogResult.Yes || r == DialogResult.Abort || r == DialogResult.Retry)
-                                    app = NesGame.Import(fileName, true, ref needPatch, needPatchCallback, this, rawData);
+                                    app = NesGame.Import(fileName, sourceFileName, true, ref needPatch, needPatchCallback, this, rawData);
                                 else
                                     continue;
                             }
@@ -1015,7 +1078,7 @@ namespace com.clusterrr.hakchi_gui
                     }
                     else
                     {
-                        app = NesMiniApplication.Import(fileName, rawData);
+                        app = NesMiniApplication.Import(fileName, sourceFileName, rawData);
                     }
                     if (!string.IsNullOrEmpty(tmp) && Directory.Exists(tmp)) Directory.Delete(tmp, true);
                     ConfigIni.SelectedGames += ";" + app.Code;
