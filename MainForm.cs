@@ -1,5 +1,7 @@
-﻿using com.clusterrr.Famicom;
+﻿using com.clusterrr.clovershell;
+using com.clusterrr.Famicom;
 using com.clusterrr.hakchi_gui.Properties;
+using SevenZip;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -15,8 +17,9 @@ namespace com.clusterrr.hakchi_gui
     public partial class MainForm : Form
     {
         const long maxTotalSize = 300;
-
         public static string BaseDirectory;
+        public static string[] InternalMods = new string[] { "clovercon", "fontfix", "clovershell" };
+        public static ClovershellConnection Clovershell;
         //readonly string UBootDump;
         readonly string KernelDump;
 
@@ -135,6 +138,11 @@ namespace com.clusterrr.hakchi_gui
                 max90toolStripMenuItem.Checked = ConfigIni.MaxGamesPerFolder == 90;
                 max100toolStripMenuItem.Checked = ConfigIni.MaxGamesPerFolder == 100;
 
+                // Little tweak for easy translation
+                var tbl = textBoxName.Left;
+                textBoxName.Left = labelName.Left + labelName.Width;
+                textBoxName.Width -= textBoxName.Left - tbl;
+
                 // Tweeks for message boxes
                 MessageBoxManager.Yes = MessageBoxManager.Retry = Resources.Yes;
                 MessageBoxManager.No = MessageBoxManager.Ignore = Resources.No;
@@ -152,11 +160,46 @@ namespace com.clusterrr.hakchi_gui
                 new Thread(NesGame.LoadCache).Start();
                 // Recalculate games in background
                 new Thread(RecalculateSelectedGamesThread).Start();
+
+                Clovershell = new ClovershellConnection() { AutoReconnect = true, Enabled = true };
+                Clovershell.OnConnected += Clovershell_OnConnected;
+#if DEBUG
+                try
+                {
+                    Clovershell.ShellEnabled = true;
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex.Message + ex.StackTrace);
+                }
+#endif
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message + ex.StackTrace);
                 MessageBox.Show(this, "Critical error: " + ex.Message + ex.StackTrace, Resources.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        void Clovershell_OnConnected()
+        {
+            try
+            {
+                var region = Clovershell.ExecuteSimple("cat /etc/clover/REGION", 500, true);
+                if (region == "JPN")
+                    Invoke(new Action(delegate
+                    {
+                        famicomMiniToolStripMenuItem.PerformClick();
+                    }));
+                if (region == "EUR_USA")
+                    Invoke(new Action(delegate
+                    {
+                        nESMiniToolStripMenuItem.PerformClick();
+                    }));
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message + ex.StackTrace);
             }
         }
 
@@ -327,15 +370,21 @@ namespace com.clusterrr.hakchi_gui
             ShowSelected();
         }
 
+        void SetImageForSelectedGame(string fileName)
+        {
+            var selected = checkedListBoxGames.SelectedItem;
+            if (selected == null || !(selected is NesMiniApplication)) return;
+            var game = (selected as NesMiniApplication);
+            game.Image = NesMiniApplication.LoadBitmap(fileName);
+            ShowSelected();
+            timerCalculateGames.Enabled = true;
+        }
+
         private void buttonBrowseImage_Click(object sender, EventArgs e)
         {
             if (openFileDialogImage.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                var selected = checkedListBoxGames.SelectedItem;
-                if (selected == null || !(selected is NesMiniApplication)) return;
-                var game = (selected as NesMiniApplication);
-                game.Image = NesMiniApplication.LoadBitmap(openFileDialogImage.FileName);
-                ShowSelected();
+                SetImageForSelectedGame(openFileDialogImage.FileName);
             }
         }
 
@@ -349,6 +398,7 @@ namespace com.clusterrr.hakchi_gui
             {
                 game.Image = googler.Result;
                 ShowSelected();
+                timerCalculateGames.Enabled = true;
             }
         }
 
@@ -429,12 +479,17 @@ namespace com.clusterrr.hakchi_gui
         {
             SaveSelectedGames();
             ConfigIni.Save();
-            foreach (var game in checkedListBoxGames.Items)
+            for (int i = 0; i < checkedListBoxGames.Items.Count; i++)
             {
+                var game = checkedListBoxGames.Items[i];
                 try
                 {
                     if (game is NesMiniApplication)
-                        (game as NesMiniApplication).Save();
+                    {
+                        // Maybe type was changed? Need to reload games
+                        if ((game as NesMiniApplication).Save())
+                            checkedListBoxGames.Items[i] = NesMiniApplication.FromDirectory((game as NesMiniApplication).GamePath);
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -448,6 +503,7 @@ namespace com.clusterrr.hakchi_gui
         {
             Debug.WriteLine("Closing main form");
             SaveConfig();
+            Clovershell.Dispose();
         }
 
         struct CountResult
@@ -577,7 +633,7 @@ namespace com.clusterrr.hakchi_gui
             }
             if (UploadGames())
             {
-                MessageBox.Show(Resources.DoneUploaded, Resources.Wow, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(Resources.Done, Resources.Wow, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -599,10 +655,9 @@ namespace com.clusterrr.hakchi_gui
             workerForm.Task = WorkerForm.Tasks.FlashKernel;
             workerForm.KernelDump = KernelDump;
             workerForm.Mod = "mod_hakchi";
-            workerForm.hmodsInstall = new List<string>() { "clovercon", "fontfix", "clovershell" };
+            workerForm.hmodsInstall = new List<string>(InternalMods);
             workerForm.Config = null;
             workerForm.Games = null;
-            workerForm.HiddenGames = null;
             workerForm.Start();
             var result = workerForm.DialogResult == DialogResult.OK;
             if (result)
@@ -617,29 +672,11 @@ namespace com.clusterrr.hakchi_gui
         {
             var workerForm = new WorkerForm();
             workerForm.Text = Resources.UploadingGames;
-            workerForm.Task = WorkerForm.Tasks.Memboot;
+            workerForm.Task = WorkerForm.Tasks.UploadGames;
             workerForm.KernelDump = KernelDump;
             workerForm.Mod = "mod_hakchi";
-            workerForm.Config = new Dictionary<string, string>();
-            workerForm.hmodsInstall = new List<string>();
+            workerForm.Config = ConfigIni.GetConfigDictionary();
             workerForm.Games = new NesMenuCollection();
-            var hiddenGames = new List<string>();
-            if (ConfigIni.ResetHack || ConfigIni.AutofireHack || ConfigIni.AutofireXYHack || ConfigIni.FcStart)
-            {
-                workerForm.hmodsInstall.Add("clovercon");
-                workerForm.Config["clovercon_enabled"] = "y";
-            }
-            else workerForm.Config["clovercon_enabled"] = "n";
-            workerForm.Config["clovercon_home_combination"] = string.Format("0x{0:X2}", (byte)ConfigIni.ResetCombination);
-            workerForm.Config["clovercon_autofire"] = ConfigIni.AutofireHack ? "1" : "0";
-            workerForm.Config["clovercon_autofire_xy"] = ConfigIni.AutofireXYHack ? "1" : "0";
-            workerForm.Config["clovercon_fc_start"] = ConfigIni.FcStart ? "1" : "0";
-            if (ConfigIni.UseFont)
-            {
-                workerForm.hmodsInstall.Add("fontfix");
-                workerForm.Config["fontfix_enabled"] = "y";
-            }
-            else workerForm.Config["fontfix_enabled"] = "n";
             bool needOriginal = false;
             foreach (var game in checkedListBoxGames.CheckedItems)
             {
@@ -652,12 +689,8 @@ namespace com.clusterrr.hakchi_gui
             {
                 if (needOriginal && checkedListBoxDefaultGames.CheckedIndices.Contains(i))
                     workerForm.Games.Add((NesDefaultGame)checkedListBoxDefaultGames.Items[i]);
-                else
-                    hiddenGames.Add(((NesDefaultGame)checkedListBoxDefaultGames.Items[i]).Code);
             }
-            workerForm.Config["disable_armet"] = (ConfigIni.AntiArmetLevel > 0) ? "y" : "n";
-            workerForm.Config["nes_extra_args"] = ConfigIni.ExtraCommandLineArguments;
-            workerForm.HiddenGames = hiddenGames.ToArray();
+
             workerForm.FoldersMode = ConfigIni.FoldersMode;
             workerForm.MaxGamesPerFolder = ConfigIni.MaxGamesPerFolder;
             workerForm.MainForm = this;
@@ -665,7 +698,7 @@ namespace com.clusterrr.hakchi_gui
             return workerForm.DialogResult == DialogResult.OK;
         }
 
-        void AddGames(string[] files)
+        void AddGames(IEnumerable<string> files)
         {
             SaveConfig();
             ICollection<NesMiniApplication> addedApps;
@@ -901,6 +934,7 @@ namespace com.clusterrr.hakchi_gui
 
         private void nESMiniToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (nESMiniToolStripMenuItem.Checked) return;
             ConfigIni.ConsoleType = 0;
             nESMiniToolStripMenuItem.Checked = ConfigIni.ConsoleType == 0;
             famicomMiniToolStripMenuItem.Checked = ConfigIni.ConsoleType == 1;
@@ -910,6 +944,7 @@ namespace com.clusterrr.hakchi_gui
 
         private void famicomMiniToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (famicomMiniToolStripMenuItem.Checked) return;
             ConfigIni.ConsoleType = 1;
             nESMiniToolStripMenuItem.Checked = ConfigIni.ConsoleType == 0;
             famicomMiniToolStripMenuItem.Checked = ConfigIni.ConsoleType == 1;
@@ -1026,7 +1061,54 @@ namespace com.clusterrr.hakchi_gui
         private void checkedListBoxGames_DragDrop(object sender, DragEventArgs e)
         {
             var files = (string[])e.Data.GetData(DataFormats.FileDrop);
-            AddGames(files);
+
+            // Need to determine type of files
+            // Maybe it's cover art?
+            if (files.Length == 1)
+            {
+                var ext = Path.GetExtension(files[0]).ToLower();
+                if (ext == ".jpg" || ext == ".png")
+                {
+                    SetImageForSelectedGame(files[0]);
+                    return;
+                }
+            }
+
+            // Maybe it's some mods?
+            bool mods = false;
+            foreach (var file in files)
+                if (Path.GetExtension(file).ToLower() == ".hmod")
+                    mods = true;
+            // Maybe it's some mods in single archive?
+            if (files.Length == 1)
+            {
+                var ext = Path.GetExtension(files[0]).ToLower();
+                if (ext == ".7z" || ext == ".zip" || ext == ".rar")
+                {
+                    SevenZipExtractor.SetLibraryPath(Path.Combine(BaseDirectory, IntPtr.Size == 8 ? @"tools\7z64.dll" : @"tools\7z.dll"));
+                    using (var szExtractor = new SevenZipExtractor(files[0]))
+                    {
+                        foreach (var f in szExtractor.ArchiveFileNames)
+                            if (Path.GetExtension(f).ToLower() == ".hmod")
+                                mods = true;
+                    }
+                }
+            }
+            if (mods)
+            {
+                installModules(files);
+                return;
+            }
+
+            // All other cases - games or apps
+            var allFilesToAdd = new List<string>();
+            foreach (var file in files)
+                if (Directory.Exists(file))
+                    allFilesToAdd.AddRange(Directory.GetFiles(file, "*.*", SearchOption.AllDirectories));
+                else if (File.Exists(file))
+                    allFilesToAdd.Add(file);
+            if (allFilesToAdd.Count > 0)
+                AddGames(allFilesToAdd);
         }
 
         private void searchToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1042,6 +1124,7 @@ namespace com.clusterrr.hakchi_gui
             if (DownloadAllCovers())
                 MessageBox.Show(this, Resources.Done, Resources.Wow, MessageBoxButtons.OK, MessageBoxIcon.Information);
             ShowSelected();
+            timerCalculateGames.Enabled = true;
         }
 
         private void checkedListBoxGames_KeyDown(object sender, KeyEventArgs e)
@@ -1129,7 +1212,12 @@ namespace com.clusterrr.hakchi_gui
                 MessageBox.Show(Resources.NoKernelYouNeed, Resources.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            var form = new SelectModsForm();
+            installModules();
+        }
+
+        private void installModules(string[] add = null)
+        {
+            var form = new SelectModsForm(false, true, add);
             form.Text = Resources.SelectModsInstall;
             if (form.ShowDialog() == DialogResult.OK)
             {
@@ -1137,7 +1225,7 @@ namespace com.clusterrr.hakchi_gui
                                    in form.checkedListBoxMods.CheckedItems.OfType<object>().ToArray()
                                   select m.ToString())).ToArray()))
                 {
-                    MessageBox.Show(Resources.DoneUploaded, Resources.Wow, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(Resources.Done, Resources.Wow, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
         }
@@ -1149,7 +1237,7 @@ namespace com.clusterrr.hakchi_gui
                 MessageBox.Show(Resources.NoKernelYouNeed, Resources.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            var form = new SelectModsForm();
+            var form = new SelectModsForm(true, false);
             form.Text = Resources.SelectModsUninstall;
             if (form.ShowDialog() == DialogResult.OK)
             {
@@ -1157,8 +1245,31 @@ namespace com.clusterrr.hakchi_gui
                                    in form.checkedListBoxMods.CheckedItems.OfType<object>().ToArray()
                                     select m.ToString())).ToArray()))
                 {
-                    MessageBox.Show(Resources.DoneUploaded, Resources.Wow, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(Resources.Done, Resources.Wow, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
+            }
+        }
+
+        private void timerConnectionCheck_Tick(object sender, EventArgs e)
+        {
+            toolStripStatusConnectionIcon.Image = Clovershell.IsOnline ? Resources.green : Resources.red;
+            toolStripStatusConnectionIcon.ToolTipText = Clovershell.IsOnline ? "Online" : "Offline";
+        }
+
+        private void saveSettingsToNESMiniNowToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (WaitingClovershellForm.WaitForDevice(this))
+                {
+                    WorkerForm.SyncConfig(ConfigIni.GetConfigDictionary(), true);
+                    MessageBox.Show(Resources.Done, Resources.Wow, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message + ex.StackTrace);
+                MessageBox.Show(this, ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }
