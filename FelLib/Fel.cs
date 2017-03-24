@@ -9,7 +9,7 @@ using System.Threading;
 
 namespace com.clusterrr.FelLib
 {
-    public class Fel
+    public class Fel : IDisposable
     {
         public byte[] Fes1Bin;
         byte[] uBootBin;
@@ -135,7 +135,7 @@ namespace com.clusterrr.FelLib
                             Debug.WriteLine("OUT endpoint maxsize: " + outMax);
                         }
                     }
-            if (inEndp != 0x82 || inMax != 64 || outEndp != 0x01 || outMax != 64)
+            if (inEndp != 0x82 || outEndp != 0x01)
                 throw new Exception("Uncorrect FEL device");
             epReader = device.OpenEndpointReader((ReadEndpointID)inEndp, 65536);
             epWriter = device.OpenEndpointWriter((WriteEndpointID)outEndp);
@@ -416,6 +416,11 @@ namespace com.clusterrr.FelLib
                     Thread.Sleep(2000);
                 }
             }
+        }
+
+        public void Dispose()
+        {
+            Close();
         }
     }
 }

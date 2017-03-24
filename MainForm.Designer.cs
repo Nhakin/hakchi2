@@ -62,6 +62,7 @@
             this.upABStartOnSecondControllerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.useExtendedFontToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.epilepsyProtectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.compressGamesIfPossibleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pagesfoldersTypeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.disablePagefoldersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
@@ -88,8 +89,9 @@
             this.max100toolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripSeparator();
             this.customToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.compressGamesIfPossibleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.globalCommandLineArgumentsexpertsOnluToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripSeparator();
+            this.saveSettingsToNESMiniNowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gitHubPageWithActualReleasesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fAQToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -119,6 +121,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.buttonAddGames = new System.Windows.Forms.Button();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusConnectionIcon = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabelSelected = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabelSize = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripProgressBar = new System.Windows.Forms.ToolStripProgressBar();
@@ -132,6 +135,7 @@
             this.groupBoxDefaultGames = new System.Windows.Forms.GroupBox();
             this.checkedListBoxDefaultGames = new System.Windows.Forms.CheckedListBox();
             this.timerCalculateGames = new System.Windows.Forms.Timer(this.components);
+            this.timerConnectionCheck = new System.Windows.Forms.Timer(this.components);
             this.foldersManagerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.groupBoxOptions.SuspendLayout();
@@ -286,9 +290,11 @@
             this.cloverconHackToolStripMenuItem,
             this.useExtendedFontToolStripMenuItem,
             this.epilepsyProtectionToolStripMenuItem,
-            this.pagesfoldersTypeToolStripMenuItem,
             this.compressGamesIfPossibleToolStripMenuItem,
-            this.globalCommandLineArgumentsexpertsOnluToolStripMenuItem});
+            this.pagesfoldersTypeToolStripMenuItem,
+            this.globalCommandLineArgumentsexpertsOnluToolStripMenuItem,
+            this.toolStripMenuItem5,
+            this.saveSettingsToNESMiniNowToolStripMenuItem});
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
             resources.ApplyResources(this.settingsToolStripMenuItem, "settingsToolStripMenuItem");
             // 
@@ -376,6 +382,13 @@
             this.epilepsyProtectionToolStripMenuItem.Name = "epilepsyProtectionToolStripMenuItem";
             resources.ApplyResources(this.epilepsyProtectionToolStripMenuItem, "epilepsyProtectionToolStripMenuItem");
             this.epilepsyProtectionToolStripMenuItem.Click += new System.EventHandler(this.ToolStripMenuItemArmet_Click);
+            // 
+            // compressGamesIfPossibleToolStripMenuItem
+            // 
+            this.compressGamesIfPossibleToolStripMenuItem.CheckOnClick = true;
+            this.compressGamesIfPossibleToolStripMenuItem.Name = "compressGamesIfPossibleToolStripMenuItem";
+            resources.ApplyResources(this.compressGamesIfPossibleToolStripMenuItem, "compressGamesIfPossibleToolStripMenuItem");
+            this.compressGamesIfPossibleToolStripMenuItem.Click += new System.EventHandler(this.compressGamesIfPossibleToolStripMenuItem_Click);
             // 
             // pagesfoldersTypeToolStripMenuItem
             // 
@@ -569,18 +582,22 @@
             this.customToolStripMenuItem.Tag = "99";
             this.customToolStripMenuItem.Click += new System.EventHandler(this.pagesModefoldersToolStripMenuItem_Click);
             // 
-            // compressGamesIfPossibleToolStripMenuItem
-            // 
-            this.compressGamesIfPossibleToolStripMenuItem.CheckOnClick = true;
-            this.compressGamesIfPossibleToolStripMenuItem.Name = "compressGamesIfPossibleToolStripMenuItem";
-            resources.ApplyResources(this.compressGamesIfPossibleToolStripMenuItem, "compressGamesIfPossibleToolStripMenuItem");
-            this.compressGamesIfPossibleToolStripMenuItem.Click += new System.EventHandler(this.compressGamesIfPossibleToolStripMenuItem_Click);
-            // 
             // globalCommandLineArgumentsexpertsOnluToolStripMenuItem
             // 
             this.globalCommandLineArgumentsexpertsOnluToolStripMenuItem.Name = "globalCommandLineArgumentsexpertsOnluToolStripMenuItem";
             resources.ApplyResources(this.globalCommandLineArgumentsexpertsOnluToolStripMenuItem, "globalCommandLineArgumentsexpertsOnluToolStripMenuItem");
             this.globalCommandLineArgumentsexpertsOnluToolStripMenuItem.Click += new System.EventHandler(this.globalCommandLineArgumentsexpertsOnluToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem5
+            // 
+            this.toolStripMenuItem5.Name = "toolStripMenuItem5";
+            resources.ApplyResources(this.toolStripMenuItem5, "toolStripMenuItem5");
+            // 
+            // saveSettingsToNESMiniNowToolStripMenuItem
+            // 
+            resources.ApplyResources(this.saveSettingsToNESMiniNowToolStripMenuItem, "saveSettingsToNESMiniNowToolStripMenuItem");
+            this.saveSettingsToNESMiniNowToolStripMenuItem.Name = "saveSettingsToNESMiniNowToolStripMenuItem";
+            this.saveSettingsToNESMiniNowToolStripMenuItem.Click += new System.EventHandler(this.saveSettingsToNESMiniNowToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
@@ -611,14 +628,11 @@
             // 
             // checkedListBoxGames
             // 
-            this.checkedListBoxGames.AllowDrop = true;
             resources.ApplyResources(this.checkedListBoxGames, "checkedListBoxGames");
             this.checkedListBoxGames.FormattingEnabled = true;
             this.checkedListBoxGames.Name = "checkedListBoxGames";
             this.checkedListBoxGames.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.checkedListBoxGames_ItemCheck);
             this.checkedListBoxGames.SelectedIndexChanged += new System.EventHandler(this.checkedListBoxGames_SelectedIndexChanged);
-            this.checkedListBoxGames.DragDrop += new System.Windows.Forms.DragEventHandler(this.checkedListBoxGames_DragDrop);
-            this.checkedListBoxGames.DragEnter += new System.Windows.Forms.DragEventHandler(this.checkedListBoxGames_DragEnter);
             this.checkedListBoxGames.KeyDown += new System.Windows.Forms.KeyEventHandler(this.checkedListBoxGames_KeyDown);
             this.checkedListBoxGames.MouseDown += new System.Windows.Forms.MouseEventHandler(this.checkedListBoxGames_MouseDown);
             // 
@@ -783,12 +797,20 @@
             // statusStrip
             // 
             this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusConnectionIcon,
             this.toolStripStatusLabelSelected,
             this.toolStripStatusLabelSize,
             this.toolStripProgressBar});
             resources.ApplyResources(this.statusStrip, "statusStrip");
             this.statusStrip.Name = "statusStrip";
             this.statusStrip.SizingGrip = false;
+            // 
+            // toolStripStatusConnectionIcon
+            // 
+            resources.ApplyResources(this.toolStripStatusConnectionIcon, "toolStripStatusConnectionIcon");
+            this.toolStripStatusConnectionIcon.Image = global::com.clusterrr.hakchi_gui.Properties.Resources.red;
+            this.toolStripStatusConnectionIcon.Margin = new System.Windows.Forms.Padding(2, 3, 0, 2);
+            this.toolStripStatusConnectionIcon.Name = "toolStripStatusConnectionIcon";
             // 
             // toolStripStatusLabelSelected
             // 
@@ -872,6 +894,12 @@
             this.timerCalculateGames.Interval = 500;
             this.timerCalculateGames.Tick += new System.EventHandler(this.timerCalculateGames_Tick);
             // 
+            // timerConnectionCheck
+            // 
+            this.timerConnectionCheck.Enabled = true;
+            this.timerConnectionCheck.Interval = 500;
+            this.timerConnectionCheck.Tick += new System.EventHandler(this.timerConnectionCheck_Tick);
+            // 
             // foldersManagerToolStripMenuItem
             // 
             this.foldersManagerToolStripMenuItem.Name = "foldersManagerToolStripMenuItem";
@@ -880,6 +908,7 @@
             // 
             // MainForm
             // 
+            this.AllowDrop = true;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.buttonStart);
@@ -897,6 +926,8 @@
             this.Name = "MainForm";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Shown += new System.EventHandler(this.MainForm_Shown);
+            this.DragDrop += new System.Windows.Forms.DragEventHandler(this.checkedListBoxGames_DragDrop);
+            this.DragEnter += new System.Windows.Forms.DragEventHandler(this.checkedListBoxGames_DragEnter);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MainForm_KeyDown);
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
@@ -1015,6 +1046,10 @@
         private System.Windows.Forms.ToolStripMenuItem useXYOnClassicControllerAsAutofireABToolStripMenuItem;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelSize;
         private System.Windows.Forms.ToolStripProgressBar toolStripProgressBar;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusConnectionIcon;
+        private System.Windows.Forms.Timer timerConnectionCheck;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem5;
+        private System.Windows.Forms.ToolStripMenuItem saveSettingsToNESMiniNowToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem compressGamesIfPossibleToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem foldersManagerToolStripMenuItem;
     }

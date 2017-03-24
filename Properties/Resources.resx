@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AreYouSure" xml:space="preserve">
     <value>Are you sure?</value>
@@ -243,9 +243,6 @@
   <data name="PleaseTryAgainUSB" xml:space="preserve">
     <value>If this problem persists, try using another USB port or cable.</value>
   </data>
-  <data name="XpZadig" xml:space="preserve">
-    <value>Please use the Zadig utility to install the driver on Windows XP/2000.</value>
-  </data>
   <data name="Donate" xml:space="preserve">
     <value>P.S. If you like it, you can donate to me. You can find my PayPal in the "About" box.</value>
   </data>
@@ -324,7 +321,7 @@
   <data name="ParticallyTitle" xml:space="preserve">
     <value>Too many ROMs</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="gamepad" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\images\gamepad.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -540,5 +537,32 @@
   </data>
   <data name="MemoryFull" xml:space="preserve">
     <value>Sorry, there are {0}MBytes of games, it's too much.</value>
+  </data>
+  <data name="green" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\images\green.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="red" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\images\red.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="UploadingConfig" xml:space="preserve">
+    <value>Uploading new config...</value>
+  </data>
+  <data name="UploadingOriginalGames" xml:space="preserve">
+    <value>Processing original games...</value>
+  </data>
+  <data name="blank_2600" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\images\blank_2600.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="blank_32x" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\images\blank_32x.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="blank_arcade" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\images\blank_arcade.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="blank_gg" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\images\blank_gg.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="blank_neogeo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\images\blank_neogeo.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
