@@ -1251,7 +1251,7 @@ namespace com.clusterrr.hakchi_gui
             if (lParseOriginal)
                 foreach (NesDefaultGame lSelectedGame in checkedListBoxDefaultGames.CheckedItems)
                     lSelectedGames.Add(lSelectedGame);
-
+ 
             TreeConstructorForm lFrm = new TreeConstructorForm(lSelectedGames, this);
             lFrm.ShowDialog();
         }
