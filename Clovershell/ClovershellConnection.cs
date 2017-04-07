@@ -32,7 +32,7 @@ namespace com.clusterrr.clovershell
         byte[] lastPingResponse = null;
         DateTime lastAliveTime;
         public delegate void OnClovershellConnected();
-        public event OnClovershellConnected OnConnected = delegate{};
+        public event OnClovershellConnected OnConnected = delegate { };
 
         internal enum ClovershellCommand
         {
@@ -236,13 +236,14 @@ namespace com.clusterrr.clovershell
                             epReader = device.OpenEndpointReader((ReadEndpointID)inEndp, 65536);
                             epWriter = device.OpenEndpointWriter((WriteEndpointID)outEndp);
                             Debug.WriteLine("clovershell connected");
-                            // Kill all other serrions and drop all output
+                            // Kill all other sessions and drop all output
                             killAll();
                             var body = new byte[65536];
                             int len;
                             while (epReader.Read(body, 50, out len) == ErrorCode.Ok) ;
                             epReader.ReadBufferSize = 65536;
                             epReader.DataReceived += epReader_DataReceived;
+                            epReader.ReadThreadPriority = ThreadPriority.AboveNormal;
                             epReader.DataReceivedEnabled = true;
                             lastAliveTime = DateTime.Now;
                             online = true;
@@ -250,7 +251,7 @@ namespace com.clusterrr.clovershell
                             while (device.mUsbRegistry.IsAlive)
                             {
                                 Thread.Sleep(100);
-                                if ((IdleTime.TotalSeconds >= 5) && (Ping() < 0))
+                                if ((IdleTime.TotalSeconds >= 10) && (Ping() < 0))
                                     throw new ClovershellException("no answer from device");
                             }
                             break;
@@ -301,19 +302,41 @@ namespace com.clusterrr.clovershell
             if (!online) throw new ClovershellException("no clovershell connection, make sure your NES Mini connected, turned on and clovershell mod installed");
         }
 
+        public void Disconnect()
+        {
+            try
+            {
+                if (device != null)
+                    device.Close();
+            }
+            catch { }
+        }
+
         void epReader_DataReceived(object sender, EndpointDataEventArgs e)
         {
-            var cmd = (ClovershellCommand)e.Buffer[0];
-            var arg = e.Buffer[1];
-            var len = e.Buffer[2] | (e.Buffer[3] * 0x100);
-            proceedPacket(cmd, arg, e.Buffer, 4, len);
+#if VERY_DEBUG
+            Debug.WriteLine("<-[CLV] " + BitConverter.ToString(e.Buffer, 0, e.Count));
+#endif
+            int pos = 0;
+            int count = e.Count;
+            while (count > 0)
+            {
+                var cmd = (ClovershellCommand)e.Buffer[pos];
+                var arg = e.Buffer[pos + 1];
+                var len = e.Buffer[pos + 2] | (e.Buffer[pos + 3] * 0x100);
+                proceedPacket(cmd, arg, e.Buffer, pos + 4, len);
+                count -= len + 4;
+                pos += len + 4;
+            }
         }
 
         void proceedPacket(ClovershellCommand cmd, byte arg, byte[] data, int pos, int len)
         {
             if (len < 0)
                 len = data.Length;
-            //Debug.WriteLine(string.Format("cmd={0}, arg={1:X2}, len={2}", cmd, arg, len));
+#if VERY_DEBUG
+            Debug.WriteLine(string.Format("<-[CLV] cmd={0}, arg={1:X2}, len={2}, data={3}", cmd, arg, len, BitConverter.ToString(data, pos, len)));
+#endif
             lastAliveTime = DateTime.Now;
             switch (cmd)
             {
@@ -370,8 +393,11 @@ namespace com.clusterrr.clovershell
 
         internal void writeUsb(ClovershellCommand cmd, byte arg, byte[] data = null, int l = -1)
         {
-            if (!online) throw new ClovershellException("NES Mini is offline");
             var len = (l >= 0) ? l : ((data != null) ? data.Length : 0);
+#if VERY_DEBUG
+            Debug.WriteLine(string.Format("->[CLV] cmd={0}, arg={1:X2}, len={2}, data={3}", cmd, arg, len, data != null ? BitConverter.ToString(data, 0, len) : ""));
+#endif
+            if (!online) throw new ClovershellException("NES Mini is offline");
             var buff = new byte[len + 4];
             buff[0] = (byte)cmd;
             buff[1] = arg;
@@ -386,6 +412,9 @@ namespace com.clusterrr.clovershell
             while (pos < len)
             {
                 var res = epWriter.Write(buff, pos, len, 1000, out tLen);
+#if VERY_DEBUG
+                Debug.WriteLine("->[CLV] " + BitConverter.ToString(buff, pos, len));
+#endif
                 pos += tLen;
                 len -= tLen;
                 if (res != ErrorCode.Ok)
@@ -419,7 +448,7 @@ namespace com.clusterrr.clovershell
                         {
                             Thread.Sleep(50);
                             t++;
-                            if (t >= 20)
+                            if (t >= 50)
                                 throw new ClovershellException("shell request timeout");
                         }
                     }
@@ -601,7 +630,7 @@ namespace com.clusterrr.clovershell
                     {
                         Thread.Sleep(50);
                         t++;
-                        if (t >= 20)
+                        if (t >= 50)
                             throw new ClovershellException("exec request timeout");
                     }
                     while (!c.finished)
