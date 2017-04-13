@@ -92,6 +92,14 @@
             this.globalCommandLineArgumentsexpertsOnluToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripSeparator();
             this.saveSettingsToNESMiniNowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveStateManagerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripSeparator();
+            this.FTPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openFTPInExplorerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem7 = new System.Windows.Forms.ToolStripSeparator();
+            this.shellToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openTelnetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gitHubPageWithActualReleasesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fAQToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -152,6 +160,7 @@
             this.kernelToolStripMenuItem,
             this.modulesToolStripMenuItem,
             this.settingsToolStripMenuItem,
+            this.toolsToolStripMenuItem,
             this.helpToolStripMenuItem});
             resources.ApplyResources(this.menuStrip, "menuStrip");
             this.menuStrip.Name = "menuStrip";
@@ -599,6 +608,61 @@
             this.saveSettingsToNESMiniNowToolStripMenuItem.Name = "saveSettingsToNESMiniNowToolStripMenuItem";
             this.saveSettingsToNESMiniNowToolStripMenuItem.Click += new System.EventHandler(this.saveSettingsToNESMiniNowToolStripMenuItem_Click);
             // 
+            // toolsToolStripMenuItem
+            // 
+            this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.saveStateManagerToolStripMenuItem,
+            this.toolStripMenuItem6,
+            this.FTPToolStripMenuItem,
+            this.openFTPInExplorerToolStripMenuItem,
+            this.toolStripMenuItem7,
+            this.shellToolStripMenuItem,
+            this.openTelnetToolStripMenuItem});
+            this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
+            resources.ApplyResources(this.toolsToolStripMenuItem, "toolsToolStripMenuItem");
+            // 
+            // saveStateManagerToolStripMenuItem
+            // 
+            this.saveStateManagerToolStripMenuItem.Name = "saveStateManagerToolStripMenuItem";
+            resources.ApplyResources(this.saveStateManagerToolStripMenuItem, "saveStateManagerToolStripMenuItem");
+            this.saveStateManagerToolStripMenuItem.Click += new System.EventHandler(this.saveStateManagerToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem6
+            // 
+            this.toolStripMenuItem6.Name = "toolStripMenuItem6";
+            resources.ApplyResources(this.toolStripMenuItem6, "toolStripMenuItem6");
+            // 
+            // FTPToolStripMenuItem
+            // 
+            this.FTPToolStripMenuItem.CheckOnClick = true;
+            this.FTPToolStripMenuItem.Name = "FTPToolStripMenuItem";
+            resources.ApplyResources(this.FTPToolStripMenuItem, "FTPToolStripMenuItem");
+            this.FTPToolStripMenuItem.Click += new System.EventHandler(this.FTPToolStripMenuItem_Click);
+            // 
+            // openFTPInExplorerToolStripMenuItem
+            // 
+            resources.ApplyResources(this.openFTPInExplorerToolStripMenuItem, "openFTPInExplorerToolStripMenuItem");
+            this.openFTPInExplorerToolStripMenuItem.Name = "openFTPInExplorerToolStripMenuItem";
+            this.openFTPInExplorerToolStripMenuItem.Click += new System.EventHandler(this.openFTPInExplorerToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem7
+            // 
+            this.toolStripMenuItem7.Name = "toolStripMenuItem7";
+            resources.ApplyResources(this.toolStripMenuItem7, "toolStripMenuItem7");
+            // 
+            // shellToolStripMenuItem
+            // 
+            this.shellToolStripMenuItem.CheckOnClick = true;
+            this.shellToolStripMenuItem.Name = "shellToolStripMenuItem";
+            resources.ApplyResources(this.shellToolStripMenuItem, "shellToolStripMenuItem");
+            this.shellToolStripMenuItem.Click += new System.EventHandler(this.shellToolStripMenuItem_Click);
+            // 
+            // openTelnetToolStripMenuItem
+            // 
+            resources.ApplyResources(this.openTelnetToolStripMenuItem, "openTelnetToolStripMenuItem");
+            this.openTelnetToolStripMenuItem.Name = "openTelnetToolStripMenuItem";
+            this.openTelnetToolStripMenuItem.Click += new System.EventHandler(this.openTelnetToolStripMenuItem_Click);
+            // 
             // helpToolStripMenuItem
             // 
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -925,6 +989,7 @@
             this.MaximizeBox = false;
             this.Name = "MainForm";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
             this.Shown += new System.EventHandler(this.MainForm_Shown);
             this.DragDrop += new System.Windows.Forms.DragEventHandler(this.checkedListBoxGames_DragDrop);
             this.DragEnter += new System.Windows.Forms.DragEventHandler(this.checkedListBoxGames_DragEnter);
@@ -1051,6 +1116,14 @@
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem5;
         private System.Windows.Forms.ToolStripMenuItem saveSettingsToNESMiniNowToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem compressGamesIfPossibleToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem saveStateManagerToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem FTPToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem shellToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem6;
+        private System.Windows.Forms.ToolStripMenuItem openFTPInExplorerToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem7;
+        private System.Windows.Forms.ToolStripMenuItem openTelnetToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem foldersManagerToolStripMenuItem;
     }
 }
