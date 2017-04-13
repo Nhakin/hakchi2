@@ -10,7 +10,6 @@ namespace com.clusterrr.hakchi_gui
         public static bool FirstRun = true;
         public static string SelectedGames = "default";
         public static string HiddenGames = "";
-        public static string PresetName = "Default";
         public static bool CustomFlashed = false;
         public static bool UseFont = true;
         public static bool ResetHack = true;
@@ -20,7 +19,7 @@ namespace com.clusterrr.hakchi_gui
         public static byte AntiArmetLevel = 0;
         public static byte ConsoleType = 0;
         public static byte MaxGamesPerFolder = 30;
-        public static NesMenuCollection.SplitStyle FoldersMode = NesMenuCollection.SplitStyle.Auto;
+        public static NesMenuCollection.SplitStyle FoldersMode = NesMenuCollection.SplitStyle.Original_Auto;
         public static SelectButtonsForm.NesButtons ResetCombination = SelectButtonsForm.NesButtons.Down | SelectButtonsForm.NesButtons.Select;
         public static Dictionary<string, string> Presets = new Dictionary<string, string>();
         public static string ExtraCommandLineArguments = "";
@@ -64,9 +63,6 @@ namespace com.clusterrr.hakchi_gui
                                     break;
                                 case "hiddengames":
                                     HiddenGames = value;
-                                    break;
-                                case "lastpreset":
-                                    PresetName = value;
                                     break;
                                 case "custom2flashed":
                                     CustomFlashed = !value.ToLower().Equals("false");
@@ -127,7 +123,8 @@ namespace com.clusterrr.hakchi_gui
             Debug.WriteLine("Saving config");
             var configLines = new List<string>();
             configLines.Add("[Config]");
-            configLines.Add(string.Format("LastPreset={0}", PresetName));
+            configLines.Add(string.Format("SelectedGames={0}", SelectedGames));
+            configLines.Add(string.Format("HiddenGames={0}", HiddenGames));
             configLines.Add(string.Format("Custom2Flashed={0}", CustomFlashed));
             configLines.Add(string.Format("UseFont={0}", UseFont));
             configLines.Add(string.Format("ResetHack={0}", ResetHack));
@@ -156,7 +153,7 @@ namespace com.clusterrr.hakchi_gui
             File.WriteAllLines(fileName, configLines.ToArray());
         }
 
-        public static Dictionary<string, string> GetConfigDictionary()
+        public static Dictionary<string,string> GetConfigDictionary()
         {
             var config = new Dictionary<string, string>();
             config["clovercon_home_combination"] = string.Format("0x{0:X2}", (byte)ConfigIni.ResetCombination);
