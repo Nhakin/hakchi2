@@ -1,3 +1,4 @@
 bin/
 driver/source/nesmini_driver/Release/
 obj/
+*.suo
