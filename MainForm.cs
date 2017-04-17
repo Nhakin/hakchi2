@@ -144,6 +144,9 @@ namespace com.clusterrr.hakchi_gui
                 textBoxName.Left = labelName.Left + labelName.Width;
                 textBoxName.Width -= textBoxName.Left - tbl;
                 maskedTextBoxReleaseDate.Left = label1.Left + label1.Width + 3;
+                tbl = textBoxPublisher.Left;
+                textBoxPublisher.Left = label2.Left + label2.Width;
+                textBoxPublisher.Width -= textBoxPublisher.Left - tbl;
 
                 // Tweeks for message boxes
                 MessageBoxManager.Yes = MessageBoxManager.Retry = Resources.Yes;
@@ -171,6 +174,17 @@ namespace com.clusterrr.hakchi_gui
                 ftpServer.FileSystemHandler = new mooftpserv.NesMiniFileSystemHandler(Clovershell);
                 ftpServer.LogHandler = new mooftpserv.DebugLogHandler();
                 ftpServer.LocalPort = 1021;
+
+                if (ConfigIni.FtpServer)
+                {
+                    FTPToolStripMenuItem.Checked = true;
+                    FTPToolStripMenuItem_Click(null, null);
+                }
+                if (ConfigIni.TelnetServer)
+                {
+                    shellToolStripMenuItem.Checked = true;
+                    shellToolStripMenuItem_Click(null, null);
+                }
             }
             catch (Exception ex)
             {
@@ -907,6 +921,7 @@ namespace com.clusterrr.hakchi_gui
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var about = new AboutBox();
+            about.Text = aboutToolStripMenuItem.Text.Replace("&", "");
             about.ShowDialog();
         }
 
@@ -1228,11 +1243,6 @@ namespace com.clusterrr.hakchi_gui
 
         private void installModulesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (!File.Exists(KernelDump))
-            {
-                MessageBox.Show(Resources.NoKernelYouNeed, Resources.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
             installModules();
         }
 
@@ -1340,17 +1350,20 @@ namespace com.clusterrr.hakchi_gui
                         }
                     });
                     ftpThread.Start();
+                    ConfigIni.FtpServer = true;
                 }
                 catch (Exception ex)
                 {
                     Debug.WriteLine(ex.Message + ex.StackTrace);
                     MessageBox.Show(this, ex.Message, Resources.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     FTPToolStripMenuItem.Checked = false;
+                    ConfigIni.FtpServer = false;
                 }
             }
             else
             {
                 ftpServer.Stop();
+                ConfigIni.FtpServer = false;
             }
             openFTPInExplorerToolStripMenuItem.Enabled = FTPToolStripMenuItem.Checked;
         }
@@ -1359,13 +1372,13 @@ namespace com.clusterrr.hakchi_gui
         {
             try
             {
-                openTelnetToolStripMenuItem.Enabled = Clovershell.ShellEnabled = shellToolStripMenuItem.Checked;
+               ConfigIni.TelnetServer = openTelnetToolStripMenuItem.Enabled = Clovershell.ShellEnabled = shellToolStripMenuItem.Checked;
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message + ex.StackTrace);
                 MessageBox.Show(this, ex.Message, Resources.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                shellToolStripMenuItem.Checked = false;
+                ConfigIni.TelnetServer = openTelnetToolStripMenuItem.Enabled = shellToolStripMenuItem.Checked = false;
             }
         }
 
