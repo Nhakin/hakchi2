@@ -69,7 +69,10 @@
             // 
             // splitContainer
             // 
-            resources.ApplyResources(this.splitContainer, "splitContainer");
+            this.splitContainer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.splitContainer.Location = new System.Drawing.Point(0, 0);
             this.splitContainer.Name = "splitContainer";
             // 
             // splitContainer.Panel1
@@ -84,16 +87,25 @@
             this.splitContainer.Panel2.Controls.Add(this.listViewContent);
             this.splitContainer.Panel2.Controls.Add(this.groupBoxSplitModes);
             this.splitContainer.Panel2.Controls.Add(this.groupBoxArt);
+            this.splitContainer.Panel2MinSize = 0;
+            this.splitContainer.Size = new System.Drawing.Size(784, 475);
+            this.splitContainer.SplitterDistance = 280;
+            this.splitContainer.TabIndex = 2;
             // 
             // treeView
             // 
             this.treeView.AllowDrop = true;
-            resources.ApplyResources(this.treeView, "treeView");
+            this.treeView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeView.FullRowSelect = true;
             this.treeView.HideSelection = false;
+            this.treeView.ImageIndex = 0;
             this.treeView.ImageList = this.imageList;
             this.treeView.LabelEdit = true;
+            this.treeView.Location = new System.Drawing.Point(0, 0);
             this.treeView.Name = "treeView";
+            this.treeView.SelectedImageIndex = 0;
+            this.treeView.Size = new System.Drawing.Size(280, 475);
+            this.treeView.TabIndex = 0;
             this.treeView.BeforeLabelEdit += new System.Windows.Forms.NodeLabelEditEventHandler(this.treeView_BeforeLabelEdit);
             this.treeView.AfterLabelEdit += new System.Windows.Forms.NodeLabelEditEventHandler(this.treeView_AfterLabelEdit);
             this.treeView.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.treeView_ItemDrag);
@@ -151,34 +163,49 @@
             this.comboBoxPosition.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxPosition.FormattingEnabled = true;
             this.comboBoxPosition.Items.AddRange(new object[] {
-            resources.GetString("comboBoxPosition.Items"),
-            resources.GetString("comboBoxPosition.Items1"),
-            resources.GetString("comboBoxPosition.Items2"),
-            resources.GetString("comboBoxPosition.Items3")});
-            resources.ApplyResources(this.comboBoxPosition, "comboBoxPosition");
+            "Leftmost",
+            "Left to the games",
+            "Right to the games",
+            "Rightmost"});
+            this.comboBoxPosition.Location = new System.Drawing.Point(127, 242);
             this.comboBoxPosition.Name = "comboBoxPosition";
+            this.comboBoxPosition.Size = new System.Drawing.Size(126, 21);
+            this.comboBoxPosition.TabIndex = 2;
             this.comboBoxPosition.SelectionChangeCommitted += new System.EventHandler(this.comboBoxPosition_SelectionChangeCommitted);
             // 
             // labelPosition
             // 
-            resources.ApplyResources(this.labelPosition, "labelPosition");
+            this.labelPosition.AutoSize = true;
+            this.labelPosition.Location = new System.Drawing.Point(10, 245);
             this.labelPosition.Name = "labelPosition";
+            this.labelPosition.Size = new System.Drawing.Size(111, 13);
+            this.labelPosition.TabIndex = 21;
+            this.labelPosition.Text = "Folder position priority:";
             // 
             // buttonNewFolder
             // 
-            resources.ApplyResources(this.buttonNewFolder, "buttonNewFolder");
+            this.buttonNewFolder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonNewFolder.Location = new System.Drawing.Point(394, 243);
             this.buttonNewFolder.Name = "buttonNewFolder";
+            this.buttonNewFolder.Size = new System.Drawing.Size(100, 21);
+            this.buttonNewFolder.TabIndex = 3;
+            this.buttonNewFolder.Text = "New folder";
             this.buttonNewFolder.UseVisualStyleBackColor = true;
             this.buttonNewFolder.Click += new System.EventHandler(this.buttonNewFolder_Click);
             // 
             // listViewContent
             // 
             this.listViewContent.AllowDrop = true;
-            resources.ApplyResources(this.listViewContent, "listViewContent");
+            this.listViewContent.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.listViewContent.LabelEdit = true;
             this.listViewContent.LargeImageList = this.imageList;
+            this.listViewContent.Location = new System.Drawing.Point(2, 269);
             this.listViewContent.Name = "listViewContent";
+            this.listViewContent.Size = new System.Drawing.Size(492, 206);
             this.listViewContent.SmallImageList = this.imageList;
+            this.listViewContent.TabIndex = 1;
             this.listViewContent.UseCompatibleStateImageBehavior = false;
             this.listViewContent.View = System.Windows.Forms.View.List;
             this.listViewContent.AfterLabelEdit += new System.Windows.Forms.LabelEditEventHandler(this.listViewContent_AfterLabelEdit);
@@ -193,71 +220,103 @@
             // 
             // groupBoxSplitModes
             // 
-            resources.ApplyResources(this.groupBoxSplitModes, "groupBoxSplitModes");
+            this.groupBoxSplitModes.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBoxSplitModes.Controls.Add(this.buttonNoFoldersOriginal);
             this.groupBoxSplitModes.Controls.Add(this.buttonNoFolders);
             this.groupBoxSplitModes.Controls.Add(this.buttonFoldersLetters);
             this.groupBoxSplitModes.Controls.Add(this.buttonFoldersEquallyOriginal);
             this.groupBoxSplitModes.Controls.Add(this.buttonFoldersLettersOriginal);
             this.groupBoxSplitModes.Controls.Add(this.buttonFoldersEqually);
+            this.groupBoxSplitModes.Location = new System.Drawing.Point(240, 12);
             this.groupBoxSplitModes.Name = "groupBoxSplitModes";
+            this.groupBoxSplitModes.Size = new System.Drawing.Size(254, 227);
+            this.groupBoxSplitModes.TabIndex = 17;
             this.groupBoxSplitModes.TabStop = false;
+            this.groupBoxSplitModes.Text = "Create folders structure automatically";
             // 
             // buttonNoFoldersOriginal
             // 
-            resources.ApplyResources(this.buttonNoFoldersOriginal, "buttonNoFoldersOriginal");
+            this.buttonNoFoldersOriginal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonNoFoldersOriginal.Location = new System.Drawing.Point(129, 22);
             this.buttonNoFoldersOriginal.Name = "buttonNoFoldersOriginal";
+            this.buttonNoFoldersOriginal.Size = new System.Drawing.Size(110, 60);
+            this.buttonNoFoldersOriginal.TabIndex = 5;
+            this.buttonNoFoldersOriginal.Text = "Original games -> Other games";
             this.buttonNoFoldersOriginal.UseVisualStyleBackColor = true;
             this.buttonNoFoldersOriginal.Click += new System.EventHandler(this.buttonNoFoldersOriginal_Click);
             // 
             // buttonNoFolders
             // 
-            resources.ApplyResources(this.buttonNoFolders, "buttonNoFolders");
+            this.buttonNoFolders.Location = new System.Drawing.Point(13, 22);
             this.buttonNoFolders.Name = "buttonNoFolders";
+            this.buttonNoFolders.Size = new System.Drawing.Size(110, 60);
+            this.buttonNoFolders.TabIndex = 4;
+            this.buttonNoFolders.Text = "No folders";
             this.buttonNoFolders.UseVisualStyleBackColor = true;
             this.buttonNoFolders.Click += new System.EventHandler(this.buttonNoFolders_Click);
             // 
             // buttonFoldersLetters
             // 
-            resources.ApplyResources(this.buttonFoldersLetters, "buttonFoldersLetters");
+            this.buttonFoldersLetters.Location = new System.Drawing.Point(13, 154);
             this.buttonFoldersLetters.Name = "buttonFoldersLetters";
+            this.buttonFoldersLetters.Size = new System.Drawing.Size(110, 60);
+            this.buttonFoldersLetters.TabIndex = 8;
+            this.buttonFoldersLetters.Text = "Split by first letter";
             this.buttonFoldersLetters.UseVisualStyleBackColor = true;
             this.buttonFoldersLetters.Click += new System.EventHandler(this.buttonFoldersLetters_Click);
             // 
             // buttonFoldersEquallyOriginal
             // 
-            resources.ApplyResources(this.buttonFoldersEquallyOriginal, "buttonFoldersEquallyOriginal");
+            this.buttonFoldersEquallyOriginal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonFoldersEquallyOriginal.Location = new System.Drawing.Point(129, 88);
             this.buttonFoldersEquallyOriginal.Name = "buttonFoldersEquallyOriginal";
+            this.buttonFoldersEquallyOriginal.Size = new System.Drawing.Size(110, 60);
+            this.buttonFoldersEquallyOriginal.TabIndex = 7;
+            this.buttonFoldersEquallyOriginal.Text = "Original games -> Split equally";
             this.buttonFoldersEquallyOriginal.UseVisualStyleBackColor = true;
             this.buttonFoldersEquallyOriginal.Click += new System.EventHandler(this.buttonFoldersEquallyOriginal_Click);
             // 
             // buttonFoldersLettersOriginal
             // 
-            resources.ApplyResources(this.buttonFoldersLettersOriginal, "buttonFoldersLettersOriginal");
+            this.buttonFoldersLettersOriginal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonFoldersLettersOriginal.Location = new System.Drawing.Point(129, 154);
             this.buttonFoldersLettersOriginal.Name = "buttonFoldersLettersOriginal";
+            this.buttonFoldersLettersOriginal.Size = new System.Drawing.Size(110, 60);
+            this.buttonFoldersLettersOriginal.TabIndex = 9;
+            this.buttonFoldersLettersOriginal.Text = "Original games -> Split by first letter";
             this.buttonFoldersLettersOriginal.UseVisualStyleBackColor = true;
             this.buttonFoldersLettersOriginal.Click += new System.EventHandler(this.buttonFoldersLettersOriginal_Click);
             // 
             // buttonFoldersEqually
             // 
-            resources.ApplyResources(this.buttonFoldersEqually, "buttonFoldersEqually");
+            this.buttonFoldersEqually.Location = new System.Drawing.Point(13, 88);
             this.buttonFoldersEqually.Name = "buttonFoldersEqually";
+            this.buttonFoldersEqually.Size = new System.Drawing.Size(110, 60);
+            this.buttonFoldersEqually.TabIndex = 6;
+            this.buttonFoldersEqually.Text = "Split equally";
             this.buttonFoldersEqually.UseVisualStyleBackColor = true;
             this.buttonFoldersEqually.Click += new System.EventHandler(this.buttonFoldersEqually_Click);
             // 
             // groupBoxArt
             // 
             this.groupBoxArt.Controls.Add(this.pictureBoxArt);
-            resources.ApplyResources(this.groupBoxArt, "groupBoxArt");
+            this.groupBoxArt.Location = new System.Drawing.Point(13, 12);
             this.groupBoxArt.Name = "groupBoxArt";
+            this.groupBoxArt.Size = new System.Drawing.Size(221, 227);
+            this.groupBoxArt.TabIndex = 16;
             this.groupBoxArt.TabStop = false;
+            this.groupBoxArt.Text = "Menu icon";
             // 
             // pictureBoxArt
             // 
             this.pictureBoxArt.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBoxArt.Cursor = System.Windows.Forms.Cursors.Hand;
-            resources.ApplyResources(this.pictureBoxArt, "pictureBoxArt");
+            this.pictureBoxArt.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.pictureBoxArt.Location = new System.Drawing.Point(9, 15);
             this.pictureBoxArt.Name = "pictureBoxArt";
+            this.pictureBoxArt.Size = new System.Drawing.Size(203, 203);
+            this.pictureBoxArt.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBoxArt.TabIndex = 14;
             this.pictureBoxArt.TabStop = false;
             this.pictureBoxArt.Click += new System.EventHandler(this.pictureBoxArt_Click);
             // 
@@ -271,78 +330,108 @@
             this.pasteToolStripMenuItem,
             this.deleteToolStripMenuItem});
             this.contextMenuStrip.Name = "contextMenuStrip";
-            resources.ApplyResources(this.contextMenuStrip, "contextMenuStrip");
+            this.contextMenuStrip.Size = new System.Drawing.Size(211, 120);
             // 
             // newFolderToolStripMenuItem
             // 
             this.newFolderToolStripMenuItem.Name = "newFolderToolStripMenuItem";
-            resources.ApplyResources(this.newFolderToolStripMenuItem, "newFolderToolStripMenuItem");
+            this.newFolderToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
+            this.newFolderToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
+            this.newFolderToolStripMenuItem.Text = "Create new folder";
             this.newFolderToolStripMenuItem.Click += new System.EventHandler(this.newFolderToolStripMenuItem_Click);
             // 
             // renameToolStripMenuItem
             // 
             this.renameToolStripMenuItem.Name = "renameToolStripMenuItem";
-            resources.ApplyResources(this.renameToolStripMenuItem, "renameToolStripMenuItem");
+            this.renameToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F2;
+            this.renameToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
+            this.renameToolStripMenuItem.Text = "Rename folder";
             this.renameToolStripMenuItem.Click += new System.EventHandler(this.renameToolStripMenuItem_Click);
             // 
             // toolStripMenuItemSep
             // 
             this.toolStripMenuItemSep.Name = "toolStripMenuItemSep";
-            resources.ApplyResources(this.toolStripMenuItemSep, "toolStripMenuItemSep");
+            this.toolStripMenuItemSep.Size = new System.Drawing.Size(207, 6);
             // 
             // cutToolStripMenuItem
             // 
             this.cutToolStripMenuItem.Name = "cutToolStripMenuItem";
-            resources.ApplyResources(this.cutToolStripMenuItem, "cutToolStripMenuItem");
+            this.cutToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.X)));
+            this.cutToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
+            this.cutToolStripMenuItem.Text = "Cut";
             this.cutToolStripMenuItem.Click += new System.EventHandler(this.cutToolStripMenuItem_Click);
             // 
             // pasteToolStripMenuItem
             // 
             this.pasteToolStripMenuItem.Name = "pasteToolStripMenuItem";
-            resources.ApplyResources(this.pasteToolStripMenuItem, "pasteToolStripMenuItem");
+            this.pasteToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.V)));
+            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
+            this.pasteToolStripMenuItem.Text = "Paste";
             this.pasteToolStripMenuItem.Click += new System.EventHandler(this.pasteToolStripMenuItem_Click);
             // 
             // deleteToolStripMenuItem
             // 
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            resources.ApplyResources(this.deleteToolStripMenuItem, "deleteToolStripMenuItem");
+            this.deleteToolStripMenuItem.ShortcutKeyDisplayString = "Del";
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
+            this.deleteToolStripMenuItem.Text = "Delete";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
             // labelElementCount
             // 
-            resources.ApplyResources(this.labelElementCount, "labelElementCount");
+            this.labelElementCount.AutoSize = true;
+            this.labelElementCount.Location = new System.Drawing.Point(12, 13);
             this.labelElementCount.Name = "labelElementCount";
+            this.labelElementCount.Size = new System.Drawing.Size(79, 13);
+            this.labelElementCount.TabIndex = 19;
+            this.labelElementCount.Text = "Folder statistics";
             // 
             // panel2
             // 
             this.panel2.Controls.Add(this.buttonCancel);
             this.panel2.Controls.Add(this.buttonOk);
             this.panel2.Controls.Add(this.labelElementCount);
-            resources.ApplyResources(this.panel2, "panel2");
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel2.Location = new System.Drawing.Point(0, 474);
             this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(784, 38);
+            this.panel2.TabIndex = 3;
             // 
             // buttonCancel
             // 
-            resources.ApplyResources(this.buttonCancel, "buttonCancel");
+            this.buttonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.buttonCancel.Location = new System.Drawing.Point(678, 7);
             this.buttonCancel.Name = "buttonCancel";
+            this.buttonCancel.Size = new System.Drawing.Size(100, 25);
+            this.buttonCancel.TabIndex = 11;
+            this.buttonCancel.Text = "Cancel";
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
             // buttonOk
             // 
-            resources.ApplyResources(this.buttonOk, "buttonOk");
+            this.buttonOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonOk.Location = new System.Drawing.Point(572, 7);
             this.buttonOk.Name = "buttonOk";
+            this.buttonOk.Size = new System.Drawing.Size(100, 25);
+            this.buttonOk.TabIndex = 10;
+            this.buttonOk.Text = "OK";
             this.buttonOk.UseVisualStyleBackColor = true;
             this.buttonOk.Click += new System.EventHandler(this.buttonOk_Click);
             // 
             // FoldersManagerForm
             // 
-            resources.ApplyResources(this, "$this");
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(784, 512);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.splitContainer);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MinimumSize = new System.Drawing.Size(700, 550);
             this.Name = "FoldersManagerForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.Text = "Folders Manager";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.TreeContructorForm_FormClosing);
             this.splitContainer.Panel1.ResumeLayout(false);
             this.splitContainer.Panel2.ResumeLayout(false);

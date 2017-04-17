@@ -58,66 +58,97 @@
             this.importToolStripMenuItem,
             this.deleteToolStripMenuItem});
             this.contextMenuStrip.Name = "contextMenuStrip";
-            resources.ApplyResources(this.contextMenuStrip, "contextMenuStrip");
+            this.contextMenuStrip.Size = new System.Drawing.Size(154, 70);
             this.contextMenuStrip.Closed += new System.Windows.Forms.ToolStripDropDownClosedEventHandler(this.contextMenuStrip_Closed);
             this.contextMenuStrip.Opened += new System.EventHandler(this.contextMenuStrip_Opened);
             this.contextMenuStrip.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.contextMenuStrip_ItemClicked);
             // 
             // exportToolStripMenuItem
             // 
-            resources.ApplyResources(this.exportToolStripMenuItem, "exportToolStripMenuItem");
+            this.exportToolStripMenuItem.Enabled = false;
             this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
+            this.exportToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.exportToolStripMenuItem.Text = "Export selected";
             this.exportToolStripMenuItem.Click += new System.EventHandler(this.buttonExport_Click);
             // 
             // importToolStripMenuItem
             // 
-            resources.ApplyResources(this.importToolStripMenuItem, "importToolStripMenuItem");
+            this.importToolStripMenuItem.Enabled = false;
             this.importToolStripMenuItem.Name = "importToolStripMenuItem";
+            this.importToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.importToolStripMenuItem.Text = "Import";
             this.importToolStripMenuItem.Click += new System.EventHandler(this.buttonImport_Click);
             // 
             // deleteToolStripMenuItem
             // 
-            resources.ApplyResources(this.deleteToolStripMenuItem, "deleteToolStripMenuItem");
+            this.deleteToolStripMenuItem.Enabled = false;
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.deleteToolStripMenuItem.Text = "Delete selected";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.buttonDelete_Click);
             // 
             // buttonExport
             // 
-            resources.ApplyResources(this.buttonExport, "buttonExport");
+            this.buttonExport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonExport.Enabled = false;
+            this.buttonExport.Location = new System.Drawing.Point(185, 451);
             this.buttonExport.Name = "buttonExport";
+            this.buttonExport.Size = new System.Drawing.Size(175, 23);
+            this.buttonExport.TabIndex = 2;
+            this.buttonExport.Text = "Export selected";
             this.buttonExport.UseVisualStyleBackColor = true;
             this.buttonExport.Click += new System.EventHandler(this.buttonExport_Click);
             // 
             // buttonImport
             // 
-            resources.ApplyResources(this.buttonImport, "buttonImport");
+            this.buttonImport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonImport.Enabled = false;
+            this.buttonImport.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.buttonImport.Location = new System.Drawing.Point(366, 451);
             this.buttonImport.Name = "buttonImport";
+            this.buttonImport.Size = new System.Drawing.Size(175, 23);
+            this.buttonImport.TabIndex = 3;
+            this.buttonImport.Text = "Import";
             this.buttonImport.UseVisualStyleBackColor = true;
             this.buttonImport.Click += new System.EventHandler(this.buttonImport_Click);
             // 
             // buttonDelete
             // 
-            resources.ApplyResources(this.buttonDelete, "buttonDelete");
+            this.buttonDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonDelete.Enabled = false;
+            this.buttonDelete.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.buttonDelete.Location = new System.Drawing.Point(547, 451);
             this.buttonDelete.Name = "buttonDelete";
+            this.buttonDelete.Size = new System.Drawing.Size(175, 23);
+            this.buttonDelete.TabIndex = 4;
+            this.buttonDelete.Text = "Delete selected";
             this.buttonDelete.UseVisualStyleBackColor = true;
             this.buttonDelete.Click += new System.EventHandler(this.buttonDelete_Click);
             // 
             // labelLoading
             // 
-            resources.ApplyResources(this.labelLoading, "labelLoading");
+            this.labelLoading.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F);
+            this.labelLoading.Location = new System.Drawing.Point(12, 12);
             this.labelLoading.Name = "labelLoading";
+            this.labelLoading.Size = new System.Drawing.Size(710, 445);
+            this.labelLoading.TabIndex = 4;
+            this.labelLoading.Text = "Loading, please wait...";
+            this.labelLoading.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // statusStrip
             // 
             this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabelSize});
-            resources.ApplyResources(this.statusStrip, "statusStrip");
+            this.statusStrip.Location = new System.Drawing.Point(0, 480);
             this.statusStrip.Name = "statusStrip";
+            this.statusStrip.Size = new System.Drawing.Size(734, 22);
+            this.statusStrip.TabIndex = 5;
+            this.statusStrip.Text = "statusStrip1";
             // 
             // toolStripStatusLabelSize
             // 
             this.toolStripStatusLabelSize.Name = "toolStripStatusLabelSize";
-            resources.ApplyResources(this.toolStripStatusLabelSize, "toolStripStatusLabelSize");
+            this.toolStripStatusLabelSize.Size = new System.Drawing.Size(0, 17);
             // 
             // saveFileDialog
             // 
@@ -130,14 +161,20 @@
             // 
             // listViewSaves
             // 
-            resources.ApplyResources(this.listViewSaves, "listViewSaves");
+            this.listViewSaves.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.listViewSaves.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.colName,
             this.colCode,
             this.colSize,
             this.colFlags});
             this.listViewSaves.ContextMenuStrip = this.contextMenuStrip;
+            this.listViewSaves.HideSelection = false;
+            this.listViewSaves.Location = new System.Drawing.Point(12, 12);
             this.listViewSaves.Name = "listViewSaves";
+            this.listViewSaves.Size = new System.Drawing.Size(710, 433);
+            this.listViewSaves.TabIndex = 1;
             this.listViewSaves.UseCompatibleStateImageBehavior = false;
             this.listViewSaves.View = System.Windows.Forms.View.Details;
             this.listViewSaves.ItemMouseHover += new System.Windows.Forms.ListViewItemMouseHoverEventHandler(this.listViewSaves_ItemMouseHover);
@@ -147,31 +184,40 @@
             // 
             // colName
             // 
-            resources.ApplyResources(this.colName, "colName");
+            this.colName.Text = "Name";
+            this.colName.Width = 400;
             // 
             // colCode
             // 
-            resources.ApplyResources(this.colCode, "colCode");
+            this.colCode.Text = "Code";
+            this.colCode.Width = 100;
             // 
             // colSize
             // 
-            resources.ApplyResources(this.colSize, "colSize");
+            this.colSize.Text = "Size";
+            this.colSize.Width = 100;
             // 
             // colFlags
             // 
-            resources.ApplyResources(this.colFlags, "colFlags");
+            this.colFlags.Text = "Save slots";
+            this.colFlags.Width = 100;
             // 
             // SaveStateManager
             // 
-            resources.ApplyResources(this, "$this");
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(734, 502);
             this.Controls.Add(this.listViewSaves);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.buttonDelete);
             this.Controls.Add(this.buttonImport);
             this.Controls.Add(this.buttonExport);
             this.Controls.Add(this.labelLoading);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MinimumSize = new System.Drawing.Size(600, 400);
             this.Name = "SaveStateManager";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.Text = "Save-State Manager";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.SaveStateManager_FormClosed);
             this.contextMenuStrip.ResumeLayout(false);
             this.statusStrip.ResumeLayout(false);

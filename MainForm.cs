@@ -145,6 +145,9 @@ namespace com.clusterrr.hakchi_gui
                 textBoxName.Left = labelName.Left + labelName.Width;
                 textBoxName.Width -= textBoxName.Left - tbl;
                 maskedTextBoxReleaseDate.Left = label1.Left + label1.Width + 3;
+                tbl = textBoxPublisher.Left;
+                textBoxPublisher.Left = label2.Left + label2.Width;
+                textBoxPublisher.Width -= textBoxPublisher.Left - tbl;
 
                 // Tweeks for message boxes
                 MessageBoxManager.Yes = MessageBoxManager.Retry = Resources.Yes;
@@ -172,10 +175,21 @@ namespace com.clusterrr.hakchi_gui
                 ftpServer.FileSystemHandler = new mooftpserv.NesMiniFileSystemHandler(Clovershell);
                 ftpServer.LogHandler = new mooftpserv.DebugLogHandler();
                 ftpServer.LocalPort = 1021;
-                }
-                catch (Exception ex)
+
+                if (ConfigIni.FtpServer)
                 {
-                    Debug.WriteLine(ex.Message + ex.StackTrace);
+                    FTPToolStripMenuItem.Checked = true;
+                    FTPToolStripMenuItem_Click(null, null);
+                }
+                if (ConfigIni.TelnetServer)
+                {
+                    shellToolStripMenuItem.Checked = true;
+                    shellToolStripMenuItem_Click(null, null);
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message + ex.StackTrace);
                 MessageBox.Show(this, "Critical error: " + ex.Message + ex.StackTrace, Resources.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -624,7 +638,7 @@ namespace com.clusterrr.hakchi_gui
                     stats.Count += checkedListBoxDefaultGames.CheckedItems.Count;
                     foreach (NesDefaultGame originalGame in checkedListBoxDefaultGames.CheckedItems)
                         stats.Size += originalGame.Size;
-            }
+                }
             }
             return stats;
         }
@@ -696,10 +710,10 @@ namespace com.clusterrr.hakchi_gui
                     return DialogResult.No; // Not dumped for some other reason
             }
             else return DialogResult.No; // Kernel dump cancelled by user
-            }
+        }
 
         DialogResult RequirePatchedKernel()
-            {
+        {
             if (ConfigIni.CustomFlashed) return DialogResult.OK; // OK - already flashed
             var kernelDump = RequireKernelDump(); // We need kernel dump first
             if (kernelDump == System.Windows.Forms.DialogResult.No)
@@ -707,29 +721,29 @@ namespace com.clusterrr.hakchi_gui
             if (MessageBox.Show((kernelDump == DialogResult.Yes ? (Resources.KernelDumped + "\r\n") : "") +
                     Resources.CustomWarning, Resources.CustomKernel, MessageBoxButtons.YesNo, MessageBoxIcon.Warning)
                     == System.Windows.Forms.DialogResult.Yes)
-                {
+            {
                 if (FlashCustomKernel())
                     return DialogResult.Yes; // Succesfully flashed
                 else
                     return DialogResult.No; // Not flashed for some other reason
-                }
-            else return DialogResult.No;
             }
+            else return DialogResult.No;
+        }
 
         private void buttonStart_Click(object sender, EventArgs e)
-            {
+        {
             SaveConfig();
 
             var stats = RecalculateSelectedGames();
             if (stats.Count == 0)
-                {
+            {
                 MessageBox.Show(Resources.SelectAtLeast, Resources.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             var kernel = RequirePatchedKernel();
             if (kernel == DialogResult.No) return;
             if (kernel == DialogResult.Yes) // Message for new user
-                    MessageBox.Show(Resources.DoneYouCanUpload + "\r\n" + Resources.PressOkToContinue, Resources.Congratulations, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(Resources.DoneYouCanUpload + "\r\n" + Resources.PressOkToContinue, Resources.Congratulations, MessageBoxButtons.OK, MessageBoxIcon.Information);
             if (UploadGames())
             {
                 MessageBox.Show(Resources.Done, Resources.Wow, MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -981,6 +995,7 @@ namespace com.clusterrr.hakchi_gui
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var about = new AboutBox();
+            about.Text = aboutToolStripMenuItem.Text.Replace("&", "");
             about.ShowDialog();
         }
 
@@ -1302,11 +1317,6 @@ namespace com.clusterrr.hakchi_gui
 
         private void installModulesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (!File.Exists(KernelDump))
-            {
-                MessageBox.Show(Resources.NoKernelYouNeed, Resources.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
             installModules();
         }
 
@@ -1414,17 +1424,20 @@ namespace com.clusterrr.hakchi_gui
                         }
                     });
                     ftpThread.Start();
+                    ConfigIni.FtpServer = true;
                 }
                 catch (Exception ex)
                 {
                     Debug.WriteLine(ex.Message + ex.StackTrace);
                     MessageBox.Show(this, ex.Message, Resources.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     FTPToolStripMenuItem.Checked = false;
+                    ConfigIni.FtpServer = false;
                 }
             }
             else
             {
                 ftpServer.Stop();
+                ConfigIni.FtpServer = false;
             }
             openFTPInExplorerToolStripMenuItem.Enabled = FTPToolStripMenuItem.Checked;
         }
@@ -1433,13 +1446,13 @@ namespace com.clusterrr.hakchi_gui
         {
             try
             {
-                openTelnetToolStripMenuItem.Enabled = Clovershell.ShellEnabled = shellToolStripMenuItem.Checked;
+               ConfigIni.TelnetServer = openTelnetToolStripMenuItem.Enabled = Clovershell.ShellEnabled = shellToolStripMenuItem.Checked;
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message + ex.StackTrace);
                 MessageBox.Show(this, ex.Message, Resources.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                shellToolStripMenuItem.Checked = false;
+                ConfigIni.TelnetServer = openTelnetToolStripMenuItem.Enabled = shellToolStripMenuItem.Checked = false;
             }
         }
 

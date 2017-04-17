@@ -39,44 +39,63 @@
             // 
             // textBoxCode
             // 
-            resources.ApplyResources(this.textBoxCode, "textBoxCode");
+            this.textBoxCode.Location = new System.Drawing.Point(81, 7);
             this.textBoxCode.Name = "textBoxCode";
+            this.textBoxCode.Size = new System.Drawing.Size(273, 20);
+            this.textBoxCode.TabIndex = 0;
             // 
             // textBoxDescription
             // 
-            resources.ApplyResources(this.textBoxDescription, "textBoxDescription");
+            this.textBoxDescription.Location = new System.Drawing.Point(81, 33);
             this.textBoxDescription.Name = "textBoxDescription";
+            this.textBoxDescription.Size = new System.Drawing.Size(273, 20);
+            this.textBoxDescription.TabIndex = 1;
             // 
             // label1
             // 
-            resources.ApplyResources(this.label1, "label1");
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(11, 10);
             this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(35, 13);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Code:";
             // 
             // label2
             // 
-            resources.ApplyResources(this.label2, "label2");
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(11, 36);
             this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(63, 13);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "Description:";
             // 
             // buttonCancel
             // 
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            resources.ApplyResources(this.buttonCancel, "buttonCancel");
+            this.buttonCancel.Location = new System.Drawing.Point(279, 59);
             this.buttonCancel.Name = "buttonCancel";
+            this.buttonCancel.Size = new System.Drawing.Size(75, 23);
+            this.buttonCancel.TabIndex = 6;
+            this.buttonCancel.Text = "Cancel";
             this.buttonCancel.UseVisualStyleBackColor = true;
             // 
             // buttonOk
             // 
-            resources.ApplyResources(this.buttonOk, "buttonOk");
+            this.buttonOk.Location = new System.Drawing.Point(198, 59);
             this.buttonOk.Name = "buttonOk";
+            this.buttonOk.Size = new System.Drawing.Size(75, 23);
+            this.buttonOk.TabIndex = 5;
+            this.buttonOk.Text = "OK";
             this.buttonOk.UseVisualStyleBackColor = true;
             this.buttonOk.Click += new System.EventHandler(this.buttonOk_Click);
             // 
             // GameGenieCodeAddModForm
             // 
             this.AcceptButton = this.buttonOk;
-            resources.ApplyResources(this, "$this");
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonCancel;
+            this.ClientSize = new System.Drawing.Size(366, 89);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonOk);
             this.Controls.Add(this.label2);
@@ -84,9 +103,12 @@
             this.Controls.Add(this.textBoxDescription);
             this.Controls.Add(this.textBoxCode);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "GameGenieCodeAddModForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.Text = "Add Game Genie code";
             this.ResumeLayout(false);
             this.PerformLayout();
 

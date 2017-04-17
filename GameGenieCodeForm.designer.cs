@@ -46,9 +46,14 @@
             // checkedListBoxGameCode
             // 
             this.checkedListBoxGameCode.AllowDrop = true;
-            resources.ApplyResources(this.checkedListBoxGameCode, "checkedListBoxGameCode");
+            this.checkedListBoxGameCode.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.checkedListBoxGameCode.FormattingEnabled = true;
+            this.checkedListBoxGameCode.Location = new System.Drawing.Point(5, 4);
             this.checkedListBoxGameCode.Name = "checkedListBoxGameCode";
+            this.checkedListBoxGameCode.Size = new System.Drawing.Size(380, 409);
+            this.checkedListBoxGameCode.TabIndex = 0;
             this.checkedListBoxGameCode.MouseDown += new System.Windows.Forms.MouseEventHandler(this.checkedListBoxGameCode_MouseDown);
             // 
             // contextMenuStrip
@@ -58,72 +63,96 @@
             this.editToolStripMenuItem,
             this.removeToolStripMenuItem});
             this.contextMenuStrip.Name = "contextMenuStrip";
-            resources.ApplyResources(this.contextMenuStrip, "contextMenuStrip");
+            this.contextMenuStrip.Size = new System.Drawing.Size(108, 70);
             // 
             // addToolStripMenuItem
             // 
             this.addToolStripMenuItem.Name = "addToolStripMenuItem";
-            resources.ApplyResources(this.addToolStripMenuItem, "addToolStripMenuItem");
+            this.addToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
+            this.addToolStripMenuItem.Text = "Add";
             this.addToolStripMenuItem.Click += new System.EventHandler(this.buttonAdd_Click);
             // 
             // editToolStripMenuItem
             // 
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            resources.ApplyResources(this.editToolStripMenuItem, "editToolStripMenuItem");
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
+            this.editToolStripMenuItem.Text = "Edit";
             this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
             // 
             // removeToolStripMenuItem
             // 
             this.removeToolStripMenuItem.Name = "removeToolStripMenuItem";
-            resources.ApplyResources(this.removeToolStripMenuItem, "removeToolStripMenuItem");
+            this.removeToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
+            this.removeToolStripMenuItem.Text = "Delete";
             this.removeToolStripMenuItem.Click += new System.EventHandler(this.removeToolStripMenuItem_Click);
             // 
             // buttonOk
             // 
-            resources.ApplyResources(this.buttonOk, "buttonOk");
+            this.buttonOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonOk.Location = new System.Drawing.Point(199, 425);
             this.buttonOk.Name = "buttonOk";
+            this.buttonOk.Size = new System.Drawing.Size(90, 23);
+            this.buttonOk.TabIndex = 3;
+            this.buttonOk.Text = "OK";
             this.buttonOk.UseVisualStyleBackColor = true;
             this.buttonOk.Click += new System.EventHandler(this.buttonOk_Click);
             // 
             // buttonCancel
             // 
-            resources.ApplyResources(this.buttonCancel, "buttonCancel");
+            this.buttonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.buttonCancel.Location = new System.Drawing.Point(295, 425);
             this.buttonCancel.Name = "buttonCancel";
+            this.buttonCancel.Size = new System.Drawing.Size(90, 23);
+            this.buttonCancel.TabIndex = 4;
+            this.buttonCancel.Text = "Cancel";
             this.buttonCancel.UseVisualStyleBackColor = true;
             // 
             // buttonImport
             // 
-            resources.ApplyResources(this.buttonImport, "buttonImport");
+            this.buttonImport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.buttonImport.Location = new System.Drawing.Point(101, 425);
             this.buttonImport.Name = "buttonImport";
+            this.buttonImport.Size = new System.Drawing.Size(90, 23);
+            this.buttonImport.TabIndex = 2;
+            this.buttonImport.Text = "Import";
             this.buttonImport.UseVisualStyleBackColor = true;
             this.buttonImport.Click += new System.EventHandler(this.buttonImport_Click);
             // 
             // ofdXmlFile
             // 
             this.ofdXmlFile.DefaultExt = "xml";
-            resources.ApplyResources(this.ofdXmlFile, "ofdXmlFile");
+            this.ofdXmlFile.Filter = "XML files|*.xml";
+            this.ofdXmlFile.Title = "Select Nestopia Game Genie XML file";
             // 
             // buttonAdd
             // 
-            resources.ApplyResources(this.buttonAdd, "buttonAdd");
+            this.buttonAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.buttonAdd.Location = new System.Drawing.Point(5, 425);
             this.buttonAdd.Name = "buttonAdd";
+            this.buttonAdd.Size = new System.Drawing.Size(90, 23);
+            this.buttonAdd.TabIndex = 1;
+            this.buttonAdd.Text = "Add";
             this.buttonAdd.UseVisualStyleBackColor = true;
             this.buttonAdd.Click += new System.EventHandler(this.buttonAdd_Click);
             // 
             // GameGenieCodeForm
             // 
-            resources.ApplyResources(this, "$this");
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(392, 458);
             this.Controls.Add(this.buttonAdd);
             this.Controls.Add(this.buttonImport);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonOk);
             this.Controls.Add(this.checkedListBoxGameCode);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "GameGenieCodeForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.Text = "Game Genie code list";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.GameGenieForm_FormClosed);
             this.contextMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
