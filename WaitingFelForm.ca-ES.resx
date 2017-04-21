@@ -59,27 +59,27 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="$this.Text">
-    <value>Čaká sa na Vaše NES Mini...</value>
+    <value>Esperant a la NES Mini</value>
   </data>
   <data name="buttonDriver.Text">
-    <value>Nainštalovať ovládač</value>
+    <value>Instaleu controlador</value>
   </data>
   <data name="label1.Text">
-    <value>Prosím postupujte podľa nasledujúcich krokov:</value>
+    <value>Si us plau, segueixi aquestes pases:</value>
   </data>
   <data name="label2.Text">
-    <value>1. Uistite sa že je tlačidlo POWER na NES Mini vypnuté</value>
+    <value>1. Asegurau-vos de que el botó Power de ls NES Mini estigui en la posició de apagat</value>
   </data>
   <data name="label3.Text">
-    <value>2. (Znovu)pripojte NES Mini k PC pomocou USB kábla.</value>
+    <value>2. Torna a conectar la NES Mini al pc via USB</value>
   </data>
   <data name="label4.Text">
-    <value>3. Stlačte a držte tlačidlo RESET a stlačte a pustite tlačilo POWER.</value>
+    <value>3. Mantingueu presionat el botó Reset i apreteu el botó Power</value>
   </data>
   <data name="label5.Text">
-    <value>4. Po pár sekundách pustite tlačidlo RESET, LED svetlo pri tlačidle POWER by nemalo svietiť.</value>
+    <value>4. Després de uns segons, amollau el botó Reset, la llum del botó Power deurà de apagar-se</value>
   </data>
   <data name="label6.Text">
-    <value>5. Nainštalujte ovládač ak ešte nie je nainštalovaný:</value>
+    <value>5. Instaleu el controlador si encara no ho heu fet:</value>
   </data>
 </root>

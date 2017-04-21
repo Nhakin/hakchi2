@@ -190,6 +190,9 @@
   <data name="labelName.Text">
     <value>Όνομα:</value>
   </data>
+  <data name="languageToolStripMenuItem.Text">
+    <value>Γλώσσα</value>
+  </data>
   <data name="maximumGamesPerFolderToolStripMenuItem.Text">
     <value>Ανώτατο όριο παιχνιδιών ανά σελίδα/φάκελο</value>
   </data>

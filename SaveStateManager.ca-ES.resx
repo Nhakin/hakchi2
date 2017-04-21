@@ -58,28 +58,37 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="buttonImport.Text">
+    <value>Importar</value>
+  </data>
+  <data name="importToolStripMenuItem.Text">
+    <value>Importar</value>
+  </data>
   <data name="$this.Text">
-    <value>Čaká sa na Vaše NES Mini...</value>
+    <value>Save-State Manager</value>
   </data>
-  <data name="buttonDriver.Text">
-    <value>Nainštalovať ovládač</value>
+  <data name="buttonDelete.Text">
+    <value>Delete selected</value>
   </data>
-  <data name="label1.Text">
-    <value>Prosím postupujte podľa nasledujúcich krokov:</value>
+  <data name="buttonExport.Text">
+    <value>Export selected</value>
   </data>
-  <data name="label2.Text">
-    <value>1. Uistite sa že je tlačidlo POWER na NES Mini vypnuté</value>
+  <data name="colCode.Text">
+    <value>Code</value>
   </data>
-  <data name="label3.Text">
-    <value>2. (Znovu)pripojte NES Mini k PC pomocou USB kábla.</value>
+  <data name="colFlags.Text">
+    <value>Save slots</value>
   </data>
-  <data name="label4.Text">
-    <value>3. Stlačte a držte tlačidlo RESET a stlačte a pustite tlačilo POWER.</value>
+  <data name="colName.Text">
+    <value>Name</value>
   </data>
-  <data name="label5.Text">
-    <value>4. Po pár sekundách pustite tlačidlo RESET, LED svetlo pri tlačidle POWER by nemalo svietiť.</value>
+  <data name="colSize.Text">
+    <value>Size</value>
   </data>
-  <data name="label6.Text">
-    <value>5. Nainštalujte ovládač ak ešte nie je nainštalovaný:</value>
+  <data name="deleteToolStripMenuItem.Text">
+    <value>Delete selected</value>
+  </data>
+  <data name="exportToolStripMenuItem.Text">
+    <value>Export selected</value>
   </data>
 </root>

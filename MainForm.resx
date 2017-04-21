@@ -239,6 +239,32 @@
   <data name="modulesToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Modules</value>
   </data>
+  <data name="languageToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAANASURBVDhPdZN9UMtxHMd/U7qj6zz1R6ltXB5ma6vMyrKsaSs2D3PoYW6VPA1DJZZMVtjN1Zyn
+        iKYQTqU7lWOdRNxwHkqRK3lMtU5UOJSjt1/zu3M4r7v3ff55vz73/fzxJf5mhkxOSz9gcSm1Ncy0Pe+K
+        r2vrTaxpfB1qzMl3pir/Z3t+sWt1S9fOR+09XY/be1D7phu1re/R3PkBjR2972wv3+qp6r9syKtwVVvN
+        l9Y2LIf1WQeONZUhrcUOS0s7TPfsWH2+BZqTV6C5mnY2MFb152t44ctos3OzS2fd4iPhgQLlrYV48rES
+        hT2dWGP/ioSbHYjLa0DMniro7mox37jrEKX+wk9hWsS1Th2IqPeHvlmFh71W1PZ1oay/H4mdfYiraUPs
+        8QYo9TYklZghiTcN+Cq1QZROEL4Ru68xyr3AushCbONSGLu7UdD3HeZP37Dq+QdEVr5CdG4d5uluYsG2
+        QhxuikRMcdQJh+zODHfxCU7r98lUgL+jBBGXr2NR/TssI0V1Uw9UtzugKGqGMusewrXXoMo2IbM2FOqq
+        ha2OBaO8ZtHp3BRM0MSAu/4EgnJuQFj0FOKLLxFa/gLiM82Q7n+ICJ0NM6IrEb03DdrrQgSf4v9wLBjp
+        KXEfy0oaYPJTwVlpAm9dDYQ7qzFtzwNMz6pDSOZ9SDaRsroK3NAL4K9IB/soAxN1c744FgzC4OraGGwD
+        2NJDmLIhCb7bkyHUncL0FdUIjquCYKHVIU8RngVbZAFHqQdHvuMOpRPEpECDeTwvA5OD98NtiyfcMsbA
+        M88bLEMkuGFF4MwsBkd8Gr4SC7jSw/CT7wNHakykdIIQSTd7CGfv7RbJD8AnVQDXdWMwLHkURhg8wEyV
+        gZWSgICoHAiW5EOkLkCYpvDFRLF2OKX/QqrMlosU5n6RWg+2UQi6gQWP3T7wPsgD70gkZJtLMDe9AsqM
+        ss/0AJlk6HA3GqX+hjFBIheEbX0r3piMkIIoBJ6TQXJ8IxZkn4Eq9wY5S9+MHs/WkFV/MiMd0l840YY4
+        B7gz2QfHyQT1QfEae4g60y6ITqmnC8IsNCfnxWQnkIw3GZdB4X8MfpYRZMaSYVJzNJnBu53IUBDET8tW
+        pSL+Tvj1AAAAAElFTkSuQmCC
+</value>
+  </data>
+  <data name="languageToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>376, 22</value>
+  </data>
+  <data name="languageToolStripMenuItem.Text" xml:space="preserve">
+    <value>Language</value>
+  </data>
   <data name="nESMiniToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>151, 22</value>
   </data>
@@ -870,20 +896,20 @@
   <data name="&gt;&gt;pictureBoxArt.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
-  <data name="label4.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
   <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 409</value>
+    <value>15, 316</value>
   </data>
   <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>43, 13</value>
+    <value>53, 204</value>
   </data>
   <data name="label4.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
   </data>
   <data name="label4.Text" xml:space="preserve">
     <value>Box art:</value>
+  </data>
+  <data name="label4.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
   </data>
   <data name="&gt;&gt;label4.Name" xml:space="preserve">
     <value>label4</value>
@@ -2660,6 +2686,12 @@
     <value>settingsToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;settingsToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;languageToolStripMenuItem.Name" xml:space="preserve">
+    <value>languageToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;languageToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;consoleTypeToolStripMenuItem.Name" xml:space="preserve">

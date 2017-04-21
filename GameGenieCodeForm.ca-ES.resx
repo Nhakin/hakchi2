@@ -59,27 +59,24 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="$this.Text">
-    <value>Čaká sa na Vaše NES Mini...</value>
+    <value>Llista de codis del Game Genie</value>
   </data>
-  <data name="buttonDriver.Text">
-    <value>Nainštalovať ovládač</value>
+  <data name="addToolStripMenuItem.Text">
+    <value>Afegir</value>
   </data>
-  <data name="label1.Text">
-    <value>Prosím postupujte podľa nasledujúcich krokov:</value>
+  <data name="buttonAdd.Text">
+    <value>Afegir</value>
   </data>
-  <data name="label2.Text">
-    <value>1. Uistite sa že je tlačidlo POWER na NES Mini vypnuté</value>
+  <data name="buttonCancel.Text">
+    <value>Cancelar</value>
   </data>
-  <data name="label3.Text">
-    <value>2. (Znovu)pripojte NES Mini k PC pomocou USB kábla.</value>
+  <data name="buttonImport.Text">
+    <value>Importar</value>
   </data>
-  <data name="label4.Text">
-    <value>3. Stlačte a držte tlačidlo RESET a stlačte a pustite tlačilo POWER.</value>
+  <data name="editToolStripMenuItem.Text">
+    <value>Editar</value>
   </data>
-  <data name="label5.Text">
-    <value>4. Po pár sekundách pustite tlačidlo RESET, LED svetlo pri tlačidle POWER by nemalo svietiť.</value>
-  </data>
-  <data name="label6.Text">
-    <value>5. Nainštalujte ovládač ak ešte nie je nainštalovaný:</value>
+  <data name="removeToolStripMenuItem.Text">
+    <value>Eliminar</value>
   </data>
 </root>
